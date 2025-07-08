@@ -55,14 +55,16 @@ const Navbar = () => {
         {/* Logo */}
         <motion.div
           className="flex items-center space-x-2"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
+          <Link href="/home" className="flex items-center">
           <img
             src="/images/logo.jpg"
             alt="Logo"
             className="h-18 hover:rotate-[-5deg] transition-transform duration-300"
           />
+          </Link>
         </motion.div>
 
         {/* Mobile Icons: Hamburger + Cart */}

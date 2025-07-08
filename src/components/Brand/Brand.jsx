@@ -6,7 +6,7 @@ const Brand = () => {
   const cards = [
     {
       id: 1,
-      img: "/shop/computer-brand.png",
+      img: "/shop/computer-brand (1).png",
       link: "/shop1",
 
     },

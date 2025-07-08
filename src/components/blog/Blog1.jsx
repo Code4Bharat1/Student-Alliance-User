@@ -29,7 +29,7 @@ const blogData = [
   },
   {
     title: 'Student Alliance 4K Ultra HD Alpha Webcam: Unmatched Quality at an Affordable Price',
-    image: '/images/webcam.jpg',
+    image: '/shop/webcam.png',
     link: '/blog-d5',
   },
   {

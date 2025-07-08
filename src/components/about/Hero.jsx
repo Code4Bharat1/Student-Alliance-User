@@ -101,8 +101,8 @@ const Hero = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Mission */}
           <motion.div
-            whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
-            transition={{ type: "spring", stiffness: 300 }}
+            whileHover={{ scale: 1.03, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
+            transition={{ type: "spring", stiffness: 100 }}
             className="bg-cover bg-center rounded-2xl text-white p-0 flex flex-col justify-end h-[450px] cursor-pointer"
             style={{ backgroundImage: "url('/images/mission.jpg')" }}
           >
@@ -118,8 +118,8 @@ const Hero = () => {
 
           {/* Vision */}
           <motion.div
-            whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
-            transition={{ type: "spring", stiffness: 300 }}
+            whileHover={{ scale: 1.03, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
+            transition={{ type: "spring", stiffness: 100 }}
             className="bg-cover bg-center rounded-2xl text-white p-0 flex flex-col justify-end h-[450px] cursor-pointer"
             style={{ backgroundImage: "url('/images/vision.jpg')" }}
           >
@@ -134,8 +134,8 @@ const Hero = () => {
 
           {/* Values */}
           <motion.div
-            whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
-            transition={{ type: "spring", stiffness: 300 }}
+            whileHover={{ scale: 1.03, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
+            transition={{ type: "spring", stiffness: 100 }}
             className="bg-cover bg-center rounded-2xl text-white p-0 flex flex-col justify-end h-[450px] cursor-pointer"
             style={{ backgroundImage: "url('/images/values.jpg')" }}
           >

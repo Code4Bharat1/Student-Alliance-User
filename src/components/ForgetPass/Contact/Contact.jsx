@@ -170,13 +170,13 @@ export default function Login() {
             </div>
           )}
 
-          <div className="relative text-center text-gray-900 my-4">
+          {/* <div className="relative text-center text-gray-900 my-4">
             <span className="bg-white px-2">or</span>
             <div className="absolute left-0 top-1/2 w-full border-t border-gray-200 transform -translate-y-1/2"></div>
-          </div>
+          </div> */}
 
           {/* Social Icons Side by Side */}
-          <div className="flex items-center justify-center gap-4 mt-4">
+          {/* <div className="flex items-center justify-center gap-4 mt-4">
             <button
               type="button"
               className="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition"
@@ -195,7 +195,7 @@ export default function Login() {
             >
               <FaInstagram className="text-pink-500 text-xl" />
             </button>
-          </div>
+          </div> */}
 
           <p className="text-center text-sm text-gray-600 mt-4">
             Don't have an account?{" "}

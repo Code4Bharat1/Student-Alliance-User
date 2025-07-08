@@ -13,6 +13,14 @@ const images = [
   "/gallery/hero5.jpg",
 ];
 
+const Respimages = [
+  "/gallery/h1.png",
+  "/gallery/h2.png",
+  "/gallery/h3.png",
+  "/gallery/h4.png",
+  "/gallery/h5.png",
+]; 
+
 const variants = {
   enter: (direction) => ({
     x: direction > 0 ? 100 : -100,
@@ -33,17 +41,38 @@ const variants = {
 
 const Hero = () => {
   const [[currentIndex, direction], setIndex] = useState([0, 1]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if window is defined (to avoid SSR issues)
+    if (typeof window !== 'undefined') {
+      const checkIfMobile = () => {
+        setIsMobile(window.innerWidth <= 768); // 768px is common breakpoint for mobile
+      };
+      
+      // Initial check
+      checkIfMobile();
+      
+      // Add event listener for window resize
+      window.addEventListener('resize', checkIfMobile);
+      
+      // Cleanup
+      return () => window.removeEventListener('resize', checkIfMobile);
+    }
+  }, []);
 
   const nextImage = () => {
+    const currentImages = isMobile ? Respimages : images;
     setIndex(([prevIndex]) => [
-      (prevIndex + 1) % images.length,
+      (prevIndex + 1) % currentImages.length,
       1,
     ]);
   };
 
   const prevImage = () => {
+    const currentImages = isMobile ? Respimages : images;
     setIndex(([prevIndex]) => [
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1,
       -1,
     ]);
   };
@@ -51,30 +80,29 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(nextImage, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]); // Add isMobile to dependency array
 
   return (
     <>
-      <section className="relative w-full h-screen">
-        <div className="absolute inset-0 w-full h-full">
+      <section className="relative w-full h-[60vh] md:h-screen">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <AnimatePresence initial={false} custom={direction} mode="wait">
-  <motion.img
-    key={images[currentIndex]}
-    src={images[currentIndex]}
-    alt={`Slide ${currentIndex + 1}`}
-    custom={direction}
-    variants={variants}
-    initial="enter"
-    animate="center"
-    exit="exit"
-    transition={{
-      x: { type: "tween", duration: 0.3 }, // faster slide
-      opacity: { duration: 0.3 },          // faster fade
-    }}
-    className="absolute top-0 left-0 w-full h-full object-center"
-  />
-</AnimatePresence>
-
+            <motion.img
+              key={isMobile ? Respimages[currentIndex] : images[currentIndex]}
+              src={isMobile ? Respimages[currentIndex] : images[currentIndex]}
+              alt={`Slide ${currentIndex + 1}`}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "tween", duration: 0.3 },
+                opacity: { duration: 0.3 },
+              }}
+              className="absolute top-0 left-0 w-full h-full object-cover object-center"
+            />
+          </AnimatePresence>
         </div>
 
         {/* Arrow Controls */}

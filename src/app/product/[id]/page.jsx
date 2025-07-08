@@ -270,10 +270,10 @@ export default function ProductDetail() {
 )}
             </div>
 
-            {/* Price Section */}
+           {/* Price Section */}
 {product.price > 0 && (
   <motion.div 
-    className="bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-xl border border-indigo-100 shadow-sm"
+    className="bg-gradient-to-br from-indigo-50 to-purple-50 p-4 sm:p-5 rounded-xl border border-indigo-100 shadow-sm"
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.4 }}
@@ -283,9 +283,9 @@ export default function ProductDetail() {
     }}
   >
     <div className="flex flex-col gap-2">
-      <div className="flex items-end gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-3">
         <motion.span 
-          className="text-3xl font-extrabold text-indigo-600"
+          className="text-3xl sm:text-3xl font-extrabold text-indigo-600"
           whileHover={{ scale: 1.05 }}
         >
           ₹{totalPrice.toLocaleString("en-IN")}
@@ -293,19 +293,19 @@ export default function ProductDetail() {
         
         {product.discount > 0 && (
           <motion.div
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 flex-wrap"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-lg line-through text-gray-500">
+            <span className="text-base sm:text-lg line-through text-gray-500 whitespace-nowrap">
               ₹{(product.price * quantity).toLocaleString("en-IN")}
             </span>
             <motion.span 
-              className="bg-green-100 text-green-800 font-semibold px-3 py-1 rounded-full text-xs flex items-center gap-1"
+              className="bg-green-100 text-green-800 font-semibold px-2 py-1 rounded-full text-xs flex items-center gap-1 whitespace-nowrap"
               whileHover={{ scale: 1.05 }}
             >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
               </svg>
               Save ₹{totalSavings.toLocaleString("en-IN")}
@@ -315,12 +315,12 @@ export default function ProductDetail() {
       </div>
 
       <motion.div 
-        className="flex items-center gap-2 text-sm text-indigo-500 mt-1"
+        className="flex items-center gap-2 text-xs sm:text-sm text-indigo-500 mt-1"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
         </svg>
         <span>
@@ -331,12 +331,12 @@ export default function ProductDetail() {
 
       {product.discount > 0 && (
         <motion.div 
-          className="mt-3 pt-3 border-t border-indigo-100 flex items-center gap-2"
+          className="mt-3 pt-3 border-t border-indigo-100 flex flex-col xs:flex-row xs:items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          <span className="text-xs font-medium bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">
+          <span className="text-xs font-medium bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full w-fit">
             {product.discount}% OFF
           </span>
           <span className="text-xs text-gray-500">
@@ -348,111 +348,107 @@ export default function ProductDetail() {
   </motion.div>
 )}
 
-            {/* Quantity & Buttons */}
-            <div className="space-y-4">
-              <motion.div 
-  className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.3 }}
->
-  <label htmlFor="quantity" className="flex items-center gap-2 text-gray-700 font-medium">
-    <svg 
-      className="w-5 h-5 text-purple-600" 
-      fill="none" 
-      stroke="currentColor" 
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        strokeWidth="2" 
-        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-      />
-    </svg>
-    Quantity:
-  </label>
-  
-  <div className="flex items-center gap-2">
-    <motion.button
-      type="button"
-      className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full text-purple-600 hover:bg-purple-50 transition-colors disabled:opacity-50"
-      whileTap={{ scale: 0.9 }}
-      onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-      disabled={quantity <= 1}
-    >
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" />
-      </svg>
-    </motion.button>
+{/* Quantity & Buttons */}
+<div className="space-y-4 mt-4">
+  <motion.div 
+    className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 sm:p-4 bg-gray-50 rounded-xl border border-gray-200"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="flex items-center justify-between sm:justify-start gap-2">
+      <label htmlFor="quantity" className="flex items-center gap-2 text-gray-700 font-medium text-sm sm:text-base">
+        <svg 
+          className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+          />
+        </svg>
+        <span className="whitespace-nowrap">Quantity:</span>
+      </label>
+      
+      <div className="flex items-center gap-2">
+        <motion.button
+          type="button"
+          className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full text-purple-600 hover:bg-purple-50 transition-colors disabled:opacity-50"
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+          disabled={quantity <= 1}
+        >
+          <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" />
+          </svg>
+        </motion.button>
+        
+        <motion.input
+          type="number"
+          id="quantity"
+          min="1"
+          max={product?.stocks || 10}
+          value={quantity}
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 1;
+            const max = product?.stocks || 10;
+            setQuantity(Math.max(1, Math.min(max, value)));
+          }}
+          className="w-12 sm:w-16 p-1 sm:p-2 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 font-medium text-sm sm:text-base"
+          whileFocus={{ scale: 1.05 }}
+        />
+        
+        <motion.button
+          type="button"
+          className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full text-purple-600 hover:bg-purple-50 transition-colors disabled:opacity-50"
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setQuantity(prev => Math.min(product?.stocks || 10, prev + 1))}
+          disabled={quantity >= (product?.stocks || 10)}
+        >
+          <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </motion.button>
+      </div>
+    </div>
     
-    <motion.input
-      type="number"
-      id="quantity"
-      min="1"
-      max={product?.stocks || 10}
-      value={quantity}
-      onChange={(e) => {
-        const value = parseInt(e.target.value) || 1;
-        const max = product?.stocks || 10;
-        setQuantity(Math.max(1, Math.min(max, value)));
-      }}
-      className="w-16 p-2 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 font-medium"
-      whileFocus={{ scale: 1.05 }}
-    />
-    
+    {product?.stocks && (
+      <motion.div 
+        className="flex items-center justify-center sm:justify-start gap-1 text-xs sm:text-sm text-gray-500 sm:ml-auto bg-green-50 px-3 py-1.5 rounded-lg"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        </svg>
+        <span>{product.stocks} in stock</span>
+      </motion.div>
+    )}
+  </motion.div>
+
+  <div className="flex flex-col sm:flex-row gap-3">
+  <Link href={"https://wa.me/9594402775"} target="_blank">
     <motion.button
-      type="button"
-      className="w-8 h-8 flex items-center justify-center bg-white border border-gray-300 rounded-full text-purple-600 hover:bg-purple-50 transition-colors disabled:opacity-50"
-      whileTap={{ scale: 0.9 }}
-      onClick={() => setQuantity(prev => Math.min(product?.stocks || 10, prev + 1))}
-      disabled={quantity >= (product?.stocks || 10)}
+      className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center gap-2 text-base"
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={handleAddToCart}
+      disabled={product.stocks <= 0}
     >
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
       </svg>
+      BUY NOW
     </motion.button>
-  </div>
-  
-  {product?.stocks && (
-    <motion.div 
-      className="flex items-center gap-1 text-sm text-gray-500 ml-auto"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-    >
-      <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-      </svg>
-      <span>{product.stocks} in stock</span>
-    </motion.div>
-  )}
-</motion.div>
-
-
-
-
-
-              
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link href={"https://wa.me/9594402775"} target="_blank">
-                  <motion.button
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 flex items-center justify-center gap-2"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleAddToCart}
-                    disabled={product.stocks <= 0}
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                    </svg>
-                    BUY NOW
-                  </motion.button>
-                </Link>
-              </div>
-            </div>
+  </Link>
+</div>
+</div>
 
             {/* Additional Info */}
             <div className="pt-4 border-t border-gray-200">
