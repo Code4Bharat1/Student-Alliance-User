@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ShoppingCart Emoji */
+@keyframes sadBlink {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.animate-sadblink {
+  animation: sadBlink 2s infinite;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
