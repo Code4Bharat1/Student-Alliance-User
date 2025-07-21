@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://studentalliancellp.com/</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://studentalliancellp.com/about</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/getintouch</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Products or Services Pages (Consider renaming for clarity) -->
+  <url>
+    <loc>https://studentalliancellp.com/shop1</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/printer</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/prod</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/kits</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://studentalliancellp.com/blog-d1</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d2</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d3</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d4</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d5</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d6</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d7</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d8</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d9</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d10</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d11</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://studentalliancellp.com/blog-d12</loc>
+    <lastmod>2025-07-09T09:44:30+00:00</lastmod>
+    <priority>0.70</priority>
+  </url>
+
+</urlset>

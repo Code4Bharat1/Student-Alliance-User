@@ -10,6 +10,7 @@ import { logout } from "@/redux/slices/authSlice";
 import { UserCircleIcon } from "@heroicons/react/solid";
 import ProfilePage from "./UserProfile/Profile";
 
+
 const Navbar = () => {
   const pathname = usePathname();
   const token = useSelector((state) => state.auth.token);
@@ -108,7 +109,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
           {[
-            { href: "/home", label: "Home" },
+            { href: "/", label: "Home" },
             { href: "/about", label: "About us" },
             { href: "/Prod", label: "Products" },
             { href: "/shop1", label: "Shop" },
@@ -148,7 +149,7 @@ const Navbar = () => {
                       transition={{ duration: 0.2 }}
                       className="absolute top-full left-0 bg-white shadow-xl rounded-md mt-1 z-10 w-48 border border-gray-100 overflow-hidden"
                     >
-                      <Link
+                      <a
                         href="/Prod"
                         className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
                           pathname === "/Prod"
@@ -157,8 +158,8 @@ const Navbar = () => {
                         }`}
                       >
                         IFPD
-                      </Link>
-                      <Link
+                      </a>
+                      <a
                         href="/printer"
                         className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
                           pathname === "/printer"
@@ -167,9 +168,10 @@ const Navbar = () => {
                         }`}
                       >
                         3D Printers
-                      </Link>
-                      <Link
+                      </a>
+                      <a
                         href="/kits"
+                        aria-label="See more about kits services"
                         className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
                           pathname === "/kits"
                             ? "bg-blue-50 font-medium text-blue-600"
@@ -177,7 +179,7 @@ const Navbar = () => {
                         }`}
                       >
                         STEM & Robotics
-                      </Link>
+                      </a>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -326,7 +328,7 @@ const Navbar = () => {
             {/* Mobile Menu Links */}
             <div className="flex flex-col space-y-4 text-gray-800 text-lg">
               <Link
-                href="/home"
+                href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="hover:text-blue-600"
               >
@@ -363,8 +365,9 @@ const Navbar = () => {
                       transition={{ duration: 0.3 }}
                       className="mt-2 ml-4 flex flex-col space-y-2 overflow-hidden"
                     >
-                      <Link
+                      <a
                         href="/Prod"
+                        aria-label="See more about products services"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`text-base hover:text-blue-600 ${
                           pathname === "/Prod"
@@ -373,9 +376,10 @@ const Navbar = () => {
                         }`}
                       >
                         IFPD
-                      </Link>
-                      <Link
+                      </a>
+                      <a
                         href="/printer"
+                        aria-label="See more about products services"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`text-base hover:text-blue-600 ${
                           pathname === "/printer"
@@ -384,9 +388,10 @@ const Navbar = () => {
                         }`}
                       >
                         3D Printers
-                      </Link>
-                      <Link
+                      </a>
+                      <a
                         href="/kits"
+                        aria-label="See more about kits services"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`text-base hover:text-blue-600 ${
                           pathname === "/kits"
@@ -395,7 +400,7 @@ const Navbar = () => {
                         }`}
                       >
                         STEM & Robotics
-                      </Link>
+                      </a>
                     </motion.div>
                   )}
                 </AnimatePresence>
