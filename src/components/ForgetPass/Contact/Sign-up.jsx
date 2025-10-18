@@ -3,228 +3,220 @@
 import { useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGoogle, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import WhatsAppWidget from "@/components/WhatsApp/WhatApp";
-
 
 export default function SignUp() {
   const [form, setForm] = useState({
     name: "",
-    contact: "",
     email: "",
     password: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    if (message) setMessage("");
   };
 
-  // Sign Up handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!acceptTerms) {
+      setMessage("Please accept the Terms and Conditions");
+      setMessageType("error");
+      return;
+    }
+
     setLoading(true);
     setMessage("");
+    setMessageType("");
+
     try {
-      const res = await axios.post("https://student-alliance-api.code4bharat.com/api/customers", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        contact: form.contact,
-      });
-      setMessage("Account created successfully! Please sign in.");
-      setForm({ name: "", contact: "", email: "", password: "" });
+      const res = await axios.post(
+        "https://student-alliance-api.code4bharat.com/api/customers",
+        {
+          name: form.name,
+          email: form.email,
+          password: form.password,
+        }
+      );
+
+      setMessage("Account created successfully! Redirecting to login...");
+      setMessageType("success");
+      setForm({ name: "", email: "", password: "" });
+
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
     } catch (err) {
       setMessage(
         err.response?.data?.message || "Sign up failed. Please try again."
       );
+      setMessageType("error");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-10 pb-10 text-black bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl"
-      >
-        <h2 className="text-3xl font-bold  text-gray-900 mb-2 text-center">
-          Create Account
-        </h2>
-        <p className="text-gray-600 text-center mb-6">
-          Please fill in the details below
-        </p>
+    <div className="bg-white py-10 mb-10 md:h-screen">
+      <div className="grid md:grid-cols-2 items-center gap-8 h-full">
+        {/* Left Side - Image */}
+        <div className="max-md:order-1 p-4">
+          <motion.img
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            src="https://readymadeui.com/signin-image.webp"
+            alt="login-image"
+            className="lg:max-w-[85%] w-full h-full aspect-square object-contain block mx-auto"
+          />
+        </div>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
-          {/* Full Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Enter Your Full Name"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
-              required
-            />
-          </div>
-
-          {/* Contact No */}
-          <div>
-            <label className="block text-sm pt-0 font-medium text-gray-900 mb-1">
-              Contact No.
-            </label>
-            <input
-              type="tel"
-              name="contact"
-              value={form.contact}
-              onChange={handleChange}
-              placeholder="Enter Your Contact Number"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
-              required
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-900 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Enter Your Email"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div className="relative">
-            <label className="block text-sm font-medium text-gray-900 mb-1">
-              Password
-            </label>
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Create a Password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-black pr-10"
-              required
-            />
-            <button
-              type="button"
-              className="absolute right-3 top-9 text-gray-500 hover:text-gray-700 transition-colors"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={showPassword ? "show" : "hide"}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {showPassword ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                      <path
-                        fillRule="evenodd"
-                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
-                        clipRule="evenodd"
-                      />
-                      <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                    </svg>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </button>
-          </div>
-
-          {/* Submit Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            whileHover={{ scale: 1.03 }}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg shadow transition duration-200"
-            type="submit"
-            disabled={loading}
+        {/* Right Side - Form */}
+        <div className="  flex items-center md:rounded-tl-[55px] md:rounded-bl-[55px] lg:p-12 p-8 bg-[#0C172C] h-full lg:w-11/12 lg:ml-auto">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit}
+            className="max-w-lg w-full mx-auto"
           >
-            {loading ? "Signing Up..." : "Sign Up"}
-          </motion.button>
-
-          {message && (
-            <div className="text-center text-sm mt-2 text-red-500">
-              {message}
+            <div className="mb-12">
+              <h1 className="text-3xl font-semibold text-purple-400">
+                Create an account
+              </h1>
             </div>
-          )}
 
-          {/* Divider */}
-          <div className="relative text-center text-gray-900 my-4">
-            <span className="bg-white px-2">or</span>
-            <div className="absolute left-0 top-1/2 w-full border-t border-gray-200 transform -translate-y-1/2"></div>
-          </div>
+            {/* Full Name */}
+            <div>
+              <label className="text-white text-xs block mb-2">Full Name</label>
+              <div className="relative flex items-center">
+                <input
+                  name="name"
+                  type="text"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  placeholder="Enter name"
+                />
+              </div>
+            </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center justify-center gap-4">
-            <button
-              type="button"
-              className="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition"
-            >
-              <FaGoogle className="text-red-500 text-xl" />
-            </button>
-            <button
-              type="button"
-              className="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition"
-            >
-              <FaFacebookF className="text-blue-600 text-xl" />
-            </button>
-            <button
-              type="button"
-              className="p-3 border border-gray-300 rounded-full hover:bg-gray-100 transition"
-            >
-              <FaInstagram className="text-pink-500 text-xl" />
-            </button>
-          </div>
+            {/* Email */}
+            <div className="mt-8">
+              <label className="text-white text-xs block mb-2">Email</label>
+              <div className="relative flex items-center">
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  placeholder="Enter email"
+                />
+              </div>
+            </div>
 
-          {/* Switch to Sign In */}
-          <p className="text-center text-sm text-gray-600 mt-4">
-            Already have an account?{" "}
-            <a href="/contact" className="text-purple-600 hover:underline">
-              Sign In
-            </a>
-          </p>
-        </form>
-      </motion.div>
+            {/* Password */}
+            <div className="mt-8">
+              <label className="text-white text-xs block mb-2">Password</label>
+              <div className="relative flex items-center">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  placeholder="Enter password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 text-gray-400 hover:text-gray-200"
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </div>
+            </div>
 
-      <WhatsAppWidget/>
+            {/* Terms and Conditions */}
+            <div className="flex items-center mt-8">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                className="h-4 w-4 shrink-0 rounded cursor-pointer"
+              />
+              <label
+                htmlFor="remember-me"
+                className="text-slate-300 ml-3 block text-sm"
+              >
+                I accept the{" "}
+                <Link href="/terms" className="text-purple-400 font-medium hover:underline ml-1">
+                  Terms and Conditions
+                </Link>
+              </label>
+            </div>
+
+            {/* Message */}
+            <AnimatePresence>
+              {message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className={`mt-6 text-sm text-center rounded-md py-3 ${
+                    messageType === "success"
+                      ? "bg-green-50 text-green-600 border border-green-300"
+                      : "bg-red-50 text-red-600 border border-red-300"
+                  }`}
+                >
+                  {message}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Button */}
+            <div className="mt-8">
+              <motion.button
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={loading}
+                className="w-max shadow-xl py-3 px-6 min-w-32 text-sm text-white font-medium rounded-sm bg-purple-600 hover:bg-purple-500 focus:outline-none cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+              >
+                {loading ? "Creating..." : "Register"}
+              </motion.button>
+
+              <p className="text-sm text-slate-300 mt-8">
+                Already have an account?{" "}
+                <Link
+                  href="/contact"
+                  className="text-purple-400 font-medium hover:underline ml-1"
+                >
+                  Login here
+                </Link>
+              </p>
+            </div>
+          </motion.form>
+        </div>
+      </div>
+
+      <WhatsAppWidget />
     </div>
   );
 }

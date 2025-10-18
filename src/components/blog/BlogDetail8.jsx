@@ -62,7 +62,7 @@ export default function BlogsDetail8() {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/cl.png"
+                  src="/images/cll.png"
                   alt="Student Alliance Digital Board"
                   width={800}
                   height={500}

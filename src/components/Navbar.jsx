@@ -1,462 +1,268 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ShoppingCartIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
-import { UserCircleIcon } from "@heroicons/react/solid";
-import ProfilePage from "./UserProfile/Profile";
-
+import { ChevronDownIcon, UserCircleIcon } from "@heroicons/react/solid";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const tokenFromRedux = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-
   const router = useRouter();
 
+  // Hydration fix: Initialize as false, update after mount
+  const [isClient, setIsClient] = useState(false);
+  const [token, setToken] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileProductDropdownOpen, setIsMobileProductDropdownOpen] =
-    useState(false);
-  const [mounted, setMounted] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  // Set client-side flag after mount
+  useEffect(() => {
+    setIsClient(true);
+    setToken(tokenFromRedux);
+  }, [tokenFromRedux]);
+
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
-  const toggleMobileProductDropdown = () =>
-    setIsMobileProductDropdownOpen((prev) => !prev);
-  const toggleProfileDropdown = () => setIsProfileDropdownOpen((prev) => !prev);
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const toggleProfileDropdown = () =>
+    setIsProfileDropdownOpen((prev) => !prev);
+
+  const isActive = (path) => pathname === path;
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
         setIsDropdownOpen(false);
+        setIsProfileDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isProductActive = ["/Prod", "/printer", "/kits"].includes(pathname);
-  const hideAuthNav = ["/contact", "/sign_up"].includes(pathname);
-
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-3">
+    <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
+      <div className="flex flex-wrap items-center justify-between gap-5 w-full">
         {/* Logo */}
-        <motion.div
-          className="flex items-center space-x-2"
-          whileHover={{ scale: 1.03 }}
-          transition={{ type: "spring", stiffness: 300 }}
+        <Link href="/home" className="max-sm:hidden">
+          <img src="/images/logo.jpg" alt="logo" className="w-36" />
+        </Link>
+        <Link href="/home" className="hidden max-sm:block">
+          <img src="/images/logo.jpg" alt="logo" className="w-9" />
+        </Link>
+
+        {/* Menu (Desktop + Mobile) */}
+        <div
+          className={`${
+            isMobileMenuOpen
+              ? "block fixed inset-0 bg-white z-50 p-6 overflow-auto max-lg:w-3/4 max-lg:min-w-[300px] max-lg:shadow-md"
+              : "hidden lg:block"
+          }`}
         >
-          <Link href="/home" className="flex items-center">
-          <img
-            src="/images/logo.jpg"
-            alt="Logo"
-            className="h-18 hover:rotate-[-5deg] transition-transform duration-300"
-          />
-          </Link>
-        </motion.div>
-
-        {/* Mobile Icons: Hamburger + Cart */}
-        <div className="flex items-center space-x-4 md:hidden">
-          {/* Cart Icon (Mobile Only) */}
-          {/* <Link href="/mycart" aria-label="Shopping Cart">
-            <ShoppingCartIcon className="h-6 w-6 text-blue-600" />
-          </Link> */}
-
-          {/* Hamburger Menu */}
-          <button
-            onClick={toggleMobileMenu}
-            className="text-gray-800 focus:outline-none"
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          {/* Close Button (Mobile) */}
+          {isMobileMenuOpen && (
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden fixed top-3 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border border-gray-200 cursor-pointer"
             >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {[
-            { href: "/", label: "Home" },
-            { href: "/about", label: "About us" },
-            { href: "/Prod", label: "Products" },
-            { href: "/shop1", label: "Shop" },
-            { href: "/blog", label: "Blog" },
-            { href: "/getintouch", label: "Contact us" },
-          ].map(({ href, label }) =>
-            label === "Products" ? (
-              <div className="relative" key={label} ref={dropdownRef}>
-                <button
-                  onClick={toggleDropdown}
-                  className={`flex items-center text-gray-800 hover:text-blue-600 focus:outline-none transition-colors duration-300 relative group ${
-                    isProductActive ? "text-blue-600 font-medium" : ""
-                  }`}
-                >
-                  {label}
-                  <motion.div
-                    animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ChevronDownIcon className="h-4 w-7 ml-1" />
-                  </motion.div>
-                  {isProductActive && (
-                    <motion.div
-                      className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.3, type: "spring" }}
-                    />
-                  )}
-                </button>
-                <AnimatePresence>
-                  {isDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 bg-white shadow-xl rounded-md mt-1 z-10 w-48 border border-gray-100 overflow-hidden"
-                    >
-                      <a
-                        href="/Prod"
-                        className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
-                          pathname === "/Prod"
-                            ? "bg-blue-50 font-medium text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        IFPD
-                      </a>
-                      <a
-                        href="/printer"
-                        className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
-                          pathname === "/printer"
-                            ? "bg-blue-50 font-medium text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        3D Printers
-                      </a>
-                      <a
-                        href="/kits"
-                        aria-label="See more about kits services"
-                        className={`block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 transition-colors duration-200 ${
-                          pathname === "/kits"
-                            ? "bg-blue-50 font-medium text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        STEM & Robotics
-                      </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <motion.div
-                key={href}
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 300 }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-3.5 h-3.5 fill-black"
+                viewBox="0 0 320.591 320.591"
               >
-                <Link
-                  href={href}
-                  className={`relative text-gray-800 hover:text-blue-600 transition-colors duration-300 ${
-                    pathname === href ? "text-blue-600 font-medium" : ""
-                  }`}
-                >
-                  {label}
-                  {pathname === href && (
-                    <motion.div
-                      className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-600"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.3, type: "spring" }}
-                    />
-                  )}
-                </Link>
-              </motion.div>
-            )
+                <path d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"></path>
+                <path d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"></path>
+              </svg>
+            </button>
           )}
-        </nav>
 
-        {/* Cart + Sign In (Desktop Only) */}
-        {!hideAuthNav && (
-          <div className="hidden md:flex items-center space-x-6">
-            <motion.button
-              className="relative hover:text-blue-600 focus:outline-none group"
-              aria-label="Shopping Cart"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              {/* <Link href={"/mycart"}>
-                <div className="relative p-2 rounded-full group-hover:bg-blue-50 transition-colors duration-300">
-                  <ShoppingCartIcon className="h-6 w-6 text-blue-600" />
-                </div>
-              </Link> */}
-            </motion.button>
-            {/* Only render auth UI after mount to avoid hydration mismatch */}
-            {mounted ? (
-              token ? (
-                <div className="relative">
+          {/* Links */}
+          <ul className="lg:flex gap-x-4 max-lg:space-y-3">
+            <li className="mb-6 hidden max-lg:block">
+              <Link href="/home">
+                <img src="/images/logo.jpg" alt="logo" className="w-36" />
+              </Link>
+            </li>
+
+            {[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About us" },
+              { href: "/Prod", label: "Products" },
+              { href: "/shop1", label: "Shop" },
+              { href: "/blog", label: "Blog" },
+              { href: "/getintouch", label: "Contact us" },
+            ].map(({ href, label }) =>
+              label === "Products" ? (
+                <li
+                  key={label}
+                  className="relative max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
+                  ref={dropdownRef}
+                >
                   <button
-                    onClick={toggleProfileDropdown}
-                    className="flex items-center focus:outline-none cursor-pointer"
-                    aria-label="User menu"
+                    onClick={toggleDropdown}
+                    className={`flex items-center font-medium text-[15px] ${
+                      isActive("/Prod")
+                        ? "text-blue-700"
+                        : "text-slate-900 hover:text-blue-700"
+                    }`}
                   >
-                    <UserCircleIcon className="h-8 w-8 text-blue-600 cursor-pointer" />
-                    {/* Optionally show user name */}
-                    {/* <span className="ml-2 text-gray-800 font-medium">{user?.name}</span> */}
+                    {label}
+                    <ChevronDownIcon className="h-4 w-5 ml-1" />
                   </button>
                   <AnimatePresence>
-                    {isProfileDropdownOpen && (
-                      <motion.div
+                    {isDropdownOpen && (
+                      <motion.ul
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                        className="absolute bg-white shadow-md rounded-md border mt-2 w-44 z-50"
                       >
-                        <Link href={'/profile'}>
-                        <button
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
-                          onClick={() => {
-                            router.push("/profile");
-                          }}
-                        >
-                          Profile
-                        </button>
-                        </Link>
-                        <button
-                          onClick={() => {
-                            dispatch(logout());
-                            window.dispatchEvent(new Event("Logout"));
-                            setIsProfileDropdownOpen(false);
-                            window.location.reload();
-                          }}
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
-                        >
-                          Logout
-                        </button>
-                      </motion.div>
+                        <li>
+                          <Link
+                            href="/Prod"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            IFPD
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/printer"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            3D Printers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/kits"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            STEM & Robotics
+                          </Link>
+                        </li>
+                      </motion.ul>
                     )}
                   </AnimatePresence>
-                </div>
+                </li>
               ) : (
-                <motion.a
-                  href="/contact"
-                  className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 5px 15px rgba(37, 99, 235, 0.4)",
-                  }}
-                  whileTap={{ scale: 0.98 }}
+                <li
+                  key={label}
+                  className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
                 >
-                  Sign in
-                </motion.a>
-              )
-            ) : null}
-          </div>
-        )}
-      </div>
-
-      {/* Mobile Nav Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ x: "100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "100%", opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden fixed top-0 right-0 h-full w-3/4 bg-white shadow-lg z-50 px-6 pt-6 pb-12 overflow-y-auto"
-          >
-            {/* Close Button */}
-            <div className="flex justify-end mb-6">
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-gray-800 hover:text-blue-600 focus:outline-none"
-                aria-label="Close menu"
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            {/* Mobile Menu Links */}
-            <div className="flex flex-col space-y-4 text-gray-800 text-lg">
-              <Link
-                href="/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-blue-600"
-              >
-                Home
-              </Link>
-              <Link
-                href="/about"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-blue-600"
-              >
-                About us
-              </Link>
-
-              <div>
-                <button
-                  onClick={toggleMobileProductDropdown}
-                  className="flex justify-between w-full items-center hover:text-blue-600 focus:outline-none"
-                >
-                  Products
-                  <motion.div
-                    animate={{ rotate: isMobileProductDropdownOpen ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
+                  <Link
+                    href={href}
+                    className={`block font-medium text-[15px] transition-all ${
+                      isActive(href)
+                        ? "text-blue-700"
+                        : "text-slate-900 hover:text-blue-700"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <ChevronDownIcon className="h-5 w-5 ml-1" />
-                  </motion.div>
-                </button>
+                    {label}
+                  </Link>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
 
-                <AnimatePresence>
-                  {isMobileProductDropdownOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="mt-2 ml-4 flex flex-col space-y-2 overflow-hidden"
+        {/* Buttons (Right Side) */}
+        <div className="flex max-lg:ml-auto space-x-4 items-center">
+          {/* Prevent hydration mismatch by only showing after client mount */}
+          {!isClient ? (
+            // Placeholder during SSR to match initial render
+            <div className="h-8 w-32"></div>
+          ) : !token ? (
+            <>
+              <button
+                onClick={() => router.push("/contact")}
+                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => router.push("/sign_up")}
+                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all"
+              >
+                Sign up
+              </button>
+            </>
+          ) : (
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={toggleProfileDropdown}
+                className="flex items-center focus:outline-none"
+              >
+                <UserCircleIcon className="h-8 w-8 text-blue-600" />
+              </button>
+              <AnimatePresence>
+                {isProfileDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+                  >
+                    <Link href="/profile">
+                      <button
+                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
+                        onClick={() => setIsProfileDropdownOpen(false)}
+                      >
+                        Profile
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        dispatch(logout());
+                        setIsProfileDropdownOpen(false);
+                        router.push("/");
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
                     >
-                      <a
-                        href="/Prod"
-                        aria-label="See more about products services"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`text-base hover:text-blue-600 ${
-                          pathname === "/Prod"
-                            ? "font-semibold text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        IFPD
-                      </a>
-                      <a
-                        href="/printer"
-                        aria-label="See more about products services"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`text-base hover:text-blue-600 ${
-                          pathname === "/printer"
-                            ? "font-semibold text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        3D Printers
-                      </a>
-                      <a
-                        href="/kits"
-                        aria-label="See more about kits services"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`text-base hover:text-blue-600 ${
-                          pathname === "/kits"
-                            ? "font-semibold text-blue-600"
-                            : ""
-                        }`}
-                      >
-                        STEM & Robotics
-                      </a>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <Link
-                href="/shop1"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-blue-600"
-              >
-                Shop
-              </Link>
-              <Link
-                href="/blog"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-blue-600"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/getintouch"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-blue-600"
-              >
-                Contact us
-              </Link>
-
-              <motion.a
-                href="/contact"
-                target="_blank"
-                className="mt-6 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 5px 15px rgba(37, 99, 235, 0.4)",
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Sign in
-              </motion.a>
+                      Logout
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+
+          {/* Hamburger Icon */}
+          <button
+            onClick={toggleMobileMenu}
+            className="lg:hidden cursor-pointer"
+          >
+            <svg
+              className="w-7 h-7"
+              fill="#000"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </header>
   );
 };
 
 export default Navbar;
-
-// After successful login (in your login handler)
-// dispatch(
-//   loginSuccess({
-//     token: res.data.token,
-//     user: res.data.customer,
-//   })
-// );
-// localStorage.setItem("userToken", res.data.token);
-// localStorage.setItem("userInfo", JSON.stringify(res.data.customer));
-// router.push("/home"); // or wherever you want to redirect

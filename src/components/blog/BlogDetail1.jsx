@@ -1,113 +1,167 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import WhatsAppWidget from '../WhatsApp/WhatApp';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import WhatsAppWidget from "../WhatsApp/WhatApp";
 
 export default function BlogsDetail() {
-  return (
-    <>
-      <div className="px-4 py-8 md:px-16 lg:px-32 bg-white text-gray-800">
-        <h1 className="text-4xl font-bold text-center border-b-4 border-blue-600 pb-4 mb-12">
-          Blogs Detail
-        </h1>
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
 
-        {/* Header Section */}
-        <section className="mb-16">
-          <h2 className="text-2xl text-purple-600 font-semibold mb-6 border-l-4 border-purple-600 pl-4 text-left">
-            INTERACTIVE FLAT PANEL DISPLAYS
-          </h2>
+  return (
+    <div className="relative min-h-screen bg-gradient-to-b from-indigo-50 via-white to-blue-50 text-gray-900 overflow-hidden">
+      {/* Animated Background Blobs */}
+      <motion.div
+        className="absolute top-0 left-0 w-[45rem] h-[45rem] bg-purple-300/30 blur-[120px] rounded-full"
+        animate={{ y: [0, 30, 0] }}
+        transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-[35rem] h-[35rem] bg-blue-300/30 blur-[120px] rounded-full"
+        animate={{ y: [0, -30, 0] }}
+        transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }}
+      />
+
+      {/* Blog Title */}
+      <motion.header
+        className="relative text-center py-20 px-6 md:px-16 lg:px-32"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 leading-tight mb-4">
+          Interactive Flat Panel Displays
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Discover how Solitaire Interactive Flat Panel Displays are reshaping
+          classrooms, offices, and training spaces with intelligent technology
+          and seamless collaboration tools.
+        </p>
+      </motion.header>
+
+      {/* Blog Sections */}
+      <main className="relative z-10 px-6 md:px-16 lg:px-40 space-y-20 pb-24">
+        {/* Section 1 */}
+        <motion.section
+          className="flex flex-col md:flex-row items-center gap-8"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="flex-1 space-y-4">
+            <h2 className="text-3xl font-bold text-gray-900">
+              Elevate Interactions with Smart Flat Panels
+            </h2>
+            <p className="text-gray-600 leading-relaxed text-justify">
+              Unleash the future of interaction with Solitaire Interactive Flat
+              Panel Displays. Elevate collaboration, presentations, and learning
+              with vibrant visuals and cutting-edge touch technology that turns
+              every meeting or class into a smart experience.
+            </p>
+          </div>
 
           <motion.div
-            className="grid md:grid-cols-2 gap-8 items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="flex-1"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.4 }}
           >
             <Image
               src="/images/b-img1.png"
-              alt="4K Display"
+              alt="Interactive Display"
               width={600}
               height={400}
-              className="rounded-xl shadow-xl w-full h-auto"
+              className="rounded-2xl shadow-xl"
             />
-
-            <div className="text-left">
-              <h3 className="text-xl font-semibold mb-4"> 
-                Elevate Interactions: Unleash the Power of Interactive Flat Panels
-              </h3>
-              <p className="text-gray-600 text-base leading-relaxed text-justify">
-                Unleash the Future of Interaction: Solitaire Interactive Flat Panel Displays. Elevate collaboration and
-                engagement with cutting-edge technology that redefines presentations, meetings, and learning experiences.
-                Experience brilliance, empower productivity.
-              </p>
-            </div>
           </motion.div>
-        </section>
+        </motion.section>
 
-        {/* Complete Range Section */}
-        <section className="mb-16">
+        {/* Divider */}
+        <div className="w-full border-t border-gray-300/50 my-4"></div>
+
+        {/* Section 2 */}
+        <motion.section
+          className="flex flex-col md:flex-row-reverse items-center gap-8"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          <div className="flex-1 space-y-4">
+            <h2 className="text-3xl font-bold text-gray-900">
+              A Complete Range of Interactive Displays
+            </h2>
+            <p className="text-gray-600 leading-relaxed text-justify">
+              Our Interactive Flat Panels are available in 55", 65", 75", 86" &
+              98" sizes — offering ultra-responsive touch, 4K clarity, and
+              effortless connectivity. Designed for classrooms, training rooms,
+              and business spaces to make learning and collaboration seamless.
+            </p>
+          </div>
+
           <motion.div
-            className="grid md:grid-cols-2 gap-8 items-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            className="flex-1"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.4 }}
           >
-            <div>
-              <h3 className="text-xl font-semibold mb-4">
-                A Complete Range of Interactive Displays
-              </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
-                Interactive Flat Panel aids teaching and learning. We provide a complete range (55", 65", 75", 86" & 98")
-                of reliable, high quality yet affordable Interactive Flat Panel Display (IFPD) systems with precise interactive
-                experience, ideal for classrooms, training rooms, learning centres, and meeting rooms. We offer interactive
-                tools to help teachers engage and inspire their students/learners.
-              </p>
-            </div>
-
             <Image
               src="/images/b-img2.png"
               alt="Interactive Panels"
               width={600}
               height={400}
-              className="rounded-xl shadow-xl w-full h-auto"
+              className="rounded-2xl shadow-xl"
             />
           </motion.div>
-        </section>
+        </motion.section>
 
-        {/* Engage Students Section */}
-        <section>
+        {/* Divider */}
+        <div className="w-full border-t border-gray-300/50 my-4"></div>
+
+        {/* Section 3 */}
+        <motion.section
+          className="flex flex-col md:flex-row items-center gap-8"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <div className="flex-1 space-y-4">
+            <h2 className="text-3xl font-bold text-gray-900">
+              Engage Students Like Never Before
+            </h2>
+            <p className="text-gray-600 leading-relaxed text-justify">
+              With SOLITAIRE IFPDs, students experience curiosity, enthusiasm,
+              and motivation like never before. Our panels combine sleek design,
+              4K resolution, and interactive K–12 software that transforms
+              lessons into immersive, hands-on experiences.
+            </p>
+          </div>
+
           <motion.div
-            className="grid md:grid-cols-2 gap-8 items-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            className="flex-1"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.4 }}
           >
             <Image
               src="/images/b-img3.png"
               alt="Students Using Panels"
               width={600}
               height={400}
-              className="rounded-xl shadow-xl w-full h-auto"
+              className="rounded-2xl shadow-xl"
             />
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">
-                Engage Students Like Never Before
-              </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
-                When students learn or are taught using SOLITAIRE IFPDs, our products ensure that the amount of attention,
-                curiosity, enthusiasm, optimism, and passion they show extends to their motivation to learn and succeed in
-                their education. Simple Design, 4K Resolution, Intuitive Interactive software, Full K12 content support.
-                Teachers can improve learning outcomes using responsive touch, rich yet simple to use interactive software.
-              </p>
-            </div>
           </motion.div>
-        </section>
-        <WhatsAppWidget/>
+        </motion.section>
+      </main>
+
+      {/* Floating WhatsApp Widget */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <WhatsAppWidget />
       </div>
-    </>
+    </div>
   );
 }

@@ -31,42 +31,88 @@ const features = [
   },
   {
     title: 'DIY Air Cannon STEM Kit',
-    desc: 'Solar electric wooden car,educational science toys for kids.',
+    desc: 'Solar electric wooden car, educational science toys for kids.',
     image: '/images/cannon.png',
   },
 ];
 
 export default function Features() {
+  const theme = {
+    primaryBlue: '#2A1B8F',
+    accentGreen: '#1FA55B',
+    bgGray: '#F7F9FB',
+    textDark: '#1E1E1E',
+  };
+
   return (
-    <section className="py-16 px-4 md:px-12 bg-white">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
-        Top Features of STEM & Robotics
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {features.map((feature, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.15 }}
-            className="rounded-xl overflow-hidden shadow-xl border-gray-700 hover:shadow-2xl transition-shadow duration-300 bg-white "
-          >
-            <div className="overflow-hidden group p-6 flex justify-center">
-              <Image
-                src={feature.image}
-                alt={feature.title}
-                width={350}
-                height={180}
-                className="object-contain group-hover:scale-105 transition-transform duration-300"
+    <section className="relative bg-[#F7F9FB] py-24 px-6 md:px-12 overflow-hidden">
+      {/* Background glow effects */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#2A1B8F]/10 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#1FA55B]/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#2A1B8F] to-[#1FA55B]"
+        >
+          Top Features of STEM & Robotics
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-16"
+        >
+          Unlock creativity and curiosity with innovative STEM kits designed for
+          hands-on learning and exploration.
+        </motion.p>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="relative group rounded-2xl overflow-hidden border border-transparent bg-white/70 backdrop-blur-md transition-all duration-500 shadow-[0_8px_25px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.15)] hover:border-[#1FA55B]/40 hover:-translate-y-1 hover:scale-[1.03]"
+            >
+              {/* Image */}
+              <div className="overflow-hidden flex justify-center items-center p-6 bg-gradient-to-b from-transparent to-[#2A1B8F]/5">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  width={350}
+                  height={200}
+                  className="object-contain transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+
+              {/* Text */}
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold text-[#2A1B8F] mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {feature.desc}
+                </p>
+              </div>
+
+              {/* Hover accent line */}
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[3px] rounded-t transition-all duration-500 group-hover:w-3/4"
+                style={{ backgroundColor: theme.accentGreen }}
               />
-            </div>
-            <div className="bg-blue-500 text-white text-center py-4 px-3">
-              <h3 className="font-semibold text-lg">{feature.title}</h3>
-              <p className="text-sm mt-2">{feature.desc}</p>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
