@@ -148,7 +148,7 @@ export default function Blog() {
                       transition={{ duration: 0.3 }}
                       className="mt-4 w-full py-3 px-6 rounded-lg font-semibold text-white 
                                 bg-gradient-to-r from-blue-900 to-green-800 
-                                shadow-md hover:shadow-lg transition-transform duration-300"
+                                shadow-md hover:shadow-lg transition-transform duration-300 cursor-pointer"
                     >
                       READ MORE →
                     </motion.button>

@@ -120,7 +120,7 @@ export default function WhyChoose() {
           transition={{ delay: 0.3, duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <button
+          {/* <button
             className="px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{
               backgroundColor: theme.accentGreen,
@@ -129,7 +129,7 @@ export default function WhyChoose() {
             }}
           >
             Learn More
-          </button>
+          </button> */}
         </motion.div>
       </div>
     </section>

@@ -1,38 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Cpu, Monitor, Rocket } from 'lucide-react';
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight, Sparkles, Cpu, Monitor, Rocket } from "lucide-react";
 
 const Service = () => {
   const services = [
     {
       title: "3D Printers",
-      description: "Unlock the power of precision and creativity with our expert 3D printer services. we bring your ideas to life!",
+      description:
+        "Unlock the power of precision and creativity with our expert 3D printer services. we bring your ideas to life!",
       buttonText: "Explore Now",
       imgSrc: "/images/3DP2.png",
       link: "/printer",
       icon: <Cpu className="w-8 h-8" />,
       gradient: "from-[#2A1B8F] to-[#1FA55B]",
-      bgColor: "#F7F9FB"
+      bgColor: "#F7F9FB",
     },
     {
       title: "IFPD Panel",
-      description: "Discover precision and reliability with IFPD Panel Services — your trusted partner for custom-built electrical panels.",
+      description:
+        "Discover precision and reliability with IFPD Panel Services — your trusted partner for custom-built electrical panels.",
       buttonText: "Explore Now",
       imgSrc: "/images/digital-d1.png",
       link: "/Prod",
       icon: <Monitor className="w-8 h-8" />,
       gradient: "from-[#2A1B8F] to-[#1FA55B]",
-      bgColor: "#F7F9FB"
+      bgColor: "#F7F9FB",
     },
     {
       title: "Stem & Robotics",
-      description: "Unlock young minds with our STEM & Robotics. interactive sessions in coding, robotics, AI, and more!",
+      description:
+        "Unlock young minds with our STEM & Robotics. interactive sessions in coding, robotics, AI, and more!",
       buttonText: "Explore Now",
       imgSrc: "/images/K5.png",
       link: "/kits",
       icon: <Rocket className="w-8 h-8" />,
       gradient: "from-[#2A1B8F] to-[#1FA55B]",
-      bgColor: "#F7F9FB"
+      bgColor: "#F7F9FB",
     },
   ];
 
@@ -44,7 +49,7 @@ const Service = () => {
           animate={{
             scale: [1, 1.2, 1],
             rotate: [0, 180, 0],
-            opacity: [0.03, 0.06, 0.03]
+            opacity: [0.03, 0.06, 0.03],
           }}
           transition={{ duration: 20, repeat: Infinity }}
           className="absolute -top-20 -left-20 w-96 h-96 bg-[#2A1B8F] rounded-full blur-3xl"
@@ -53,7 +58,7 @@ const Service = () => {
           animate={{
             scale: [1.2, 1, 1.2],
             rotate: [180, 0, 180],
-            opacity: [0.03, 0.06, 0.03]
+            opacity: [0.03, 0.06, 0.03],
           }}
           transition={{ duration: 25, repeat: Infinity }}
           className="absolute -bottom-20 -right-20 w-96 h-96 bg-[#1FA55B] rounded-full blur-3xl"
@@ -75,7 +80,9 @@ const Service = () => {
             className="inline-flex items-center gap-2 px-6 py-2 bg-white/90 backdrop-blur-sm rounded-full border border-[#E0E0E0] shadow-lg mb-6"
           >
             <Sparkles className="w-4 h-4 text-[#1FA55B]" />
-            <span className="text-sm font-semibold text-[#2A1B8F]">What We Offer</span>
+            <span className="text-sm font-semibold text-[#2A1B8F]">
+              What We Offer
+            </span>
           </motion.div>
 
           <h2 className="text-5xl md:text-6xl font-bold mb-4">
@@ -84,7 +91,8 @@ const Service = () => {
             </span>
           </h2>
           <p className="text-[#757575] text-lg max-w-2xl mx-auto">
-            Innovative solutions designed to transform your educational experience
+            Innovative solutions designed to transform your educational
+            experience
           </p>
         </motion.div>
 
@@ -112,7 +120,10 @@ const Service = () => {
                 </motion.div>
 
                 {/* Image Container */}
-                <div className="relative p-8" style={{ backgroundColor: service.bgColor }}>
+                <div
+                  className="relative p-8"
+                  style={{ backgroundColor: service.bgColor }}
+                >
                   <motion.div
                     whileHover={{ scale: 1.05, rotate: 2 }}
                     transition={{ duration: 0.4 }}
@@ -123,7 +134,7 @@ const Service = () => {
                       alt={service.title}
                       className="w-full h-full object-contain p-4"
                     />
-                    
+
                     {/* Overlay on hover */}
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -138,30 +149,33 @@ const Service = () => {
                   <h3 className="text-2xl font-bold text-[#1E1E1E] mb-3 group-hover:text-[#2A1B8F] transition-colors">
                     {service.title}
                   </h3>
-                  
+
                   <p className="text-[#757575] mb-6 leading-relaxed flex-grow">
                     {service.description}
                   </p>
 
-                  {/* CTA Button */}
-                  <motion.a
-                    href={service.link}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group/btn`}
-                  >
-                    <span>{service.buttonText}</span>
+                  {/* ✅ Replaced <motion.a> with <Link> */}
+                  <Link href={service.link} passHref>
                     <motion.div
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${service.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group/btn cursor-pointer`}
                     >
-                      <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                      <span>{service.buttonText}</span>
+                      <motion.div
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                      </motion.div>
                     </motion.div>
-                  </motion.a>
+                  </Link>
                 </div>
 
                 {/* Decorative corner gradient */}
-                <div className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl ${service.gradient} opacity-5 rounded-tl-full transition-all duration-500 group-hover:w-40 group-hover:h-40 group-hover:opacity-10`} />
+                <div
+                  className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl ${service.gradient} opacity-5 rounded-tl-full transition-all duration-500 group-hover:w-40 group-hover:h-40 group-hover:opacity-10`}
+                />
               </div>
 
               {/* Glow effect on hover */}
@@ -188,14 +202,16 @@ const Service = () => {
             <p className="text-[#757575] mb-6">
               Get in touch with us to learn more about our services
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-[#E63946] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2"
-            >
-              <span>Contact Us</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
+            <Link href="/getintouch">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-[#E63946] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2 cursor-pointer" 
+              >
+                <span>Contact Us</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

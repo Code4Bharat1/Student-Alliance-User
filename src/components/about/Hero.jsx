@@ -74,19 +74,32 @@ const Hero = () => {
             Transforming education through cutting-edge lab solutions. Over 100+ schools empowered with innovative STEM and robotics learning environments.
           </p>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <button className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-medium transition-colors">
-              Get Started
-            </button>
-            <button className="px-8 py-3 border border-slate-400 hover:border-white rounded-full font-medium transition-colors">
-              Learn More
-            </button>
-          </motion.div>
+        
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <a
+                href="https://wa.me/919594402775?text=Hi!%20I%20want%20to%20know%20more%20about%20Student%20Alliance%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-medium transition-all cursor-pointer inline-block"
+              >
+                Get Started
+              </a>
+
+              <a
+                href="https://wa.me/919594402775?text=Hello!%20I%20would%20like%20to%20learn%20more%20about%20your%20STEM%20and%20Robotics%20solutions."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 border border-slate-400 hover:border-white rounded-full font-medium transition-all cursor-pointer inline-block"
+              >
+                Learn More
+              </a>
+            </motion.div>
+
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -310,12 +323,24 @@ const Hero = () => {
                 Our team is here to help you with any additional queries
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all">
+               <a
+                  href="https://wa.me/919594402775?text=Hi!%20I%20need%20some%20support%20regarding%20your%20services."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all cursor-pointer inline-block"
+                >
                   Contact Support
-                </button>
-                <button className="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-full font-medium hover:border-slate-400 hover:shadow-md transition-all">
+                </a>
+
+                <a
+                  href="https://wa.me/919594402775?text=Hello!%20I’d%20like%20to%20schedule%20a%20call%20to%20discuss%20your%20offerings."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-full font-medium hover:border-slate-400 hover:shadow-md transition-all cursor-pointer inline-block"
+                >
                   Schedule a Call
-                </button>
+                </a>
+
               </div>
             </div>
           </motion.div>
