@@ -10,44 +10,47 @@ import { ChevronDownIcon, UserCircleIcon } from "@heroicons/react/solid";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const tokenFromRedux = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.token);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Hydration fix: Initialize as false, update after mount
-  const [isClient, setIsClient] = useState(false);
-  const [token, setToken] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const profileDropdownRef = useRef(null);
 
-  // Set client-side flag after mount
   useEffect(() => {
-    setIsClient(true);
-    setToken(tokenFromRedux);
-  }, [tokenFromRedux]);
+    setMounted(true);
+  }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-  const toggleProfileDropdown = () =>
-    setIsProfileDropdownOpen((prev) => !prev);
+  const toggleProfileDropdown = () => setIsProfileDropdownOpen((prev) => !prev);
 
   const isActive = (path) => pathname === path;
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setIsDropdownOpen(false);
+      }
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(e.target)) {
         setIsProfileDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setIsProfileDropdownOpen(false);
+    router.push("/");
+  };
 
   return (
     <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
@@ -179,69 +182,63 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Buttons (Right Side) */}
         <div className="flex max-lg:ml-auto space-x-4 items-center">
-          {/* Prevent hydration mismatch by only showing after client mount */}
-          {!isClient ? (
-            // Placeholder during SSR to match initial render
-            <div className="h-8 w-32"></div>
-          ) : !token ? (
+          {mounted && (
             <>
-              <button
-                onClick={() => router.push("/contact")}
-                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => router.push("/sign_up")}
-                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all"
-              >
-                Sign up
-              </button>
-            </>
-          ) : (
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={toggleProfileDropdown}
-                className="flex items-center focus:outline-none"
-              >
-                <UserCircleIcon className="h-8 w-8 text-blue-600" />
-              </button>
-              <AnimatePresence>
-                {isProfileDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+              {isAuthenticated ? (
+                <div className="relative" ref={profileDropdownRef}>
+                  <button
+                    onClick={toggleProfileDropdown}
+                    className="flex items-center focus:outline-none"
                   >
-                    <Link href="/profile">
-                      <button
-                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
-                        onClick={() => setIsProfileDropdownOpen(false)}
+                    <UserCircleIcon className="h-8 w-8 text-blue-600 hover:text-blue-700 transition-colors" />
+                  </button>
+                  <AnimatePresence>
+                    {isProfileDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-50"
                       >
-                        Profile
-                      </button>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        dispatch(logout());
-                        setIsProfileDropdownOpen(false);
-                        router.push("/");
-                      }}
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer"
-                    >
-                      Logout
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                        <Link href="/profile">
+                          <button
+                            className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer rounded-t-md"
+                            onClick={() => setIsProfileDropdownOpen(false)}
+                          >
+                            Profile
+                          </button>
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer rounded-b-md"
+                        >
+                          Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={() => router.push("/login")}
+                    className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => router.push("/sign_up")}
+                    className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all"
+                  >
+                    Sign up
+                  </button>
+                </>
+              )}
+            </>
           )}
 
-          {/* Hamburger Icon */}
           <button
             onClick={toggleMobileMenu}
             className="lg:hidden cursor-pointer"

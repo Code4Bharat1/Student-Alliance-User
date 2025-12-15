@@ -17,7 +17,7 @@ export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const hideAuthNav = ["/contact", "/sign_up"].includes(pathname);
+  const hideAuthNav = ["/login", "/sign_up"].includes(pathname);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -36,16 +36,25 @@ export default function Login() {
         }
       );
 
+      // ✅ First set localStorage
+      localStorage.setItem("userToken", res.data.token);
+      localStorage.setItem("userInfo", JSON.stringify(res.data.customer));
+
+      // ✅ Then dispatch to Redux
       dispatch(
         loginSuccess({
           token: res.data.token,
           user: res.data.customer,
         })
       );
-      localStorage.setItem("userToken", res.data.token);
-      localStorage.setItem("userInfo", JSON.stringify(res.data.customer));
+
       setMessage("Login successful!");
-      router.push("/");
+      
+      // ✅ Small delay to ensure state updates
+      setTimeout(() => {
+        router.push("/");
+      }, 100);
+      
     } catch (err) {
       setMessage(
         err.response?.data?.message || "Login failed. Please try again."
@@ -84,7 +93,7 @@ export default function Login() {
           <div className="mb-12">
             <h3 className="text-4xl font-bold">Sign in</h3>
             <p className="text-slate-600 text-sm mt-4">
-              Don’t have an account?
+              Don't have an account?
               <Link
                 href="/sign_up"
                 className="text-blue-600 font-medium hover:underline ml-1"
@@ -221,12 +230,20 @@ export default function Login() {
               whileHover={{ scale: 1.03 }}
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-6 text-sm font-medium tracking-wider rounded-full text-white bg-slate-800 hover:bg-slate-900"
+              className="w-full py-3 px-6 text-sm font-medium tracking-wider rounded-full text-white bg-slate-800 hover:bg-slate-900 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Signing in..." : "Sign in"}
             </motion.button>
             {message && (
-              <p className="text-center text-sm text-red-500 mt-2">{message}</p>
+              <motion.p 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`text-center text-sm mt-2 ${
+                  message.includes("successful") ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {message}
+              </motion.p>
             )}
           </div>
 

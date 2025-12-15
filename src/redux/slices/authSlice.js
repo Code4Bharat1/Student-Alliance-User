@@ -17,17 +17,25 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.user = action.payload.user;
       state.isAuthenticated = true;
+      
+      // ✅ localStorage already set in login page, but adding here for safety
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userToken", action.payload.token);
+        localStorage.setItem("userInfo", JSON.stringify(action.payload.user));
+      }
     },
     logout: (state) => {
       state.token = null;
       state.user = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("userToken");
-      localStorage.removeItem("userInfo");
+      
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userInfo");
+      }
     },
   },
 });
 
 export const { loginSuccess, logout } = authSlice.actions;
 export default authSlice.reducer;
-
