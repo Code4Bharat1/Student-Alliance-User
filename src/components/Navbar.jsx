@@ -60,7 +60,7 @@ const Navbar = () => {
           <img src="/images/logo.jpg" alt="logo" className="w-36" />
         </Link>
         <Link href="/home" className="hidden max-sm:block">
-          <img src="/images/logo.jpg" alt="logo" className="w-9" />
+          <img src="/images/logo.jpg" alt="logo" className="w-25" />
         </Link>
 
         {/* Menu (Desktop + Mobile) */}
