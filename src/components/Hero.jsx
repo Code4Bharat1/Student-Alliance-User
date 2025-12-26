@@ -114,30 +114,34 @@ const Hero = () => {
     >
       {/* Image Container */}
       <div className="absolute inset-0 w-full h-full">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={currentImages[currentIndex]}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="absolute inset-0"
-          >
-            <img
-              src={currentImages[currentIndex]}
-              alt={`Slide ${currentIndex + 1}`}
-              className="w-full h-full bg-cover"
-              loading="lazy"
-            />
-            {/* Gradient Overlay */}
-            <div 
-              className="absolute inset-0"
-              style={{ background: "linear-gradient(to top, rgba(42, 27, 143, 0.6), transparent, rgba(42, 27, 143, 0.2))" }}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+  <AnimatePresence initial={false}>
+    <motion.img
+      key={currentImages[currentIndex]}
+      src={currentImages[currentIndex]}
+      alt={`Slide ${currentIndex + 1}`}
+      className="absolute inset-0 w-full h-full object-cover"
+      initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeInOut",
+      }}
+      loading={currentIndex === 0 ? "eager" : "lazy"}
+
+    />
+  </AnimatePresence>
+
+  {/* Gradient Overlay */}
+  <div
+    className="absolute inset-0 z-10 pointer-events-none"
+    style={{
+      background:
+        "linear-gradient(to top, rgba(42, 27, 143, 0.6), transparent, rgba(42, 27, 143, 0.2))",
+    }}
+  />
+</div>
+
 
       {/* Navigation Controls */}
       <motion.div
