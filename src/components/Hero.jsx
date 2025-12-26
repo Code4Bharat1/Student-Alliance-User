@@ -80,6 +80,8 @@ const Hero = () => {
     ]);
   }, [currentImages.length]);
 
+
+  
   const goToSlide = useCallback((index) => {
     setIndex(([prevIndex]) => [index, index > prevIndex ? 1 : -1]);
   }, []);
