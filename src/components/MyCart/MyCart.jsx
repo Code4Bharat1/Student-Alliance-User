@@ -28,7 +28,7 @@ export default function MyCart() {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://student-alliance-api.code4bharat.com/api/cart/${user._id}`,
+          `https://api-studentalliance.nexcorealliance.com/api/cart/${user._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -42,7 +42,7 @@ export default function SignUp() {
 
     try {
       const res = await axios.post(
-        "https://student-alliance-api.code4bharat.com/api/customers",
+        "https://api-studentalliance.nexcorealliance.com/api/customers",
         {
           name: form.name,
           email: form.email,

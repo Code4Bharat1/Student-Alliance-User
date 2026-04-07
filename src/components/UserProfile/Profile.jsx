@@ -33,7 +33,7 @@ const ProfilePage = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          `https://student-alliance-api.code4bharat.com/api/customers/${userFromRedux._id}`
+          `https://api-studentalliance.nexcorealliance.com/api/customers/${userFromRedux._id}`
         );
         setUser(res.data);
       } catch (err) {
@@ -67,7 +67,7 @@ const ProfilePage = () => {
     setIsEditing(false);
     try {
       const res = await axios.put(
-        `https://student-alliance-api.code4bharat.com/api/customers/${userFromRedux._id}`,
+        `https://api-studentalliance.nexcorealliance.com/api/customers/${userFromRedux._id}`,
         formData
       );
       setUser(res.data.customer || res.data);

@@ -29,7 +29,7 @@ export default function Login() {
     setMessage("");
     try {
       const res = await axios.post(
-        "https://student-alliance-api.code4bharat.com/api/customers/login",
+        "https://api-studentalliance.nexcorealliance.com/api/customers/login",
         {
           email: form.email,
           password: form.password,

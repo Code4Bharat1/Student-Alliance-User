@@ -67,7 +67,7 @@ export default function OTP() {
       return;
     }
     try {
-      await axios.post("https://student-alliance-api.code4bharat.com/api/auth/verify-otp", {
+      await axios.post("https://api-studentalliance.nexcorealliance.com/api/auth/verify-otp", {
         email,
         otp: otpValue,
       });
@@ -85,7 +85,7 @@ export default function OTP() {
   const handleResend = async () => {
     setIsResending(true);
     try {
-      await axios.post("https://student-alliance-api.code4bharat.com/api/auth/send-otp", { email });
+      await axios.post("https://api-studentalliance.nexcorealliance.com/api/auth/send-otp", { email });
       setCountdown(30);
     } catch {
       alert("Failed to resend OTP. Try again.");

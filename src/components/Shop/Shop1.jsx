@@ -19,7 +19,7 @@ export default function Printer() {
       setIsLoading(true);
       try {
         const res = await axios.get(
-          "https://student-alliance-api.code4bharat.com/api/products"
+          "https://api-studentalliance.nexcorealliance.com/api/products"
         );
         setPrinters(res.data || []);
       } catch (err) {

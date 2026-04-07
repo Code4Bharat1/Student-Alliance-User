@@ -26,7 +26,7 @@ export default function ProductDetail() {
     if (!id) return;
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://student-alliance-api.code4bharat.com/api/products/${id}`);
+        const res = await fetch(`https://api-studentalliance.nexcorealliance.com/api/products/${id}`);
         const data = await res.json();
         setProduct(data);
       } catch (error) {
@@ -108,7 +108,7 @@ export default function ProductDetail() {
     }
     try {
       const res = await fetch(
-        "https://student-alliance-api.code4bharat.com/api/cart/add",
+        "https://api-studentalliance.nexcorealliance.com/api/cart/add",
         {
           method: "POST",
           headers: {

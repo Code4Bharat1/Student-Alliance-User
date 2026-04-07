@@ -39,15 +39,15 @@ const UpdatePass = () => {
 
     setLoading(true);
     try {
-      // GET https://student-alliance-api.code4bharat.com/api/customers/email/someone@example.com
+      // GET https://api-studentalliance.nexcorealliance.com/api/customers/email/someone@example.com
       const res = await axios.get(
-        `https://student-alliance-api.code4bharat.com/api/customers/email/${email}`
+        `https://api-studentalliance.nexcorealliance.com/api/customers/email/${email}`
       );
       const customer = res.data;
       console.log("Customer data:", customer);
 
       console.log(email)
-      await axios.post(`https://student-alliance-api.code4bharat.com/api/customers/update-password`, {
+      await axios.post(`https://api-studentalliance.nexcorealliance.com/api/customers/update-password`, {
         email,
         password,
       });

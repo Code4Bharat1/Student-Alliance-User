@@ -27,20 +27,27 @@ export default function Products() {
   }, [products]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          "https://student-alliance-api.code4bharat.com/api/products/category/IFPD"
-        );
-        const data = await res.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+   const fetchProducts = async () => {
+  setLoading(true);
+  try {
+    const res = await fetch(
+      "https://api-studentalliance.nexcorealliance.com/api/products/category/IFPD"
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    // console.log("API response:", data);
+
+    setProducts(data);
+  } catch (error) {
+    console.error("Detailed fetch error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
     fetchProducts();
   }, []);

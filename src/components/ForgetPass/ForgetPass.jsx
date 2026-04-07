@@ -38,7 +38,7 @@ export default function ForgotPass() {
     try {
       // 1. Check if email exists
       const res = await axios.get(
-        `https://student-alliance-api.code4bharat.com/api/customers/email/${encodeURIComponent(email)}`
+        `https://api-studentalliance.nexcorealliance.com/api/customers/email/${encodeURIComponent(email)}`
       );
       const customer = res.data;
       if (!customer || !customer._id) {
@@ -48,7 +48,7 @@ export default function ForgotPass() {
       }
 
       // 2. Send OTP to email
-      await axios.post("https://student-alliance-api.code4bharat.com/api/auth/send-otp", { email });
+      await axios.post("https://api-studentalliance.nexcorealliance.com/api/auth/send-otp", { email });
 
       // 3. Route to OTP page
       toast.success("OTP sent successfully! Please check your email.");

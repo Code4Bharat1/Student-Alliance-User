@@ -38,7 +38,7 @@ export default function Check() {
       return;
     }
     axios
-      .get(`https://student-alliance-api.code4bharat.com/api/cart/${user._id}`, {
+      .get(`https://api-studentalliance.nexcorealliance.com/api/cart/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -100,7 +100,7 @@ export default function Check() {
 
       // Send order to backend
       const response = await axios.post(
-        "https://student-alliance-api.code4bharat.com/api/orders",
+        "https://api-studentalliance.nexcorealliance.com/api/orders",
         orderData,
         {
           headers: {

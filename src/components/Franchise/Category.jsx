@@ -122,7 +122,7 @@ export default function Categories() {
         </div>
 
         {/* Explore Button */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -140,7 +140,7 @@ export default function Categories() {
           >
             Explore All Categories
           </Link>
-        </motion.div>
+        </motion.div> */}
 
         {/* WhatsApp Widget */}
         <WhatsAppWidget />

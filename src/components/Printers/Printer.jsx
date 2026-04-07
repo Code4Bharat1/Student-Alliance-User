@@ -17,7 +17,7 @@ export default function Printer() {
     const fetchPrinters = async () => {
       try {
         const res = await axios.get(
-          "https://student-alliance-api.code4bharat.com/api/products/category/3D%20Printers"
+          "https://api-studentalliance.nexcorealliance.com/api/products/category/3D%20Printers"
         );
         setPrinters(res.data || []);
       } catch (err) {
