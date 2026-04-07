@@ -109,7 +109,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative w-full h-[60vh] md:h-screen overflow-hidden"
+      className="relative w-full h-[80vh] md:h-screen overflow-hidden  "
       style={{ background: "linear-gradient(to bottom, #2A1B8F, #1E1E1E)" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -121,7 +121,7 @@ const Hero = () => {
       key={currentImages[currentIndex]}
       src={currentImages[currentIndex]}
       alt={`Slide ${currentIndex + 1}`}
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cotain"
       initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
@@ -135,13 +135,13 @@ const Hero = () => {
   </AnimatePresence>
 
   {/* Gradient Overlay */}
-  <div
+  {/* <div
     className="absolute inset-0 z-10 pointer-events-none"
     style={{
       background:
         "linear-gradient(to top, rgba(42, 27, 143, 0.6), transparent, rgba(42, 27, 143, 0.2))",
     }}
-  />
+  /> */}
 </div>
 
 
@@ -204,7 +204,7 @@ const Hero = () => {
       </motion.button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2 md:gap-3">
+      {/* <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2 md:gap-3">
         {currentImages.map((_, index) => (
           <motion.button
             key={index}
@@ -230,17 +230,17 @@ const Hero = () => {
             )}
           </motion.button>
         ))}
-      </div>
+      </div> */}
 
       {/* Slide Counter */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
         className="absolute top-6 left-6 md:top-8 md:left-8 z-20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm md:text-base font-semibold shadow-lg"
         style={{ backgroundColor: "rgba(42, 27, 143, 0.9)", border: "1px solid #2A1B8F" }}
       >
         {currentIndex + 1} / {currentImages.length}
-      </motion.div>
+      </motion.div> */}
 
      
     
