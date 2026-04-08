@@ -27,12 +27,9 @@ export default function MyCart() {
     const fetchCartItems = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          `/api/cart/${user._id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
+        const response = await fetch(`/api/cart/${user._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         const data = await response.json();
 
@@ -49,7 +46,7 @@ export default function MyCart() {
               price: product.price || 0,
               originalPrice: product.originalPrice || null,
               description: product.description || "",
-              image: product.image || "/placeholder-product.jpg",
+              image: product.image || "/placeholder-product.svg",
             },
             quantity: item.quantity || 1,
           };
@@ -223,7 +220,7 @@ export default function MyCart() {
                         alt={item.product.name}
                         className="w-24 h-24 object-cover rounded-lg mr-4 border border-border-primary"
                         onError={(e) => {
-                          e.target.src = "/placeholder-product.jpg";
+                          e.target.src = "/placeholder-product.svg";
                         }}
                       />
                       <div className="flex-1">
