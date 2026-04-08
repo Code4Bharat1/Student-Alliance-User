@@ -109,15 +109,15 @@ const Hero = () => {
   const slide = slides[currentIndex] || slides[0];
 
   return (
-    <section className="relative w-full h-[85vh] md:h-[92vh] overflow-hidden bg-bg-primary">
+    <section className="relative w-full h-[85vh] md:h-[92vh] overflow-hidden bg-bg-primary mt-9 ">
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-auto">
         <AnimatePresence initial={false}>
           <motion.img
             key={currentImages[currentIndex]}
             src={currentImages[currentIndex]}
             alt={`Slide ${currentIndex + 1}`}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-contain"
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
@@ -127,92 +127,14 @@ const Hero = () => {
         </AnimatePresence>
 
         {/* Dark Overlay */}
-        <div className="hero-overlay absolute inset-0 z-[1]" />
+        {/* <div className="hero-overlay absolute inset-0 z-[1]" /> */}
 
         {/* Bottom gradient for depth */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent z-[1]" />
       </div>
 
       {/* Text Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          <div className="max-w-2xl">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                {/* Tagline */}
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-white/20 bg-white/10 backdrop-blur-sm text-white"
-                >
-                  <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse" />
-                  {slide.tagline}
-                </motion.span>
-
-                {/* Headline */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6 whitespace-pre-line"
-                  style={{ textShadow: "0 2px 20px rgba(0,0,0,0.3)" }}
-                >
-                  {slide.headline}
-                </motion.h1>
-
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="text-base sm:text-lg text-white/80 mb-8 leading-relaxed max-w-lg"
-                >
-                  {slide.description}
-                </motion.p>
-
-                {/* CTA Buttons */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex flex-wrap gap-4"
-                >
-                  <Link href={slide.cta.href}>
-                    <motion.button
-                      whileHover={{ scale: 1.04, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="px-7 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base flex items-center gap-2 transition-all duration-300"
-                      style={{
-                        backgroundImage: "var(--brand-gradient)",
-                        boxShadow: "0 8px 30px rgba(42, 27, 143, 0.35)",
-                      }}
-                    >
-                      {slide.cta.label}
-                      <ArrowRight className="w-4 h-4" />
-                    </motion.button>
-                  </Link>
-                  <Link href={slide.secondary.href}>
-                    <motion.button
-                      whileHover={{ scale: 1.04, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="px-7 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base border border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-                    >
-                      {slide.secondary.label}
-                    </motion.button>
-                  </Link>
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Navigation Arrows */}
       <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 z-10 pointer-events-none">
@@ -220,7 +142,7 @@ const Hero = () => {
           onClick={prevImage}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
+          className="pointer-events-auto bg-black backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-5 w-5 text-white" />
@@ -230,7 +152,7 @@ const Hero = () => {
           onClick={nextImage}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
+          className="pointer-events-auto bg-black  backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
           aria-label="Next slide"
         >
           <ChevronRight className="h-5 w-5 text-white" />
