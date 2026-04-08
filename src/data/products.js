@@ -201,7 +201,7 @@ export const products =[
     ]
   },
 
-  {
+   {
     "id": 11,
     "name": "65\" Google EDLA IFPD with Camera",
     "size": 65,
@@ -210,7 +210,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 135000,
     "originalPrice": 320000,
-    "image": "/images/65_inch.png",
+    "image": "/images/65_inch_withcamer.png",
     "features": [
       "Built-in AI Camera",
       "Google EDLA Certified",
@@ -230,7 +230,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 165000,
     "originalPrice": 370000,
-    "image": "/images/75_inch.png",
+    "image": "/images/75_inch_withcamer.png",
     "features": [
       "AI Camera + Mic",
       "Google EDLA Certified",
@@ -250,7 +250,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 210000,
     "originalPrice": 476000,
-    "image": "/images/86_inch.png",
+    "image": "/images/85_inch_withcamer.png",
     "features": [
       "AI Camera System",
       "Google EDLA Certified",
@@ -270,7 +270,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 600000,
     "originalPrice": 750000,
-    "image": "/images/98_inch.png",
+    "image": "/images/98_inch_withcamer.png",
     "features": [
       "AI Camera + Speaker System",
       "Google EDLA Certified",
