@@ -65,7 +65,7 @@ const Footer = () => {
                 alt="Student Alliance Logo"
                 width={160}
                 height={60}
-                className="w-36"
+                className="w-36 h-auto"
               />
             </Link>
             <p className="text-white/50 leading-relaxed text-sm lg:max-w-sm mt-6">
@@ -91,7 +91,7 @@ const Footer = () => {
                     alt={social.name}
                     width={24}
                     height={24}
-                    className="object-contain"
+                    className="object-contain w-6 h-auto"
                   />
                 </motion.a>
               ))}

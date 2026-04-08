@@ -30,6 +30,7 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -318,20 +319,79 @@ const Navbar = () => {
             className="lg:hidden overflow-hidden border-t border-border-primary bg-bg-card/95 backdrop-blur-xl"
           >
             <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1">
-              {navLinks.map(({ href, label }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                    isActive(href)
-                      ? "text-brand-primary bg-brand-primary/10"
-                      : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
-                  }`}
-                >
-                  {label}
-                </Link>
-              ))}
+              {navLinks.map(({ href, label }) => {
+                if (label === "Products") {
+                  return (
+                    <div key={label} className="space-y-1">
+                      <button
+                        onClick={() => setIsMobileProductsOpen((v) => !v)}
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                          isActive(href)
+                            ? "text-brand-primary bg-brand-primary/10"
+                            : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
+                        }`}
+                      >
+                        <span>Products</span>
+                        <FiChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${
+                            isMobileProductsOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+
+                      {isMobileProductsOpen && (
+                        <div className="pl-4 pr-2 space-y-1">
+                          <Link
+                            href="/Prod"
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsMobileProductsOpen(false);
+                            }}
+                            className="block px-3 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-brand-primary hover:bg-bg-hover transition-colors"
+                          >
+                            IFPD
+                          </Link>
+                          <Link
+                            href="/printer"
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsMobileProductsOpen(false);
+                            }}
+                            className="block px-3 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-brand-primary hover:bg-bg-hover transition-colors"
+                          >
+                            3D Printers
+                          </Link>
+                          <Link
+                            href="/kits"
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsMobileProductsOpen(false);
+                            }}
+                            className="block px-3 py-2 rounded-lg text-sm font-medium text-text-secondary hover:text-brand-primary hover:bg-bg-hover transition-colors"
+                          >
+                            STEM & Robotics
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={label}
+                    href={href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                      isActive(href)
+                        ? "text-brand-primary bg-brand-primary/10"
+                        : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
               {!isAuthenticated && (
                 <div className="flex gap-2 pt-3 border-t border-border-primary mt-3">
                   <button
