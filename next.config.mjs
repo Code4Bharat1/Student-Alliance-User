@@ -37,6 +37,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "www.edusquadz.in",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "studentalliance.s3.ap-northeast-1.wasabisys.com",
       },
       {
