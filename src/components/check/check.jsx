@@ -34,11 +34,11 @@ export default function Check() {
   useEffect(() => {
     if (!token) {
       toast.error("Please login first to view your cart.");
-      router.replace("/contact");
+      router.replace("/login");
       return;
     }
     axios
-      .get(`https://api-studentalliance.nexcorealliance.com/api/cart/${user._id}`, {
+      .get(`/api/cart/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -100,7 +100,7 @@ export default function Check() {
 
       // Send order to backend
       const response = await axios.post(
-        "https://api-studentalliance.nexcorealliance.com/api/orders",
+        "/api/orders",
         orderData,
         {
           headers: {
@@ -144,7 +144,7 @@ export default function Check() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="p-10 bg-gradient-to-br from-indigo-900 to-purple-800 rounded-xl shadow-2xl text-white"
+            className="p-10 bg-gradient-to-br from-brand-primary to-purple-800 rounded-xl shadow-2xl text-white"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Order Summary Section */}
@@ -157,7 +157,7 @@ export default function Check() {
                   Your Order
                 </motion.h2>
 
-                <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                <div className="bg-bg-card/5 rounded-lg p-4 border border-white/10">
                   {cartItems.map((item) => (
                     <div
                       key={item._id}
@@ -171,7 +171,7 @@ export default function Check() {
                         />
                         <div>
                           <p className="font-medium">{item.product.name}</p>
-                          <span className="text-sm text-gray-300">
+                          <span className="text-sm text-text-tertiary">
                             {item.quantity} ×{" "}
                             {formatCurrency(item.product.price)}
                           </span>
@@ -196,7 +196,7 @@ export default function Check() {
                         {formatCurrency(shippingFee)}
                       </span>
                     </div>
-                    <div className="flex justify-between text-green-300">
+                    <div className="flex justify-between text-success">
                       <span>Discount</span>
                       <span className="font-medium">
                         -{formatCurrency(discount)}
@@ -233,8 +233,8 @@ export default function Check() {
                       key={method}
                       className={`px-4 py-2 rounded-lg border ${
                         deliveryMethod === method
-                          ? "bg-yellow-400 text-gray-900"
-                          : "bg-white/10 text-white"
+                          ? "bg-yellow-400 text-text-heading"
+                          : "bg-bg-card/10 text-white"
                       } hover:shadow-md transition`}
                       onClick={() => setDeliveryMethod(method)}
                       type="button"
@@ -270,7 +270,7 @@ export default function Check() {
                         value={formData[field.name]}
                         onChange={handleInputChange}
                         placeholder={`Enter ${field.label.toLowerCase()}`}
-                        className="mt-1 w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-white/20 text-white transition placeholder-white/50"
+                        className="mt-1 w-full px-4 py-2 bg-bg-card/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-bg-card/20 text-white transition placeholder-white/50"
                         required
                       />
                     </motion.div>
@@ -297,8 +297,8 @@ export default function Check() {
                     <motion.div
                       className={`p-3 rounded-md ${
                         submitStatus.success
-                          ? "bg-green-100 text-green-700"
-                          : "bg-green-200 text-green-700"
+                          ? "bg-success-bg text-success"
+                          : "bg-success-bg text-success"
                       }`}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -316,7 +316,7 @@ export default function Check() {
                     <motion.button
                       type="button"
                       onClick={() => setShowCheckoutForm(false)}
-                      className="w-full py-3 px-4 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition"
+                      className="w-full py-3 px-4 bg-bg-card/10 text-white font-semibold rounded-lg hover:bg-bg-card/20 transition"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -325,7 +325,7 @@ export default function Check() {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full py-3 px-4 bg-gradient-to-r from-yellow-300 to-yellow-400 text-gray-900 font-semibold rounded-lg hover:from-yellow-400 hover:to-yellow-500 transition ${
+                      className={`w-full py-3 px-4 bg-gradient-to-r from-yellow-300 to-yellow-400 text-text-heading font-semibold rounded-lg hover:from-yellow-400 hover:to-yellow-500 transition ${
                         isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                       }`}
                       whileHover={!isSubmitting ? { scale: 1.02 } : {}}
@@ -344,7 +344,7 @@ export default function Check() {
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="p-8 bg-gradient-to-br from-indigo-900 to-purple-800 text-white rounded-xl shadow-2xl flex flex-col justify-between border border-white/10 w-full lg:w-full"
+          className="p-8 bg-gradient-to-br from-brand-primary to-purple-800 text-white rounded-xl shadow-2xl flex flex-col justify-between border border-white/10 w-full lg:w-full"
         >
           <div>
             <h3 className="text-3xl font-bold mb-6 flex items-center gap-2">
@@ -371,7 +371,7 @@ export default function Check() {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="flex items-center p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all"
+                  className="flex items-center p-4 bg-bg-card/5 rounded-lg backdrop-blur-sm border border-white/10 hover:bg-bg-card/10 transition-all"
                 >
                   <div className="mr-4 flex-shrink-0">
                     <img
@@ -384,7 +384,7 @@ export default function Check() {
                   <div className="flex-1 flex justify-between items-center">
                     <div>
                       <p className="font-medium">{item.product.name}</p>
-                      <span className="text-sm text-gray-300">
+                      <span className="text-sm text-text-tertiary">
                         {item.quantity}x
                       </span>
                     </div>
@@ -399,9 +399,9 @@ export default function Check() {
                 <input
                   type="text"
                   placeholder="Enter promo code"
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 focus:bg-white/20 focus:ring-2 focus:ring-yellow-400 focus:outline-none placeholder-gray-300 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-bg-card/10 border border-white/20 focus:bg-bg-card/20 focus:ring-2 focus:ring-yellow-400 focus:outline-none placeholder-text-tertiary transition-all"
                 />
-                <button className="bg-gradient-to-r from-yellow-300 to-yellow-400 text-gray-900 px-5 py-3 rounded-lg hover:from-yellow-400 hover:to-yellow-500 transition-all font-medium shadow-md hover:shadow-yellow-400/40 active:scale-95">
+                <button className="bg-gradient-to-r from-yellow-300 to-yellow-400 text-text-heading px-5 py-3 rounded-lg hover:from-yellow-400 hover:to-yellow-500 transition-all font-medium shadow-md hover:shadow-yellow-400/40 active:scale-95">
                   Apply
                 </button>
               </div>
@@ -417,7 +417,7 @@ export default function Check() {
               <span>Shipping</span>
               <span className="font-medium">{formatCurrency(shippingFee)}</span>
             </div>
-            <div className="flex justify-between border-b border-white/20 pb-3 text-green-300">
+            <div className="flex justify-between border-b border-white/20 pb-3 text-success">
               <span>Discount</span>
               <span className="font-medium">-{formatCurrency(discount)}</span>
             </div>
@@ -430,15 +430,15 @@ export default function Check() {
 
             <button
               onClick={() => setShowCheckoutForm(true)}
-              className="w-full mt-6 bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-gray-900 py-4 rounded-xl text-lg font-bold transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-yellow-400/40"
+              className="w-full mt-6 bg-gradient-to-r from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-text-heading py-4 rounded-xl text-lg font-bold transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-yellow-400/40"
             >
               Proceed to Payment
             </button>
 
-            <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-white/5 rounded-lg backdrop-blur-sm">
+            <div className="flex items-center justify-center gap-2 mt-4 p-3 bg-bg-card/5 rounded-lg backdrop-blur-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-green-400"
+                className="h-5 w-5 text-success"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -450,7 +450,7 @@ export default function Check() {
                   d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                 />
               </svg>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-text-tertiary">
                 100% Secure Checkout - SSL Encrypted
               </p>
             </div>

@@ -18,7 +18,7 @@ export default function Resources() {
   ];
 
   return (
-    <div className="py-20 text-white bg-white ">
+    <div className="py-20 text-white bg-bg-card ">
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
@@ -27,10 +27,10 @@ export default function Resources() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-black ">
+          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-text-heading ">
             Download Essential Software & Drivers
           </h2>
-          <p className="text-xl text-black max-w-3xl mx-auto">
+          <p className="text-xl text-text-heading max-w-3xl mx-auto">
             Get the latest software, drivers, and updates for your devices. Optimize performance, enhance features, and
             stay up to date. Fast, secure, and hassle-free downloads—everything you need in one place!
           </p>
@@ -70,7 +70,7 @@ export default function Resources() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg group-hover:from-purple-600 group-hover:to-blue-500 transition-all duration-300"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-brand-primary to-purple-600 rounded-lg group-hover:from-purple-600 group-hover:to-brand-primary transition-all duration-300"></span>
                   <span className="relative z-10 block px-6 py-2 font-semibold text-white rounded-lg border-2 border-transparent group-hover:border-white/30 transition-all duration-300">
                     DOWNLOAD NOW
                   </span>

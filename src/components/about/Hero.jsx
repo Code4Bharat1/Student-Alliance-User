@@ -47,7 +47,7 @@ const Hero = () => {
   return (
     <>
       {/* Hero Section - Minimalist */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 min-h-screen flex items-center justify-center text-white px-4">
+      <section className="relative bg-gradient-to-br from-bg-primary via-brand-primary to-bg-primary min-h-screen flex items-center justify-center text-white px-4">
         <motion.div
           className="max-w-5xl mx-auto text-center space-y-8"
           initial={{ opacity: 0, y: 20 }}
@@ -58,19 +58,19 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-block px-4 py-2 bg-blue-500/20 rounded-full text-sm font-medium mb-4"
+            className="inline-block px-4 py-2 bg-brand-primary/20 rounded-full text-sm font-medium mb-4"
           >
             Since 2012
           </motion.div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             India's Pioneer in
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mt-2">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary mt-2">
               STEM & Robotics Labs
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-text-tertiary max-w-3xl mx-auto leading-relaxed">
             Transforming education through cutting-edge lab solutions. Over 100+ schools empowered with innovative STEM and robotics learning environments.
           </p>
 
@@ -85,7 +85,7 @@ const Hero = () => {
                 href="https://wa.me/919594402775?text=Hi!%20I%20want%20to%20know%20more%20about%20Student%20Alliance%20services."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-medium transition-all cursor-pointer inline-block"
+                className="px-8 py-3 bg-brand-primary hover:bg-brand-primary rounded-full font-medium transition-all cursor-pointer inline-block"
               >
                 Get Started
               </a>
@@ -94,7 +94,7 @@ const Hero = () => {
                 href="https://wa.me/919594402775?text=Hello!%20I%20would%20like%20to%20learn%20more%20about%20your%20STEM%20and%20Robotics%20solutions."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 border border-slate-400 hover:border-white rounded-full font-medium transition-all cursor-pointer inline-block"
+                className="px-8 py-3 border border-border-secondary hover:border-white rounded-full font-medium transition-all cursor-pointer inline-block"
               >
                 Learn More
               </a>
@@ -108,18 +108,18 @@ const Hero = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ChevronDown className="w-6 h-6 text-slate-400" />
+          <ChevronDown className="w-6 h-6 text-text-tertiary" />
         </motion.div>
       </section>
 
       {/* Foundation Section - Clean Cards */}
-      <section className="py-24 px-4 bg-white">
+      <section className="py-24 px-4 bg-bg-card">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-text-heading mb-4">
               Our Foundation
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
               The principles that drive us forward
             </p>
           </div>
@@ -129,15 +129,15 @@ const Hero = () => {
             <motion.div
               whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
-              className="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all"
+              className="group bg-bg-section rounded-2xl p-8 border border-border-primary hover:border-brand-primary hover:shadow-xl transition-all"
             >
-              <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-brand-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Mission</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-text-heading mb-3">Mission</h3>
+              <p className="text-text-secondary leading-relaxed">
                 To empower individuals and organizations by delivering innovative technology solutions that simplify communication, enhance collaboration, and drive success.
               </p>
             </motion.div>
@@ -146,16 +146,16 @@ const Hero = () => {
             <motion.div
               whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
-              className="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all"
+              className="group bg-bg-section rounded-2xl p-8 border border-border-primary hover:border-brand-primary hover:shadow-xl transition-all"
             >
-              <div className="w-12 h-12 bg-cyan-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 bg-brand-secondary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Vision</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-text-heading mb-3">Vision</h3>
+              <p className="text-text-secondary leading-relaxed">
                 To become a global leader in providing accessible and reliable audio-visual technology, transforming the way people connect, learn, and grow.
               </p>
             </motion.div>
@@ -164,15 +164,15 @@ const Hero = () => {
             <motion.div
               whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
-              className="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all"
+              className="group bg-bg-section rounded-2xl p-8 border border-border-primary hover:border-brand-primary hover:shadow-xl transition-all"
             >
               <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Values</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-2xl font-bold text-text-heading mb-3">Values</h3>
+              <p className="text-text-secondary leading-relaxed">
                 We prioritize innovation, ensure accessibility through user-friendly tech, maintain reliability with trusted products, and focus on client success.
               </p>
             </motion.div>
@@ -181,9 +181,9 @@ const Hero = () => {
       </section>
 
       {/* FAQ Section - Enhanced */}
-      <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+      <section className="py-24 px-4 bg-gradient-to-b from-bg-primary to-bg-card relative overflow-hidden">
         {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-bg-badge rounded-full blur-3xl opacity-30"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-30"></div>
         
         <div className="max-w-4xl mx-auto relative z-10">
@@ -201,18 +201,18 @@ const Hero = () => {
               transition={{ delay: 0.2, type: "spring" }}
               className="inline-block mb-4"
             >
-              <div className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white text-sm font-medium">
+              <div className="px-4 py-2 bg-gradient-to-r from-brand-primary to-purple-500 rounded-full text-white text-sm font-medium">
                 Got Questions?
               </div>
             </motion.div>
             
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-text-heading mb-4">
               Frequently Asked
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-purple-600">
                 Questions
               </span>
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            <p className="text-text-secondary text-lg max-w-2xl mx-auto">
               Find answers to common questions about our services and solutions
             </p>
           </motion.div>
@@ -228,10 +228,10 @@ const Hero = () => {
                 transition={{ delay: idx * 0.1 }}
               >
                 <motion.div
-                  className={`bg-white rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
+                  className={`bg-bg-card rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
                     openIndex === idx 
-                      ? "border-blue-500 shadow-xl shadow-blue-100" 
-                      : "border-slate-200 hover:border-slate-300 hover:shadow-lg"
+                      ? "border-brand-primary shadow-xl shadow-brand-primary/20" 
+                      : "border-border-primary hover:border-border-secondary hover:shadow-lg"
                   }`}
                   whileHover={{ scale: openIndex === idx ? 1 : 1.01 }}
                 >
@@ -243,8 +243,8 @@ const Hero = () => {
                       <motion.div 
                         className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-colors ${
                           openIndex === idx 
-                            ? "bg-gradient-to-br from-blue-500 to-purple-500 text-white" 
-                            : "bg-slate-100 text-slate-600 group-hover:bg-slate-200"
+                            ? "bg-gradient-to-br from-brand-primary to-purple-500 text-white" 
+                            : "bg-bg-hover text-text-secondary group-hover:bg-bg-hover"
                         }`}
                         animate={{ rotate: openIndex === idx ? 360 : 0 }}
                         transition={{ duration: 0.5 }}
@@ -253,7 +253,7 @@ const Hero = () => {
                       </motion.div>
                       
                       <span className={`font-semibold text-lg pt-0.5 transition-colors ${
-                        openIndex === idx ? "text-blue-600" : "text-slate-900"
+                        openIndex === idx ? "text-brand-primary" : "text-text-heading"
                       }`}>
                         {faq.question}
                       </span>
@@ -266,12 +266,12 @@ const Hero = () => {
                     >
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                         openIndex === idx 
-                          ? "bg-blue-100" 
-                          : "bg-slate-100 group-hover:bg-slate-200"
+                          ? "bg-bg-badge" 
+                          : "bg-bg-hover group-hover:bg-bg-hover"
                       }`}>
                         <ChevronDown
                           className={`w-5 h-5 transition-colors ${
-                            openIndex === idx ? "text-blue-600" : "text-slate-600"
+                            openIndex === idx ? "text-brand-primary" : "text-text-secondary"
                           }`}
                         />
                       </div>
@@ -293,8 +293,8 @@ const Hero = () => {
                           transition={{ delay: 0.1 }}
                           className="px-8 pb-6 pl-20"
                         >
-                          <div className="border-l-4 border-blue-500 pl-6 py-2">
-                            <p className="text-slate-600 leading-relaxed text-base">
+                          <div className="border-l-4 border-brand-primary pl-6 py-2">
+                            <p className="text-text-secondary leading-relaxed text-base">
                               {faq.answer}
                             </p>
                           </div>
@@ -315,11 +315,11 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="mt-16 text-center"
           >
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border border-blue-100">
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">
+            <div className="bg-gradient-to-r from-brand-primary/10 to-purple-50 rounded-2xl p-8 border border-brand-primary/20">
+              <h3 className="text-2xl font-bold text-text-heading mb-3">
                 Still have questions?
               </h3>
-              <p className="text-slate-600 mb-6">
+              <p className="text-text-secondary mb-6">
                 Our team is here to help you with any additional queries
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -327,7 +327,7 @@ const Hero = () => {
                   href="https://wa.me/919594402775?text=Hi!%20I%20need%20some%20support%20regarding%20your%20services."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all cursor-pointer inline-block"
+                  className="px-6 py-3 bg-gradient-to-r from-brand-primary to-purple-500 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all cursor-pointer inline-block"
                 >
                   Contact Support
                 </a>
@@ -336,7 +336,7 @@ const Hero = () => {
                   href="https://wa.me/919594402775?text=Hello!%20I’d%20like%20to%20schedule%20a%20call%20to%20discuss%20your%20offerings."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-full font-medium hover:border-slate-400 hover:shadow-md transition-all cursor-pointer inline-block"
+                  className="px-6 py-3 border-2 border-border-secondary text-text-primary rounded-full font-medium hover:border-border-secondary hover:shadow-md transition-all cursor-pointer inline-block"
                 >
                   Schedule a Call
                 </a>
@@ -352,7 +352,7 @@ const Hero = () => {
         href="https://wa.me/your-number"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg flex items-center justify-center z-50 transition-colors"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-brand-secondary hover:bg-brand-secondary rounded-full shadow-lg flex items-center justify-center z-50 transition-colors"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

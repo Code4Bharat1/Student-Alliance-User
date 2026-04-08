@@ -20,7 +20,7 @@ export default function MyCart() {
   useEffect(() => {
     if (!token) {
       toast.error("Please login first to view your cart.");
-      router.replace("/contact");
+      router.replace("/login");
       return;
     }
 
@@ -28,14 +28,14 @@ export default function MyCart() {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://api-studentalliance.nexcorealliance.com/api/cart/${user._id}`,
+          `/api/cart/${user._id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
-        
+
         const data = await response.json();
-        
+
         // Validate and normalize cart items with unique keys
         const validatedItems = (data.items || []).map((item, index) => {
           const product = item.product || {};
@@ -45,16 +45,16 @@ export default function MyCart() {
             key: product._id ? `${product._id}-${index}` : `item-${index}`,
             product: {
               _id: product._id || `temp-${index}`,
-              name: product.name || 'Unnamed Product',
+              name: product.name || "Unnamed Product",
               price: product.price || 0,
               originalPrice: product.originalPrice || null,
-              description: product.description || '',
-              image: product.image || '/placeholder-product.jpg'
+              description: product.description || "",
+              image: product.image || "/placeholder-product.jpg",
             },
-            quantity: item.quantity || 1
+            quantity: item.quantity || 1,
           };
         });
-        
+
         setCartItems(validatedItems);
       } catch (error) {
         console.error("Failed to fetch cart items:", error);
@@ -74,11 +74,11 @@ export default function MyCart() {
   const handleQuantityChange = (id, amount) => {
     const updatedCart = cartItems.map((item) =>
       item.product._id === id
-        ? { 
-            ...item, 
-            quantity: Math.max(1, (item.quantity || 1) + amount) 
+        ? {
+            ...item,
+            quantity: Math.max(1, (item.quantity || 1) + amount),
           }
-        : item
+        : item,
     );
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -92,7 +92,7 @@ export default function MyCart() {
 
   const applyCoupon = () => {
     if (!subtotal) return;
-    
+
     if (couponCode.toUpperCase() === "PETLOVER10") {
       setDiscount(subtotal * 0.1);
       setShowCouponInput(false);
@@ -108,7 +108,7 @@ export default function MyCart() {
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + (item.product?.price || 0) * (item.quantity || 1),
-    0
+    0,
   );
 
   const total =
@@ -131,8 +131,8 @@ export default function MyCart() {
   }
 
   return (
-    <div className="p-4 text-black md:p-8 bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+    <div className="p-4 text-text-primary md:p-8 bg-bg-primary min-h-screen">
+      <div className="max-w-4xl mx-auto bg-bg-card rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
         <div className="relative">
           <h1 className="text-2xl font-bold px-6 py-4 bg-gradient-to-r from-orange-500 to-pink-500 text-white flex items-center">
             <svg
@@ -150,7 +150,8 @@ export default function MyCart() {
               />
             </svg>
             Your Shopping Cart (
-            {cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0)} items)
+            {cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0)}{" "}
+            items)
           </h1>
           {cartItems.length > 0 && (
             <button
@@ -159,7 +160,7 @@ export default function MyCart() {
                 localStorage.setItem("cart", JSON.stringify([]));
                 toast.success("Cart cleared successfully");
               }}
-              className="absolute right-4 top-4 text-white hover:text-gray-200 transition-colors text-sm flex items-center"
+              className="absolute right-4 top-4 text-white hover:text-white/80 transition-colors text-sm flex items-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +186,7 @@ export default function MyCart() {
             <div className="text-center py-10">
               <div className="text-5xl mb-4 animate-bounce">😕</div>
               <h2 className="text-xl font-semibold">Your cart feels lonely</h2>
-              <p className="text-gray-500 mt-2">
+              <p className="text-text-muted mt-2">
                 Your pet deserves the best! Fill your cart with goodies.
               </p>
               <Link href={"/shop1"}>
@@ -214,13 +215,13 @@ export default function MyCart() {
                 {cartItems.map((item) => (
                   <div
                     key={item.key}
-                    className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 border border-gray-100 hover:border-orange-200 hover:shadow-sm rounded-lg transition-all duration-200 bg-white"
+                    className="flex flex-col md:flex-row items-center justify-between p-4 mb-4 border border-border-primary hover:border-orange-200 hover:shadow-sm rounded-lg transition-all duration-200 bg-bg-card"
                   >
                     <div className="flex items-center w-full md:w-auto">
                       <img
                         src={item.product.image}
                         alt={item.product.name}
-                        className="w-24 h-24 object-cover rounded-lg mr-4 border border-gray-200"
+                        className="w-24 h-24 object-cover rounded-lg mr-4 border border-border-primary"
                         onError={(e) => {
                           e.target.src = "/placeholder-product.jpg";
                         }}
@@ -229,7 +230,7 @@ export default function MyCart() {
                         <h2 className="font-bold text-lg hover:text-orange-500 transition-colors">
                           {item.product.name}
                         </h2>
-                        <p className="text-sm text-gray-500 line-clamp-2">
+                        <p className="text-sm text-text-muted line-clamp-2">
                           {item.product.description}
                         </p>
                         <div className="flex items-center mt-1">
@@ -238,7 +239,7 @@ export default function MyCart() {
                           </span>
                           {item.product.originalPrice && (
                             <>
-                              <span className="line-through text-gray-400 ml-2 text-sm">
+                              <span className="line-through text-text-tertiary ml-2 text-sm">
                                 {formatCurrency(item.product.originalPrice)}
                               </span>
                               <span className="ml-2 bg-orange-100 text-orange-800 text-xs px-2 py-0.5 rounded-full">
@@ -246,7 +247,7 @@ export default function MyCart() {
                                   (1 -
                                     item.product.price /
                                       item.product.originalPrice) *
-                                    100
+                                    100,
                                 )}
                                 % OFF
                               </span>
@@ -262,18 +263,18 @@ export default function MyCart() {
                           onClick={() =>
                             handleQuantityChange(item.product._id, -1)
                           }
-                          className="px-3 py-1 bg-gray-100 rounded-l-full hover:bg-gray-200 transition-colors active:scale-95 text-gray-700"
+                          className="px-3 py-1 bg-bg-hover rounded-l-full hover:bg-bg-hover transition-colors active:scale-95 text-text-primary"
                         >
                           -
                         </button>
-                        <span className="px-4 py-1 bg-gray-50 font-medium">
+                        <span className="px-4 py-1 bg-bg-section font-medium">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() =>
                             handleQuantityChange(item.product._id, 1)
                           }
-                          className="px-3 py-1 bg-gray-100 rounded-r-full hover:bg-gray-200 transition-colors active:scale-95 text-gray-700"
+                          className="px-3 py-1 bg-bg-hover rounded-r-full hover:bg-bg-hover transition-colors active:scale-95 text-text-primary"
                         >
                           +
                         </button>
@@ -285,7 +286,7 @@ export default function MyCart() {
                         </span>
                         <button
                           onClick={() => removeItem(item.product._id)}
-                          className="text-gray-400 hover:text-red-500 transition-colors p-1 rounded-full hover:bg-red-50"
+                          className="text-text-tertiary hover:text-error transition-colors p-1 rounded-full hover:bg-error-bg"
                           aria-label="Remove item"
                         >
                           <svg
@@ -313,22 +314,25 @@ export default function MyCart() {
         </div>
 
         {cartItems.length > 0 && (
-          <div className="px-6 py-4 bg-gray-50 border-t">
+          <div className="px-6 py-4 bg-bg-section border-t">
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">
+                <span className="text-text-secondary">
                   Subtotal (
-                  {cartItems.reduce((acc, item) => acc + (item.quantity || 0), 0)}{" "}
+                  {cartItems.reduce(
+                    (acc, item) => acc + (item.quantity || 0),
+                    0,
+                  )}{" "}
                   items)
                 </span>
                 <span className="font-medium">{formatCurrency(subtotal)}</span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-gray-600">Shipping</span>
+                <span className="text-text-secondary">Shipping</span>
                 <span className="font-medium">
                   {subtotal >= freeShippingThreshold ? (
-                    <span className="text-green-600">FREE</span>
+                    <span className="text-brand-secondary">FREE</span>
                   ) : (
                     formatCurrency(shippingFee)
                   )}
@@ -343,7 +347,7 @@ export default function MyCart() {
               )}
 
               {discount > 0 && (
-                <div className="flex justify-between text-green-600">
+                <div className="flex justify-between text-brand-secondary">
                   <span>Discount Applied</span>
                   <span className="font-medium">
                     -{formatCurrency(discount)}
@@ -368,14 +372,14 @@ export default function MyCart() {
                   </button>
                   <button
                     onClick={() => setShowCouponInput(false)}
-                    className="ml-2 text-gray-500 hover:text-gray-700"
+                    className="ml-2 text-text-muted hover:text-text-primary"
                   >
                     Cancel
                   </button>
                 </div>
               ) : (
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Coupon / Discount</span>
+                  <span className="text-text-secondary">Coupon / Discount</span>
                   <button
                     onClick={() => setShowCouponInput(true)}
                     className="text-orange-500 hover:text-orange-600 underline transition-colors flex items-center"
@@ -434,7 +438,7 @@ export default function MyCart() {
               </button>
             </Link>
 
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center text-sm text-gray-500 space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center text-sm text-text-muted space-y-2 sm:space-y-0 sm:space-x-4">
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

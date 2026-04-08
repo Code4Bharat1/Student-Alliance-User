@@ -8,7 +8,12 @@ const categories = [
   { id: 4, name: "IFPD Panel", image: "/shop/board.png", link: "/Prod" },
   { id: 5, name: "Camera", image: "/shop/camera.png", link: "/shop1" },
   { id: 7, name: "OPS", image: "/shop/opss.png", link: "/shop1" },
-  { id: 8, name: "3D Printers", image: "/images/printer.png", link: "/printer" },
+  {
+    id: 8,
+    name: "3D Printers",
+    image: "/images/printer.png",
+    link: "/printer",
+  },
   { id: 9, name: "Kits", image: "/images/K1.jpg", link: "/kits" },
 ];
 
@@ -44,13 +49,11 @@ const ShopByCat = () => {
   }, [isHovering]);
 
   return (
-    <section className="relative overflow-hidden bg-[#F7F9FB] py-16 px-4">
+    <section className="relative overflow-hidden bg-bg-section py-20 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-[#1E1E1E]">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2A1B8F] to-[#1FA55B]">
-            Shop By Category
-          </span>
+        <h2 className="section-heading text-center mb-14">
+          <span className="gradient-text">Shop By Category</span>
         </h2>
 
         {/* Marquee Container */}
@@ -69,9 +72,10 @@ const ShopByCat = () => {
                 <Link href={category.link} scroll={false}>
                   <div
                     className="relative w-28 h-40 md:w-36 md:h-36 rounded-full overflow-hidden 
-                    bg-[#FFFFFF] border-2 border-[#E0E0E0] shadow-md 
+                    bg-bg-card border-2 border-border-primary 
                     transition-all duration-500 group-hover:shadow-xl 
-                    group-hover:border-[#2A1B8F]"
+                    group-hover:border-brand-primary"
+                    style={{ boxShadow: "var(--shadow-md)" }}
                   >
                     <Image
                       src={category.image}
@@ -81,7 +85,7 @@ const ShopByCat = () => {
                     />
                   </div>
                 </Link>
-                <p className="mt-4 text-lg font-semibold text-[#1E1E1E] group-hover:text-[#2A1B8F] transition-colors duration-300">
+                <p className="mt-4 text-lg font-semibold text-text-dark group-hover:text-brand-primary transition-colors duration-300">
                   {category.name}
                 </p>
               </div>
@@ -89,12 +93,15 @@ const ShopByCat = () => {
           </div>
 
           {/* Gradient Fades */}
-          <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-[#F7F9FB] to-transparent z-10"></div>
-          <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#F7F9FB] to-transparent z-10"></div>
+          <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-bg-section to-transparent z-10"></div>
+          <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-bg-section to-transparent z-10"></div>
         </div>
 
         {/* Accent Line */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-[3px] bg-gradient-to-r from-[#2A1B8F] via-[#1FA55B] to-[#E63946] rounded-full blur-[1px]"></div>
+        <div
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-[3px] rounded-full blur-[1px]"
+          style={{ backgroundImage: "var(--brand-gradient)" }}
+        ></div>
       </div>
     </section>
   );

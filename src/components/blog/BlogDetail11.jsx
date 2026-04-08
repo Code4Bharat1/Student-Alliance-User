@@ -6,10 +6,10 @@ import WhatsAppWidget from '../WhatsApp/WhatApp';
 
 export default function BlogsDetail11() {
   return (
-    <div className="px-4 py-8 md:px-16 lg:px-32 bg-gray-50 text-gray-800">
+    <div className="px-4 py-8 md:px-16 lg:px-32 bg-bg-section text-text-heading">
       {/* Hero Section */}
       <section className="mb-10 relative w-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-section to-bg-section z-0"></div>
         
         <motion.div
           className="container mx-auto px-4 py-16 md:py-24 relative z-10"
@@ -26,13 +26,13 @@ export default function BlogsDetail11() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-primary">
                   How to Start an Offline Coaching Center
                 </span>
               </motion.h1>
               
               <motion.p
-                className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0"
+                className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto lg:mx-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
@@ -46,9 +46,9 @@ export default function BlogsDetail11() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-200">
-                  <div className="text-sm text-gray-500">Estimated Setup Cost</div>
-                  <div className="text-2xl font-bold text-blue-600">₹50,000 - ₹1,00,000</div>
+                <div className="bg-bg-card px-6 py-3 rounded-lg shadow-md border border-border-primary">
+                  <div className="text-sm text-text-muted">Estimated Setup Cost</div>
+                  <div className="text-2xl font-bold text-brand-primary">₹50,000 - ₹1,00,000</div>
                 </div>
               </motion.div>
             </div>
@@ -81,18 +81,18 @@ export default function BlogsDetail11() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}
           >
-            <div className="text-gray-500 font-medium">Ideal for:</div>
+            <div className="text-text-muted font-medium">Ideal for:</div>
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">Academic Coaching</div>
-              <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">Competitive Exams</div>
-              <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">Skill Development</div>
+              <div className="bg-bg-card px-4 py-2 rounded-lg shadow-sm border border-border-primary">Academic Coaching</div>
+              <div className="bg-bg-card px-4 py-2 rounded-lg shadow-sm border border-border-primary">Competitive Exams</div>
+              <div className="bg-bg-card px-4 py-2 rounded-lg shadow-sm border border-border-primary">Skill Development</div>
             </div>
           </motion.div>
         </motion.div>
         
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div className="absolute top-0 left-0 w-32 h-32 bg-brand-primary/30 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-brand-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
       </section>
 
       {/* Why Choose Section */}
@@ -100,25 +100,25 @@ export default function BlogsDetail11() {
         <h2 className="text-3xl font-bold text-center mb-16 relative">
           <span className="relative inline-block">
             Key Aspects of Starting a Coaching Center
-            <span className="absolute bottom-0 left-0 w-full h-2 bg-blue-200 -z-10"></span>
+            <span className="absolute bottom-0 left-0 w-full h-2 bg-brand-primary/30 -z-10"></span>
           </span>
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* One-Time Costs Card */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             whileHover={{ y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="h-48 relative bg-blue-50 flex items-center justify-center">
-              <svg className="w-20 h-20 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="h-48 relative bg-bg-section flex items-center justify-center">
+              <svg className="w-20 h-20 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-3 text-blue-600">One-Time Setup Costs</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-bold mb-3 text-brand-primary">One-Time Setup Costs</h3>
+              <p className="text-text-primary">
                 Includes partitions, furniture, whiteboards, and initial branding materials.
               </p>
             </div>
@@ -126,18 +126,18 @@ export default function BlogsDetail11() {
 
           {/* Monthly Expenses Card */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             whileHover={{ y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="h-48 relative bg-purple-50 flex items-center justify-center">
-              <svg className="w-20 h-20 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="h-48 relative bg-bg-section flex items-center justify-center">
+              <svg className="w-20 h-20 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-3 text-purple-600">Monthly Operational Costs</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-bold mb-3 text-brand-primary">Monthly Operational Costs</h3>
+              <p className="text-text-primary">
                 Rent, utilities, staff salaries, and maintenance expenses to consider.
               </p>
             </div>
@@ -145,18 +145,18 @@ export default function BlogsDetail11() {
 
           {/* Growth Potential Card */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             whileHover={{ y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="h-48 relative bg-green-50 flex items-center justify-center">
-              <svg className="w-20 h-20 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="h-48 relative bg-success-bg flex items-center justify-center">
+              <svg className="w-20 h-20 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-3 text-green-600">Scalability</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-bold mb-3 text-success">Scalability</h3>
+              <p className="text-text-primary">
                 Plan for future expansion and student capacity from the beginning.
               </p>
             </div>
@@ -165,7 +165,7 @@ export default function BlogsDetail11() {
       </section>
 
       {/* Features Section */}
-      <section className="mb-20 bg-white rounded-2xl shadow-lg overflow-hidden">
+      <section className="mb-20 bg-bg-card rounded-2xl shadow-lg overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/2 relative h-96 md:h-auto">
             <Image
@@ -176,42 +176,42 @@ export default function BlogsDetail11() {
             />
           </div>
           <div className="md:w-1/2 p-8 md:p-12">
-            <h2 className="text-2xl font-bold mb-6 text-purple-700">
+            <h2 className="text-2xl font-bold mb-6 text-brand-primary">
               One-Time Setup Expenses
             </h2>
             
             <div className="space-y-6">
               <div className="flex items-start">
-                <div className="bg-blue-100 p-2 rounded-lg mr-4">
-                  <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
+                <div className="bg-bg-badge p-2 rounded-lg mr-4">
+                  <div className="bg-brand-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1 text-blue-600">Partition Work</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-lg mb-1 text-brand-primary">Partition Work</h3>
+                  <p className="text-text-secondary">
                     ₹200 per square foot for dividing large halls into classrooms and counseling sections.
                   </p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <div className="bg-purple-100 p-2 rounded-lg mr-4">
-                  <div className="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
+                <div className="bg-bg-badge p-2 rounded-lg mr-4">
+                  <div className="bg-brand-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1 text-purple-600">Furniture & Equipment</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-lg mb-1 text-brand-primary">Furniture & Equipment</h3>
+                  <p className="text-text-secondary">
                     Whiteboards (₹1500-2000), benches, chairs, water cooler, and computer setup.
                   </p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <div className="bg-green-100 p-2 rounded-lg mr-4">
+                <div className="bg-success-bg p-2 rounded-lg mr-4">
                   <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1 text-green-600">Lighting & Interior</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-lg mb-1 text-success">Lighting & Interior</h3>
+                  <p className="text-text-secondary">
                     Proper lighting, fans, counseling counter setup, and basic interior work.
                   </p>
                 </div>
@@ -223,7 +223,7 @@ export default function BlogsDetail11() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1 text-yellow-600">Branding Materials</h3>
-                  <p className="text-gray-600">
+                  <p className="text-text-secondary">
                     Banners, posters, and stationery for your coaching center branding.
                   </p>
                 </div>
@@ -238,37 +238,37 @@ export default function BlogsDetail11() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Final Thoughts Card */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             whileHover={{ y: -5 }}
             transition={{ duration: 0.3 }}
           >
             <div className="p-8">
-              <h2 className="text-2xl font-bold mb-6 text-blue-600">
+              <h2 className="text-2xl font-bold mb-6 text-brand-primary">
                 Financial Planning Essentials
               </h2>
               <div className="space-y-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
+                <div className="bg-bg-section p-4 rounded-lg">
                   <h3 className="font-semibold text-lg mb-1">Key Consideration</h3>
-                  <p className="text-gray-700">Balance between initial investment and operational costs</p>
+                  <p className="text-text-primary">Balance between initial investment and operational costs</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Smart Planning Tips:</h3>
-                  <ul className="space-y-2 text-gray-700">
+                  <ul className="space-y-2 text-text-primary">
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">•</span>
+                      <span className="text-brand-primary mr-2">•</span>
                       <span>Start small and expand gradually</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">•</span>
+                      <span className="text-brand-primary mr-2">•</span>
                       <span>Prioritize essential items first</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2">•</span>
+                      <span className="text-brand-primary mr-2">•</span>
                       <span>Plan for at least 6 months of operational costs</span>
                     </li>
                   </ul>
                 </div>
-                <p className="text-gray-600 mt-4">
+                <p className="text-text-secondary mt-4">
                   With proper financial planning and strategic decisions, your coaching center can become sustainable and profitable.
                 </p>
               </div>
@@ -277,52 +277,52 @@ export default function BlogsDetail11() {
 
           {/* Growth Strategies Card */}
           <motion.div 
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             whileHover={{ y: -5 }}
             transition={{ duration: 0.3 }}
           >
             <div className="p-8">
-              <h2 className="text-2xl font-bold mb-6 text-purple-600">
+              <h2 className="text-2xl font-bold mb-6 text-brand-primary">
                 Next Steps After Setup
               </h2>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="bg-purple-100 p-2 rounded-lg mr-4">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-bg-badge p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Growth Strategies</h3>
-                    <p className="text-gray-600">
+                    <p className="text-text-secondary">
                       Once established, focus on marketing, quality teaching, and student satisfaction for growth.
                     </p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-blue-100 p-2 rounded-lg mr-4">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-bg-badge p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Operational Efficiency</h3>
-                    <p className="text-gray-600">
+                    <p className="text-text-secondary">
                       Streamline processes and maintain financial records from day one.
                     </p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-success-bg p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Curriculum Development</h3>
-                    <p className="text-gray-600">
+                    <p className="text-text-secondary">
                       Invest time in creating effective teaching materials and methodologies.
                     </p>
                   </div>

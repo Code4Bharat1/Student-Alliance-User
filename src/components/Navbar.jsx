@@ -3,15 +3,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/redux/slices/authSlice";
-import { ChevronDownIcon, UserCircleIcon } from "@heroicons/react/solid";
+import { useTheme } from "@/components/ThemeProvider";
+import {
+  FiSun,
+  FiMoon,
+  FiChevronDown,
+  FiUser,
+  FiLogOut,
+  FiMenu,
+  FiX,
+  FiShoppingCart,
+} from "react-icons/fi";
 
 const Navbar = () => {
   const pathname = usePathname();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const { theme, toggleTheme } = useTheme();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -20,12 +31,16 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const dropdownRef = useRef(null);
   const profileDropdownRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
@@ -56,164 +71,294 @@ const Navbar = () => {
     router.push("/");
   };
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About us" },
+    { href: "/Prod", label: "Products" },
+    { href: "/shop1", label: "Shop" },
+    { href: "/blog", label: "Blog" },
+    { href: "/getintouch", label: "Contact us" },
+  ];
+
   return (
-    <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
-      <div className="flex items-center justify-between gap-3 w-full">
-        {/* Logo */}
-        <Link href="/home">
-          <Image
-            src="/images/logo.jpg"
-            alt="logo"
-            width={176}
-            height={80}
-            className="w-28 sm:w-32 md:w-36 lg:w-40 xl:w-44 h-auto"
-            priority
-          />
-        </Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "glass py-2"
+          : "bg-bg-navbar/95 py-4 border-b border-border-primary"
+      }`}
+      style={
+        scrolled ? { boxShadow: "0 4px 30px rgba(0,0,0,0.08)" } : undefined
+      }
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/home" className="flex-shrink-0">
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Image
+                src="/images/logo.jpg"
+                alt="Student Alliance"
+                width={176}
+                height={80}
+                className={`h-auto transition-all duration-300 ${scrolled ? "w-28 sm:w-32" : "w-32 sm:w-36 lg:w-40"}`}
+                priority
+              />
+            </motion.div>
+          </Link>
 
-        {/* Menu */}
-        <div
-          className={`${
-            isMobileMenuOpen
-              ? "block fixed inset-0 bg-white z-50 p-6 overflow-auto max-lg:w-3/4 max-lg:min-w-[300px] max-lg:shadow-md"
-              : "hidden lg:block"
-          }`}
-        >
-          {isMobileMenuOpen && (
-            <button
-              onClick={toggleMobileMenu}
-              className="lg:hidden fixed top-3 right-4 z-[100] rounded-full bg-white w-9 h-9 flex items-center justify-center border"
-            >
-              ✕
-            </button>
-          )}
-
-          <ul className="lg:flex gap-x-4 max-lg:space-y-3">
-            {[
-              { href: "/", label: "Home" },
-              { href: "/about", label: "About us" },
-              { href: "/Prod", label: "Products" },
-              { href: "/shop1", label: "Shop" },
-              { href: "/blog", label: "Blog" },
-              { href: "/getintouch", label: "Contact us" },
-            ].map(({ href, label }) =>
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navLinks.map(({ href, label }) =>
               label === "Products" ? (
-                <li
-                  key={label}
-                  className="relative px-3"
-                  ref={dropdownRef}
-                >
+                <div key={label} className="relative" ref={dropdownRef}>
                   <button
                     onClick={toggleDropdown}
-                    className={`flex items-center font-medium text-[15px] ${
+                    className={`nav-link flex items-center gap-1 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                       isActive("/Prod")
-                        ? "text-blue-700"
-                        : "text-slate-900 hover:text-blue-700"
+                        ? "text-brand-primary bg-brand-primary/10 active"
+                        : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
                     }`}
                   >
-                    Products <ChevronDownIcon className="h-4 w-5 ml-1" />
+                    Products
+                    <FiChevronDown
+                      className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
 
                   <AnimatePresence>
                     {isDropdownOpen && (
-                      <motion.ul
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="absolute bg-white shadow-md rounded-md border mt-2 w-44 z-50"
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-2 w-56 bg-bg-card/95 backdrop-blur-xl border border-border-primary rounded-xl overflow-hidden"
+                        style={{
+                          boxShadow: "0 20px 40px -12px rgba(0,0,0,0.15)",
+                        }}
                       >
-                        <li>
-                          <Link className="block px-4 py-2" href="/Prod">
-                            IFPD
+                        {[
+                          {
+                            href: "/Prod",
+                            label: "IFPD",
+                            desc: "Interactive Flat Panels",
+                          },
+                          {
+                            href: "/printer",
+                            label: "3D Printers",
+                            desc: "Professional printing",
+                          },
+                          {
+                            href: "/kits",
+                            label: "STEM & Robotics",
+                            desc: "Learning kits",
+                          },
+                        ].map((item) => (
+                          <Link
+                            key={item.label}
+                            className="block px-4 py-3 hover:bg-bg-hover transition-colors group"
+                            href={item.href}
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            <div className="text-sm font-medium text-text-primary group-hover:text-brand-primary transition-colors">
+                              {item.label}
+                            </div>
+                            <div className="text-xs text-text-muted mt-0.5">
+                              {item.desc}
+                            </div>
                           </Link>
-                        </li>
-                        <li>
-                          <Link className="block px-4 py-2" href="/printer">
-                            3D Printers
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="block px-4 py-2" href="/kits">
-                            STEM & Robotics
-                          </Link>
-                        </li>
-                      </motion.ul>
+                        ))}
+                      </motion.div>
                     )}
                   </AnimatePresence>
-                </li>
+                </div>
               ) : (
-                <li key={label} className="px-3">
-                  <Link
-                    href={href}
-                    className={`font-medium text-[15px] ${
-                      isActive(href)
-                        ? "text-blue-700"
-                        : "text-slate-900 hover:text-blue-700"
-                    }`}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              )
+                <Link
+                  key={label}
+                  href={href}
+                  className={`nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    isActive(href)
+                      ? "text-brand-primary bg-brand-primary/10 active"
+                      : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ),
             )}
-          </ul>
-        </div>
+          </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-2 lg:gap-4 max-lg:ml-auto">
-          {isAuthenticated ? (
-            mounted && (
-              <div className="relative" ref={profileDropdownRef}>
-                <button onClick={toggleProfileDropdown}>
-                  <UserCircleIcon className="h-8 w-8 text-blue-600" />
-                </button>
-
-                <AnimatePresence>
-                  {isProfileDropdownOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg"
-                    >
-                      <Link href="/profile">
-                        <button className="block w-full px-4 py-2 text-left">
-                          Profile
-                        </button>
-                      </Link>
-                      <button
-                        onClick={handleLogout}
-                        className="block w-full px-4 py-2 text-left"
-                      >
-                        Logout
-                      </button>
-                    </motion.div>
+          {/* Right Actions */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative p-2.5 rounded-xl bg-bg-hover/80 text-text-secondary hover:text-brand-primary border border-transparent hover:border-border-primary transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={theme}
+                  initial={{ y: -12, opacity: 0, rotate: -90 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: 12, opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {theme === "dark" ? (
+                    <FiSun size={18} />
+                  ) : (
+                    <FiMoon size={18} />
                   )}
-                </AnimatePresence>
-              </div>
-            )
-          ) : (
-            <>
-              <button
-                onClick={() => router.push("/login")}
-                className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm rounded-full border"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => router.push("/sign_up")}
-                className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm rounded-full bg-blue-600 text-white"
-              >
-                Sign up
-              </button>
-            </>
-          )}
+                </motion.div>
+              </AnimatePresence>
+            </motion.button>
 
-          <button onClick={toggleMobileMenu} className="lg:hidden">
-            ☰
-          </button>
+            {/* Cart */}
+            <Link href="/mycart">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-xl bg-bg-hover/80 text-text-secondary hover:text-brand-primary border border-transparent hover:border-border-primary transition-all duration-300"
+              >
+                <FiShoppingCart size={18} />
+              </motion.div>
+            </Link>
+
+            {isAuthenticated ? (
+              mounted && (
+                <div className="relative" ref={profileDropdownRef}>
+                  <motion.button
+                    onClick={toggleProfileDropdown}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-brand-primary/10 text-brand-primary hover:bg-brand-primary/15 transition-all duration-300"
+                  >
+                    <FiUser size={18} />
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {isProfileDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 mt-2 w-48 bg-bg-card/95 backdrop-blur-xl border border-border-primary rounded-xl overflow-hidden"
+                        style={{
+                          boxShadow: "0 20px 40px -12px rgba(0,0,0,0.15)",
+                        }}
+                      >
+                        <Link
+                          href="/profile"
+                          onClick={() => setIsProfileDropdownOpen(false)}
+                        >
+                          <div className="flex items-center gap-3 px-4 py-3 text-text-primary hover:bg-bg-hover transition-colors">
+                            <FiUser size={16} />
+                            <span className="text-sm font-medium">Profile</span>
+                          </div>
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center gap-3 w-full px-4 py-3 text-error hover:bg-error-bg transition-colors"
+                        >
+                          <FiLogOut size={16} />
+                          <span className="text-sm font-medium">Logout</span>
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <motion.button
+                  onClick={() => router.push("/login")}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-5 py-2 text-sm font-medium rounded-xl text-text-primary border border-border-primary hover:border-brand-primary hover:text-brand-primary transition-all duration-300"
+                >
+                  Login
+                </motion.button>
+                <motion.button
+                  onClick={() => router.push("/sign_up")}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-5 py-2 text-sm font-medium rounded-xl text-text-inverse transition-all duration-300 pulse-glow"
+                  style={{ backgroundImage: "var(--brand-gradient)" }}
+                >
+                  Sign up
+                </motion.button>
+              </div>
+            )}
+
+            {/* Mobile Menu Toggle */}
+            <motion.button
+              onClick={toggleMobileMenu}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="lg:hidden p-2.5 rounded-xl bg-bg-hover/80 text-text-secondary hover:text-brand-primary transition-all duration-300"
+            >
+              {isMobileMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            </motion.button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden overflow-hidden border-t border-border-primary bg-bg-card/95 backdrop-blur-xl"
+          >
+            <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+              {navLinks.map(({ href, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    isActive(href)
+                      ? "text-brand-primary bg-brand-primary/10"
+                      : "text-text-secondary hover:text-brand-primary hover:bg-bg-hover"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+              {!isAuthenticated && (
+                <div className="flex gap-2 pt-3 border-t border-border-primary mt-3">
+                  <button
+                    onClick={() => {
+                      router.push("/login");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex-1 py-2.5 text-sm font-medium rounded-xl text-text-primary border border-border-primary hover:border-brand-primary transition-all"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => {
+                      router.push("/sign_up");
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex-1 py-2.5 text-sm font-medium rounded-xl text-text-inverse transition-all"
+                    style={{ backgroundImage: "var(--brand-gradient)" }}
+                  >
+                    Sign up
+                  </button>
+                </div>
+              )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

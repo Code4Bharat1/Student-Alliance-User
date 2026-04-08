@@ -14,14 +14,14 @@ const galleryImages = [
 
 export default function Gallery() {
   return (
-    <section className="bg-white py-5">
+    <section className="bg-bg-card py-5">
         <motion.h2
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                 >
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-800">Gallery</h2> 
+        <h2 className="text-4xl font-bold text-text-heading">Gallery</h2> 
       </div>
       </motion.h2>
 

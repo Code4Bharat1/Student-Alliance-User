@@ -3,18 +3,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FiEye, FiEyeOff, FiUser, FiMail, FiLock } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import WhatsAppWidget from "@/components/WhatsApp/WhatApp";
 
 export default function SignUp() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -29,38 +23,24 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!acceptTerms) {
       setMessage("Please accept the Terms and Conditions");
       setMessageType("error");
       return;
     }
-
     setLoading(true);
     setMessage("");
-    setMessageType("");
-
     try {
-      const res = await axios.post(
-        "https://api-studentalliance.nexcorealliance.com/api/customers",
-        {
-          name: form.name,
-          email: form.email,
-          password: form.password,
-        }
+      await axios.post(
+        "/api/customers",
+        { name: form.name, email: form.email, password: form.password }
       );
-
       setMessage("Account created successfully! Redirecting to login...");
       setMessageType("success");
       setForm({ name: "", email: "", password: "" });
-
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
+      setTimeout(() => { router.push("/login"); }, 2000);
     } catch (err) {
-      setMessage(
-        err.response?.data?.message || "Sign up failed. Please try again."
-      );
+      setMessage(err.response?.data?.message || "Sign up failed. Please try again.");
       setMessageType("error");
     } finally {
       setLoading(false);
@@ -68,110 +48,93 @@ export default function SignUp() {
   };
 
   return (
-    <div className="bg-white py-10 mb-10 md:h-screen">
-      <div className="grid md:grid-cols-2 items-center gap-8 h-full">
-        {/* Left Side - Image */}
-        <div className="max-md:order-1 p-4">
-          <motion.img
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            src="https://readymadeui.com/signin-image.webp"
-            alt="login-image"
-            className="lg:max-w-[85%] w-full h-full aspect-square object-contain block mx-auto"
-          />
-        </div>
-
-        {/* Right Side - Form */}
-        <div className="  flex items-center md:rounded-tl-[55px] md:rounded-bl-[55px] lg:p-12 p-8 bg-[#0C172C] h-full lg:w-11/12 lg:ml-auto">
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            onSubmit={handleSubmit}
-            className="max-w-lg w-full mx-auto"
-          >
-            <div className="mb-12">
-              <h1 className="text-3xl font-semibold text-purple-400">
-                Create an account
-              </h1>
+    <div className="min-h-screen bg-bg-primary flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-bg-card rounded-2xl p-8 border border-border-primary"
+          style={{ boxShadow: "var(--shadow-lg)" }}
+        >
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center text-text-inverse" style={{ backgroundImage: "var(--brand-gradient)" }}>
+              <FiUser size={24} />
             </div>
+            <h2 className="text-3xl font-bold text-text-heading">Create Account</h2>
+            <p className="text-text-secondary mt-2 text-sm">
+              Already have an account?{" "}
+              <Link href="/login" className="text-brand-primary font-medium hover:underline">Login here</Link>
+            </p>
+          </div>
 
-            {/* Full Name */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name */}
             <div>
-              <label className="text-white text-xs block mb-2">Full Name</label>
-              <div className="relative flex items-center">
+              <label className="text-text-primary text-sm font-medium block mb-2">Full Name</label>
+              <div className="relative">
+                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={16} />
                 <input
                   name="name"
                   type="text"
+                  required
                   value={form.name}
                   onChange={handleChange}
-                  required
-                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  className="w-full pl-10 pr-4 py-3 bg-bg-input border border-border-primary rounded-lg text-text-primary text-sm focus:outline-none focus:border-border-focus transition-colors"
                   placeholder="Enter name"
                 />
               </div>
             </div>
 
             {/* Email */}
-            <div className="mt-8">
-              <label className="text-white text-xs block mb-2">Email</label>
-              <div className="relative flex items-center">
+            <div>
+              <label className="text-text-primary text-sm font-medium block mb-2">Email</label>
+              <div className="relative">
+                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={16} />
                 <input
                   name="email"
                   type="email"
+                  required
                   value={form.email}
                   onChange={handleChange}
-                  required
-                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  className="w-full pl-10 pr-4 py-3 bg-bg-input border border-border-primary rounded-lg text-text-primary text-sm focus:outline-none focus:border-border-focus transition-colors"
                   placeholder="Enter email"
                 />
               </div>
             </div>
 
             {/* Password */}
-            <div className="mt-8">
-              <label className="text-white text-xs block mb-2">Password</label>
-              <div className="relative flex items-center">
+            <div>
+              <label className="text-text-primary text-sm font-medium block mb-2">Password</label>
+              <div className="relative">
+                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={16} />
                 <input
                   name="password"
                   type={showPassword ? "text" : "password"}
+                  required
                   value={form.password}
                   onChange={handleChange}
-                  required
-                  className="w-full bg-transparent text-sm text-white border-b border-slate-500 focus:border-white pl-2 pr-8 py-3 outline-none"
+                  className="w-full pl-10 pr-10 py-3 bg-bg-input border border-border-primary rounded-lg text-text-primary text-sm focus:outline-none focus:border-border-focus transition-colors"
                   placeholder="Enter password"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-2 text-gray-400 hover:text-gray-200"
-                >
-                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FiEyeOff size={16} /> : <FiEye size={16} />}
                 </button>
               </div>
             </div>
 
-            {/* Terms and Conditions */}
-            <div className="flex items-center mt-8">
+            {/* Terms */}
+            <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer">
               <input
-                id="remember-me"
-                name="remember-me"
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="h-4 w-4 shrink-0 rounded cursor-pointer"
+                className="h-4 w-4 rounded border-border-primary"
               />
-              <label
-                htmlFor="remember-me"
-                className="text-slate-300 ml-3 block text-sm"
-              >
-                I accept the{" "}
-                <Link href="/terms" className="text-purple-400 font-medium hover:underline ml-1">
-                  Terms and Conditions
-                </Link>
-              </label>
-            </div>
+              I accept the{" "}
+              <Link href="/terms" className="text-brand-primary font-medium hover:underline">Terms and Conditions</Link>
+            </label>
 
             {/* Message */}
             <AnimatePresence>
@@ -180,10 +143,8 @@ export default function SignUp() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`mt-6 text-sm text-center rounded-md py-3 ${
-                    messageType === "success"
-                      ? "bg-green-50 text-green-600 border border-green-300"
-                      : "bg-red-50 text-red-600 border border-red-300"
+                  className={`text-sm text-center rounded-lg py-3 ${
+                    messageType === "success" ? "bg-success-bg text-success" : "bg-error-bg text-error"
                   }`}
                 >
                   {message}
@@ -191,32 +152,19 @@ export default function SignUp() {
               )}
             </AnimatePresence>
 
-            {/* Button */}
-            <div className="mt-8">
-              <motion.button
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                disabled={loading}
-                className="w-max shadow-xl py-3 px-6 min-w-32 text-sm text-white font-medium rounded-sm bg-purple-600 hover:bg-purple-500 focus:outline-none cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed transition-all"
-              >
-                {loading ? "Creating..." : "Register"}
-              </motion.button>
-
-              <p className="text-sm text-slate-300 mt-8">
-                Already have an account?{" "}
-                <Link
-                  href="/contact"
-                  className="text-purple-400 font-medium hover:underline ml-1"
-                >
-                  Login here
-                </Link>
-              </p>
-            </div>
-          </motion.form>
-        </div>
+            {/* Submit */}
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: 1.01 }}
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 text-sm font-semibold rounded-lg text-text-inverse bg-brand-primary hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {loading ? "Creating..." : "Create Account"}
+            </motion.button>
+          </form>
+        </motion.div>
       </div>
-
-      <WhatsAppWidget />
     </div>
   );
 }

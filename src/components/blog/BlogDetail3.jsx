@@ -11,15 +11,15 @@ export default function BlogsDetail3() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-indigo-50 via-white to-blue-50 text-gray-900 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-bg-section via-bg-card to-bg-section text-text-heading overflow-hidden">
       {/* Animated Gradient Blobs */}
       <motion.div
-        className="absolute top-0 left-0 w-[45rem] h-[45rem] bg-purple-300/30 blur-[120px] rounded-full"
+        className="absolute top-0 left-0 w-[45rem] h-[45rem] bg-brand-primary/20 blur-[120px] rounded-full"
         animate={{ y: [0, 30, 0] }}
         transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-[35rem] h-[35rem] bg-blue-300/30 blur-[120px] rounded-full"
+        className="absolute bottom-0 right-0 w-[35rem] h-[35rem] bg-brand-primary/20 blur-[120px] rounded-full"
         animate={{ y: [0, -30, 0] }}
         transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }}
       />
@@ -31,10 +31,10 @@ export default function BlogsDetail3() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 leading-tight mb-4">
+        <h1 className="text-5xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-primary to-brand-accent leading-tight mb-4">
           IFPD for Schools and Classes
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
           Transform your classroom into an interactive learning hub with
           cutting-edge technology designed to boost engagement, creativity, and
           collaboration.
@@ -53,10 +53,10 @@ export default function BlogsDetail3() {
           transition={{ duration: 0.7 }}
         >
           <div className="flex-1 space-y-4">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl font-bold text-text-heading">
               Transform Classrooms with Interactive Flat Panel Displays
             </h2>
-            <p className="text-gray-600 leading-relaxed text-justify">
+            <p className="text-text-secondary leading-relaxed text-justify">
               Interactive Flat Panel Displays (IFPDs) are revolutionizing the
               way educators teach and students learn. These smart displays
               foster collaboration, creativity, and participation — enhancing
@@ -82,7 +82,7 @@ export default function BlogsDetail3() {
         </motion.section>
 
         {/* Divider */}
-        <div className="w-full border-t border-gray-300/50 my-4"></div>
+        <div className="w-full border-t border-border-secondary/50 my-4"></div>
 
         {/* Section 2 */}
         <motion.section
@@ -94,10 +94,10 @@ export default function BlogsDetail3() {
           transition={{ duration: 0.7, delay: 0.1 }}
         >
           <div className="flex-1 space-y-4">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl font-bold text-text-heading">
               A Range Designed for Every Classroom
             </h2>
-            <p className="text-gray-600 leading-relaxed text-justify">
+            <p className="text-text-secondary leading-relaxed text-justify">
               Whether it’s a small group or a large classroom, our IFPDs come in
               multiple sizes — 55", 65", 75", 86", and 98". Each model is built
               with durability, responsiveness, and simplicity in mind, ensuring
@@ -123,7 +123,7 @@ export default function BlogsDetail3() {
         </motion.section>
 
         {/* Divider */}
-        <div className="w-full border-t border-gray-300/50 my-4"></div>
+        <div className="w-full border-t border-border-secondary/50 my-4"></div>
 
         {/* Section 3 */}
         <motion.section
@@ -135,10 +135,10 @@ export default function BlogsDetail3() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <div className="flex-1 space-y-4">
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-3xl font-bold text-text-heading">
               Inspire Student Engagement Like Never Before
             </h2>
-            <p className="text-gray-600 leading-relaxed text-justify">
+            <p className="text-text-secondary leading-relaxed text-justify">
               IFPDs make learning immersive, engaging, and collaborative.
               Students can interact with lessons through multi-touch gestures,
               write notes digitally, and participate in live quizzes or group

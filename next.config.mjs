@@ -1,10 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
+  compress: true,
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.3dbazaar.in",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "rees52.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.rees52.com",
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -15,6 +34,15 @@ const nextConfig = {
         hostname: "localhost",
       },
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination:
+          "https://api-studentalliance.nexcorealliance.com/api/:path*",
+      },
+    ];
   },
 };
 

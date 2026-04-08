@@ -15,36 +15,43 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Student Alliance | Student Alliance LLP",
-  description: "Student Alliance LLP is India’s leading provider of innovative educational lab solutions. We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning.",
+  description:
+    "Student Alliance LLP is India’s leading provider of innovative educational lab solutions. We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning.",
+  keywords: [
+    "student alliance",
+    "student alliance llp",
+    "education",
+    "STEM",
+    "robotics labs",
+  ],
+  authors: [{ name: "Student Alliance LLP" }],
+  alternates: { canonical: "https://studentalliancellp.com/" },
+  openGraph: {
+    title: "Student Alliance | Student Alliance LLP",
+    description:
+      "Student Alliance LLP is India's leading provider of innovative educational lab solutions.",
+    type: "website",
+    url: "https://studentalliancellp.com/",
+    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Student Alliance | Student Alliance LLP",
+    description:
+      "We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning.",
+    images: ["https://studentalliancellp.com/images/og-banner.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Primary Meta Tags */}
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Student Alliance LLP is India’s leading provider of innovative educational lab solutions. We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning." />
-        <meta name="keywords" content="student alliance, student alliance llp, student, education, education website, Student Alliance LLP" />
-        <meta name="author" content="Student Alliance LLP" />
-        <link rel="canonical" href="https://studentalliancellp.com/" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Student Alliance | Student Alliance LLP" />
-        <meta property="og:description" content="Student Alliance LLP is India’s leading provider of innovative educational lab solutions." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://studentalliancellp.com/" />
-        <meta property="og:image" content="https://studentalliancellp.com/images/og-banner.jpg" />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Student Alliance | Student Alliance LLP" />
-        <meta name="twitter:description" content="We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning." />
-        <meta name="twitter:image" content="https://studentalliancellp.com/images/og-banner.jpg" />
-
-       {/* Structured Data (JSON-LD) */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `
+        {/* Structured Data (JSON-LD) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
           {
             "@context": "https://schema.org",
             "@type": "Organization",
@@ -61,10 +68,12 @@ export default function RootLayout({ children }) {
               "https://www.instagram.com/studentalliance/#"
             ]
           }
-        ` }} />
+        `,
+          }}
+        />
 
         {/* Google Analytics */}
-        <Script 
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-L48FSWY2HB"
           strategy="afterInteractive"
         />
@@ -76,9 +85,9 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-L48FSWY2HB');
           `}
         </Script>
-
       </head>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LayoutClientWrapper>{children}</LayoutClientWrapper>

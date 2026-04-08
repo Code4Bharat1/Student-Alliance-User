@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { FiMail, FiArrowLeft } from "react-icons/fi";
 
 export default function ForgotPass() {
   const router = useRouter();
@@ -21,236 +22,81 @@ export default function ForgotPass() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate email
-    if (!email.trim()) {
-      setEmailError("Email is required");
-      return;
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setEmailError("Please enter a valid email address");
-      return;
-    }
+    if (!email.trim()) { setEmailError("Email is required"); return; }
+    if (!/^\S+@\S+\.\S+$/.test(email)) { setEmailError("Please enter a valid email address"); return; }
 
     setIsSubmitting(true);
     setEmailError("");
 
     try {
-      // 1. Check if email exists
       const res = await axios.get(
-        `https://api-studentalliance.nexcorealliance.com/api/customers/email/${encodeURIComponent(email)}`
+        `/api/customers/email/${encodeURIComponent(email)}`
       );
-      const customer = res.data;
-      if (!customer || !customer._id) {
+      if (!res.data || !res.data._id) {
         setEmailError("No user found with this email.");
         setIsSubmitting(false);
         return;
       }
-
-      // 2. Send OTP to email
-      await axios.post("https://api-studentalliance.nexcorealliance.com/api/auth/send-otp", { email });
-
-      // 3. Route to OTP page
+      await axios.post("/api/auth/send-otp", { email });
       toast.success("OTP sent successfully! Please check your email.");
       router.push(`/OTP?email=${encodeURIComponent(email)}`);
     } catch (error) {
-      if (error.response) {
-        setEmailError(
-          error.response.data.message || "Failed to verify email. Try again."
-        );
-      } else if (error.request) {
-        setEmailError("Network error. Please check your connection.");
-      } else {
-        setEmailError("An unexpected error occurred.");
-      }
+      setEmailError(error.response?.data?.message || "Failed to verify email. Try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen text-black flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-bg-primary flex items-center justify-center px-4 py-12">
       <AnimatePresence>
         {isMounted && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-md mx-4"
+            className="w-full max-w-md"
           >
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200 backdrop-blur-sm bg-opacity-90">
-              <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="flex justify-center mb-6"
-              >
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-md">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    />
-                  </svg>
+            <div className="bg-bg-card rounded-2xl p-8 border border-border-primary" style={{ boxShadow: "var(--shadow-lg)" }}>
+              <div className="text-center mb-8">
+                <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center text-text-inverse" style={{ backgroundImage: "var(--brand-gradient)" }}>
+                  <FiMail size={24} />
                 </div>
-              </motion.div>
+                <h2 className="text-2xl font-bold text-text-heading">Forgot Password</h2>
+                <p className="text-text-secondary text-sm mt-2">Enter your email and we&apos;ll send you a verification code</p>
+              </div>
 
-              <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-                Reset Password
-              </h2>
-              <p className="text-gray-500 text-center mb-6">
-                Enter your email to receive an OTP
-              </p>
-
-              <form onSubmit={handleSubmit}>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="mb-6"
-                >
-                  <label
-                    htmlFor="email"
-                    className="block text-gray-700 text-sm font-medium mb-2"
-                  >
-                    Email Address <span className="text-red-500">*</span>
-                  </label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="text-text-primary text-sm font-medium block mb-2">Email Address</label>
                   <div className="relative">
+                    <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={16} />
                     <input
-                      id="email"
                       type="email"
                       value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        if (e.target.value.trim() !== "") {
-                          setEmailError("");
-                        }
-                      }}
-                      onBlur={() => {
-                        if (!email.trim()) {
-                          setEmailError("Email is required");
-                        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-                          setEmailError("Please enter a valid email address");
-                        }
-                      }}
-                      className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-all duration-200 pl-10 ${
-                        emailError
-                          ? "bg-red-50 border-red-400 focus:ring-red-500"
-                          : "bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-transparent"
-                      }`}
-                      placeholder="your@email.com"
-                      required
+                      onChange={(e) => { setEmail(e.target.value); setEmailError(""); }}
+                      className={`w-full pl-10 pr-4 py-3 bg-bg-input border rounded-lg text-text-primary text-sm focus:outline-none transition-colors ${emailError ? "border-error" : "border-border-primary focus:border-border-focus"}`}
+                      placeholder="Enter your email"
                     />
-                    <div
-                      className={`absolute left-3 top-3 ${
-                        emailError ? "text-red-400" : "text-gray-400"
-                      }`}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                      </svg>
-                    </div>
                   </div>
-                  {emailError && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-1 text-sm text-red-500"
-                    >
-                      {emailError}
-                    </motion.p>
-                  )}
-                </motion.div>
+                  {emailError && <p className="text-error text-xs mt-1">{emailError}</p>}
+                </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3 text-sm font-semibold rounded-lg text-text-inverse bg-brand-primary hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center ${
-                      isSubmitting
-                        ? "opacity-75"
-                        : "hover:from-blue-600 hover:to-purple-700"
-                    }`}
-                    whilehover={{ scale: isSubmitting ? 1 : 1.02 }}
-                    whiletap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <span>Sending OTP...</span>
-                        <svg
-                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                      </>
-                    ) : (
-                      <>
-                        <span>Send OTP</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 ml-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                        </svg>
-                      </>
-                    )}
-                  </button>
-                </motion.div>
+                  {isSubmitting ? "Sending OTP..." : "Send Verification Code"}
+                </motion.button>
               </form>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6 text-center"
-              >
-                <p className="text-gray-600">
-                  Remember your password?{" "}
-                  <Link
-                    href="/form"
-                    className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors"
-                  >
-                    Login
-                  </Link>
-                </p>
-              </motion.div>
+              <div className="mt-6 text-center">
+                <Link href="/login" className="inline-flex items-center gap-1 text-sm text-brand-primary hover:underline">
+                  <FiArrowLeft size={14} /> Back to Login
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}

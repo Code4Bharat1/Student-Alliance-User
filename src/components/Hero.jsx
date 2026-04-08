@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const images = [
   "/gallery/hero1.jpg",
@@ -20,49 +21,59 @@ const Respimages = [
   "/gallery/h5.png",
 ];
 
-const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? "100%" : "-100%",
-    opacity: 0,
-    scale: 1.05,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      x: { type: "spring", stiffness: 280, damping: 28 },
-      opacity: { duration: 0.5 },
-      scale: { duration: 0.5 },
-    },
+const slides = [
+  {
+    tagline: "Empowering Future Leaders",
+    headline: "Transform Education\nWith Technology",
+    description:
+      "Interactive panels, 3D printers, and STEM kits designed to make learning engaging, creative, and future-ready.",
+    cta: { label: "Explore Products", href: "/Prod" },
+    secondary: { label: "Get in Touch", href: "/getintouch" },
   },
-  exit: (direction) => ({
-    x: direction < 0 ? "100%" : "-100%",
-    opacity: 0,
-    scale: 0.95,
-    transition: {
-      x: { type: "spring", stiffness: 280, damping: 28 },
-      opacity: { duration: 0.4 },
-      scale: { duration: 0.4 },
-    },
-  }),
-};
+  {
+    tagline: "Interactive Learning",
+    headline: "Smart Classrooms\nStart Here",
+    description:
+      "Discover our range of Interactive Flat Panel Displays that bring lessons to life with touch-enabled technology.",
+    cta: { label: "View IFPDs", href: "/Prod" },
+    secondary: { label: "Shop Now", href: "/shop1" },
+  },
+  {
+    tagline: "Innovation in 3D",
+    headline: "Build, Create,\nInnovate",
+    description:
+      "Professional-grade 3D printers for education — from prototyping to creative projects, bring ideas into reality.",
+    cta: { label: "3D Printers", href: "/printer" },
+    secondary: { label: "STEM Kits", href: "/kits" },
+  },
+  {
+    tagline: "STEM & Robotics",
+    headline: "Hands-On Learning\nFor Every Student",
+    description:
+      "Comprehensive STEM and Robotics kits that teach coding, engineering, and problem-solving through play.",
+    cta: { label: "Explore Kits", href: "/kits" },
+    secondary: { label: "Learn More", href: "/about" },
+  },
+  {
+    tagline: "Trusted Nationwide",
+    headline: "Pan-India\nEdTech Partner",
+    description:
+      "Serving 500+ institutions across India with world-class educational technology and unmatched support.",
+    cta: { label: "Our Story", href: "/about" },
+    secondary: { label: "Contact Us", href: "/getintouch" },
+  },
+];
 
 const Hero = () => {
   const [[currentIndex, direction], setIndex] = useState([0, 1]);
   const [isMobile, setIsMobile] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const checkIfMobile = () => {
-        setIsMobile(window.innerWidth <= 768);
-      };
-
+      const checkIfMobile = () => setIsMobile(window.innerWidth <= 768);
       checkIfMobile();
       window.addEventListener("resize", checkIfMobile);
-
       return () => window.removeEventListener("resize", checkIfMobile);
     }
   }, []);
@@ -80,16 +91,9 @@ const Hero = () => {
     ]);
   }, [currentImages.length]);
 
-
-  
-  const goToSlide = useCallback((index) => {
-    setIndex(([prevIndex]) => [index, index > prevIndex ? 1 : -1]);
-  }, []);
-
   useEffect(() => {
     if (!isPlaying) return;
-
-    const interval = setInterval(nextImage, 5000);
+    const interval = setInterval(nextImage, 6000);
     return () => clearInterval(interval);
   }, [isPlaying, nextImage]);
 
@@ -98,152 +102,159 @@ const Hero = () => {
       if (e.key === "ArrowLeft") prevImage();
       if (e.key === "ArrowRight") nextImage();
     };
-
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [prevImage, nextImage]);
 
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const slide = slides[currentIndex] || slides[0];
 
   return (
-    <section 
-      className="relative w-full h-[80vh] md:h-screen overflow-hidden  "
-      style={{ background: "linear-gradient(to bottom, #2A1B8F, #1E1E1E)" }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Image Container */}
+    <section className="relative w-full h-[85vh] md:h-[92vh] overflow-hidden bg-bg-primary">
+      {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
-  <AnimatePresence initial={false}>
-    <motion.img
-      key={currentImages[currentIndex]}
-      src={currentImages[currentIndex]}
-      alt={`Slide ${currentIndex + 1}`}
-      className="absolute inset-0 w-full h-full object-cotain"
-      initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
-      transition={{
-        duration: 0.6,
-        ease: "easeInOut",
-      }}
-      loading={currentIndex === 0 ? "eager" : "lazy"}
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={currentImages[currentIndex]}
+            src={currentImages[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            loading={currentIndex === 0 ? "eager" : "lazy"}
+          />
+        </AnimatePresence>
 
-    />
-  </AnimatePresence>
+        {/* Dark Overlay */}
+        <div className="hero-overlay absolute inset-0 z-[1]" />
 
-  {/* Gradient Overlay */}
-  {/* <div
-    className="absolute inset-0 z-10 pointer-events-none"
-    style={{
-      background:
-        "linear-gradient(to top, rgba(42, 27, 143, 0.6), transparent, rgba(42, 27, 143, 0.2))",
-    }}
-  /> */}
-</div>
+        {/* Bottom gradient for depth */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent z-[1]" />
+      </div>
 
+      {/* Text Content */}
+      <div className="relative z-10 h-full flex items-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="max-w-2xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                {/* Tagline */}
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-white/20 bg-white/10 backdrop-blur-sm text-white"
+                >
+                  <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse" />
+                  {slide.tagline}
+                </motion.span>
 
-      {/* Navigation Controls */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0.3 }}
-        transition={{ duration: 0.3 }}
-        className="absolute inset-0 flex items-center justify-between px-4 md:px-8 z-10 pointer-events-none"
-      >
+                {/* Headline */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6 whitespace-pre-line"
+                  style={{ textShadow: "0 2px 20px rgba(0,0,0,0.3)" }}
+                >
+                  {slide.headline}
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-base sm:text-lg text-white/80 mb-8 leading-relaxed max-w-lg"
+                >
+                  {slide.description}
+                </motion.p>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="flex flex-wrap gap-4"
+                >
+                  <Link href={slide.cta.href}>
+                    <motion.button
+                      whileHover={{ scale: 1.04, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-7 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base flex items-center gap-2 transition-all duration-300"
+                      style={{
+                        backgroundImage: "var(--brand-gradient)",
+                        boxShadow: "0 8px 30px rgba(42, 27, 143, 0.35)",
+                      }}
+                    >
+                      {slide.cta.label}
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.button>
+                  </Link>
+                  <Link href={slide.secondary.href}>
+                    <motion.button
+                      whileHover={{ scale: 1.04, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="px-7 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base border border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+                    >
+                      {slide.secondary.label}
+                    </motion.button>
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 z-10 pointer-events-none">
         <motion.button
           onClick={prevImage}
-          whileHover={{ scale: 1.1, x: -5 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="pointer-events-auto bg-white/90 backdrop-blur-sm hover:bg-white rounded-full p-3 md:p-4 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-          style={{ border: "1px solid #E0E0E0" }}
+          className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
           aria-label="Previous slide"
         >
-          <ChevronLeft 
-            className="h-5 w-5 md:h-6 md:w-6 transition-colors" 
-            style={{ color: "#2A1B8F" }}
-            onMouseEnter={(e) => e.currentTarget.style.color = "#1FA55B"}
-            onMouseLeave={(e) => e.currentTarget.style.color = "#2A1B8F"}
-          />
+          <ChevronLeft className="h-5 w-5 text-white" />
         </motion.button>
 
         <motion.button
           onClick={nextImage}
-          whileHover={{ scale: 1.1, x: 5 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="pointer-events-auto bg-white/90 backdrop-blur-sm hover:bg-white rounded-full p-3 md:p-4 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-          style={{ border: "1px solid #E0E0E0" }}
+          className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-full p-3 transition-all duration-300 border border-white/20"
           aria-label="Next slide"
         >
-          <ChevronRight 
-            className="h-5 w-5 md:h-6 md:w-6 transition-colors" 
-            style={{ color: "#2A1B8F" }}
-            onMouseEnter={(e) => e.currentTarget.style.color = "#1FA55B"}
-            onMouseLeave={(e) => e.currentTarget.style.color = "#2A1B8F"}
-          />
+          <ChevronRight className="h-5 w-5 text-white" />
         </motion.button>
-      </motion.div>
-
-      {/* Play/Pause Button */}
-      <motion.button
-        onClick={togglePlayPause}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute top-4 right-4 md:top-8 md:right-8 z-20 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full p-2 md:p-3 shadow-xl hover:shadow-2xl transition-all duration-300"
-        style={{ border: "1px solid #E0E0E0" }}
-        aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-      >
-        {isPlaying ? (
-          <Pause className="h-5 w-5 md:h-6 md:w-6" style={{ color: "#E63946" }} />
-        ) : (
-          <Play className="h-5 w-5 md:h-6 md:w-6" style={{ color: "#1FA55B" }} />
-        )}
-      </motion.button>
+      </div>
 
       {/* Slide Indicators */}
-      {/* <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2 md:gap-3">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {currentImages.map((_, index) => (
-          <motion.button
+          <button
             key={index}
-            onClick={() => goToSlide(index)}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className="relative transition-all duration-300 rounded-full overflow-hidden"
-            style={{
-              width: index === currentIndex ? (isMobile ? "2.5rem" : "3rem") : (isMobile ? "0.5rem" : "0.625rem"),
-              height: isMobile ? "0.5rem" : "0.625rem",
-              backgroundColor: index === currentIndex ? "white" : "rgba(255, 255, 255, 0.4)",
+            onClick={() => {
+              setIsPlaying(false);
+              setIndex(([prev]) => [index, index > prev ? 1 : -1]);
             }}
+            className={`rounded-full transition-all duration-500 ${
+              index === currentIndex
+                ? "w-10 h-2.5 bg-white"
+                : "w-2.5 h-2.5 bg-white/40 hover:bg-white/60"
+            }`}
             aria-label={`Go to slide ${index + 1}`}
-          >
-            {index === currentIndex && (
-              <motion.div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to right, #1FA55B, #2A1B8F, #E63946)" }}
-                initial={{ width: "0%" }}
-                animate={{ width: isPlaying ? "100%" : "100%" }}
-                transition={{ duration: isPlaying ? 5 : 0, ease: "linear" }}
-              />
-            )}
-          </motion.button>
+          />
         ))}
-      </div> */}
-
-      {/* Slide Counter */}
-      {/* <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-        className="absolute top-6 left-6 md:top-8 md:left-8 z-20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm md:text-base font-semibold shadow-lg"
-        style={{ backgroundColor: "rgba(42, 27, 143, 0.9)", border: "1px solid #2A1B8F" }}
-      >
-        {currentIndex + 1} / {currentImages.length}
-      </motion.div> */}
-
-     
-    
+      </div>
     </section>
   );
 };

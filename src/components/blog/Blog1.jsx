@@ -74,8 +74,8 @@ export default function Blog() {
     <>
       <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white via-gray-50 to-[#e8f3ff] overflow-hidden">
         {/* Background glow accents */}
-        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-blue-200/30 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-green-200/30 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-primary/20 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-secondary/20 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
 
         {/* Title Section */}
         <motion.div
@@ -95,12 +95,12 @@ export default function Blog() {
             initial={{ width: 0 }}
             animate={{ width: '7rem' }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="h-1 mx-auto bg-gradient-to-r from-blue-500 to-green-500 rounded-full mb-12"
+            className="h-1 mx-auto bg-gradient-to-r from-bg-section0 to-brand-secondary rounded-full mb-12"
           />
         </motion.div>
 
         {/* Category Head */}
-        <h3 className="text-2xl font-bold text-gray-800 mb-8 border-l-4 border-blue-500 pl-3">
+        <h3 className="text-2xl font-bold text-text-heading mb-8 border-l-4 border-brand-primary pl-3">
           IFPD
         </h3>
 
@@ -114,7 +114,7 @@ export default function Blog() {
                 whileHover={{ scale: 1.03, y: -5 }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden group hover:shadow-[0_15px_40px_rgba(37,99,235,0.15)] transition-all duration-500"
+                className="bg-bg-card rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-border-primary overflow-hidden group hover:shadow-[0_15px_40px_rgba(37,99,235,0.15)] transition-all duration-500"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden">
@@ -135,7 +135,7 @@ export default function Blog() {
 
                 {/* Content */}
                 <div className="p-6 text-center">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3 ">
+                  <h3 className="text-xl font-semibold text-text-heading mb-3 ">
                     {blog.title}
                   </h3>
 
@@ -147,7 +147,7 @@ export default function Blog() {
                       whileTap={{ scale: 0.97 }}
                       transition={{ duration: 0.3 }}
                       className="mt-4 w-full py-3 px-6 rounded-lg font-semibold text-white 
-                                bg-gradient-to-r from-blue-900 to-green-800 
+                                bg-gradient-to-r from-brand-primary to-brand-secondary 
                                 shadow-md hover:shadow-lg transition-transform duration-300 cursor-pointer"
                     >
                       READ MORE →
@@ -166,7 +166,7 @@ export default function Blog() {
                   viewport={{ once: true }}
                   className="md:col-span-3 mt-12"
                 >
-                  <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-green-500 pl-3">
+                  <h3 className="text-2xl font-bold text-text-heading border-l-4 border-green-500 pl-3">
                     Studio Setup
                   </h3>
                 </motion.div>
@@ -180,7 +180,7 @@ export default function Blog() {
                   viewport={{ once: true }}
                   className="md:col-span-3 mt-12"
                 >
-                  <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-green-500 pl-3">
+                  <h3 className="text-2xl font-bold text-text-heading border-l-4 border-green-500 pl-3">
                     Online Teaching
                   </h3>
                 </motion.div>
@@ -194,7 +194,7 @@ export default function Blog() {
                   viewport={{ once: true }}
                   className="md:col-span-3 mt-12"
                 >
-                  <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-green-500 pl-3">
+                  <h3 className="text-2xl font-bold text-text-heading border-l-4 border-green-500 pl-3">
                     Coaching Growth
                   </h3>
                 </motion.div>

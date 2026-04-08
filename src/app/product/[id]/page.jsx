@@ -26,7 +26,7 @@ export default function ProductDetail() {
     if (!id) return;
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://api-studentalliance.nexcorealliance.com/api/products/${id}`);
+        const res = await fetch(`/api/products/${id}`);
         const data = await res.json();
         setProduct(data);
       } catch (error) {
@@ -103,12 +103,12 @@ export default function ProductDetail() {
   const handleAddToCart = async () => {
     if (!token) {
       toast.error("Please login first to add to cart.");
-      router.replace("/contact");
+      router.replace("/login");
       return;
     }
     try {
       const res = await fetch(
-        "https://api-studentalliance.nexcorealliance.com/api/cart/add",
+        "/api/cart/add",
         {
           method: "POST",
           headers: {

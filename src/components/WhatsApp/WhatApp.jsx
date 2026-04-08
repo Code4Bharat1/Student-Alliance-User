@@ -11,7 +11,7 @@ const WhatsAppWidget = () => {
       {/* Floating WhatsApp Button */}
       <motion.button
         onClick={togglePopup}
-        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl"
+        className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-brand-secondary to-brand-secondary text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl"
         whileHover={{ scale: 1.1 }}
         animate={{
           boxShadow: [
@@ -40,10 +40,10 @@ const WhatsAppWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.4 }}
-            className="fixed bottom-28 right-6 w-80 md:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200 z-50"
+            className="fixed bottom-28 right-6 w-80 md:w-96 bg-bg-card rounded-3xl shadow-2xl overflow-hidden border border-border-primary z-50"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-4 flex justify-between items-center text-white">
+            <div className="bg-gradient-to-r from-brand-secondary to-brand-secondary p-4 flex justify-between items-center text-white">
               <div>
                 <h3 className="text-lg font-semibold">Chat with Us</h3>
                 <p className="text-xs opacity-90">We reply within minutes 💬</p>
@@ -57,8 +57,8 @@ const WhatsAppWidget = () => {
             </div>
 
             {/* Chat Preview Section */}
-            <div className="p-4 bg-gray-50">
-              <p className="text-sm text-gray-700 mb-3">
+            <div className="p-4 bg-bg-section">
+              <p className="text-sm text-text-primary mb-3">
                 👋 Hi there! How can we help you today?
               </p>
 
@@ -69,22 +69,22 @@ const WhatsAppWidget = () => {
                   href="https://wa.me/9594402775"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white p-3 rounded-2xl hover:bg-green-50 transition shadow-sm"
+                  className="flex items-center gap-3 bg-bg-card p-3 rounded-2xl hover:bg-success-bg transition shadow-sm"
                 >
                   <img
                     src="/images/p6.png"
                     alt="Neha Fakih"
-                    className="w-12 h-12 rounded-full border-2 border-green-500"
+                    className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold text-gray-800">Neha Fakih</p>
-                    <p className="text-xs text-gray-500">Owner</p>
+                    <p className="font-semibold text-text-heading">Neha Fakih</p>
+                    <p className="text-xs text-text-muted">Owner</p>
                   </div>
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
-                    className="text-green-500 text-xs font-semibold"
+                    className="text-success text-xs font-semibold"
                   >
                     Online
                   </motion.span>
@@ -95,25 +95,25 @@ const WhatsAppWidget = () => {
                   href="https://wa.me/9920892689"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white p-3 rounded-2xl hover:bg-green-50 transition shadow-sm"
+                  className="flex items-center gap-3 bg-bg-card p-3 rounded-2xl hover:bg-success-bg transition shadow-sm"
                 >
                   <img
                     src="/images/p4.png"
                     alt="Ayaan Raje"
-                    className="w-12 h-12 rounded-full border-2 border-green-500"
+                    className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold text-gray-800">Ayaan Raje</p>
-                    <p className="text-xs text-gray-500">Marketing Head</p>
+                    <p className="font-semibold text-text-heading">Ayaan Raje</p>
+                    <p className="text-xs text-text-muted">Marketing Head</p>
                   </div>
-                  <span className="text-gray-400 text-xs">Typically replies in 5m</span>
+                  <span className="text-text-tertiary text-xs">Typically replies in 5m</span>
                 </a>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="bg-white border-t border-gray-200 text-center py-3 text-xs text-gray-500">
-              💬 Powered by <span className="text-green-600 font-medium">WhatsApp</span>
+            <div className="bg-bg-card border-t border-border-primary text-center py-3 text-xs text-text-muted">
+              💬 Powered by <span className="text-brand-secondary font-medium">WhatsApp</span>
             </div>
           </motion.div>
         )}

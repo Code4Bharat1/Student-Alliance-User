@@ -18,9 +18,7 @@ export default function Printer() {
     const fetchPrinters = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.get(
-          "https://api-studentalliance.nexcorealliance.com/api/products"
-        );
+        const res = await axios.get("/api/products");
         setPrinters(res.data || []);
       } catch (err) {
         console.error("Error fetching printers:", err);
@@ -36,7 +34,7 @@ export default function Printer() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-bg-primary py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -45,19 +43,19 @@ export default function Printer() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            Explore advanced IFPDs, 3D printers, and cameras for education excellence
+          <h1 className="section-heading gradient-text">
+            Explore advanced IFPDs, 3D printers, and cameras for education
+            excellence
           </h1>
-          
         </motion.div>
 
         {/* Product Grid */}
         {isLoading ? (
-          <div className="text-center py-20 text-lg text-gray-500">
+          <div className="text-center py-20 text-lg text-text-tertiary">
             Loading products...
           </div>
         ) : printers.length === 0 ? (
-          <div className="text-center py-20 text-gray-500">
+          <div className="text-center py-20 text-text-tertiary">
             No 3D printers available.
           </div>
         ) : (
@@ -79,7 +77,8 @@ export default function Printer() {
                   scale: 1.05,
                   transition: { duration: 0.3, ease: "easeInOut" },
                 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 flex flex-col h-full"
+                className="card-glow bg-bg-card rounded-2xl overflow-hidden border border-border-primary transition-all duration-500 flex flex-col h-full"
+                style={{ boxShadow: "var(--shadow-card)" }}
               >
                 <div className="relative overflow-hidden">
                   <Image
@@ -87,12 +86,12 @@ export default function Printer() {
                     alt={printer.name}
                     width={400}
                     height={300}
-                    className="w-full h-64 object-contain bg-gray-50 p-4"
+                    className="w-full h-64 object-contain bg-bg-section p-4"
                   />
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow text-center">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 min-h-[3.5rem]">
+                  <h3 className="text-lg font-semibold text-text-heading mb-3 line-clamp-2 min-h-[3.5rem]">
                     {printer.name}
                   </h3>
 
@@ -105,7 +104,7 @@ export default function Printer() {
                         <motion.svg
                           key={i}
                           className={`h-5 w-5 ${
-                            isFilled ? "text-yellow-400" : "text-gray-300"
+                            isFilled ? "text-yellow-400" : "text-text-tertiary"
                           }`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -119,7 +118,7 @@ export default function Printer() {
                         </motion.svg>
                       );
                     })}
-                    <span className="text-xs text-gray-500 ml-1">
+                    <span className="text-xs text-text-muted ml-1">
                       ({printer.reviews || Math.floor(Math.random() * 50) + 10}{" "}
                       reviews)
                     </span>
@@ -128,11 +127,12 @@ export default function Printer() {
                   {/* Button - Always at bottom */}
                   <motion.button
                     onClick={() => handleProductClick(printer._id)}
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-150 ease-out cursor-pointer"
+                    className="w-full text-text-inverse font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-150 ease-out cursor-pointer"
+                    style={{ backgroundImage: "var(--brand-gradient)" }}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                     View Details <ArrowRight className="w-4 h-4" />
+                    View Details <ArrowRight className="w-4 h-4" />
                   </motion.button>
                 </div>
               </motion.div>

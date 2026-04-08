@@ -26,14 +26,14 @@ const ProfilePage = () => {
   useEffect(() => {
     if (!token || !userFromRedux?._id) {
       toast.error("Please login first!");
-      router.push("/contact");
+      router.push("/login");
       return;
     }
 
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          `https://api-studentalliance.nexcorealliance.com/api/customers/${userFromRedux._id}`
+          `/api/customers/${userFromRedux._id}`
         );
         setUser(res.data);
       } catch (err) {
@@ -67,7 +67,7 @@ const ProfilePage = () => {
     setIsEditing(false);
     try {
       const res = await axios.put(
-        `https://api-studentalliance.nexcorealliance.com/api/customers/${userFromRedux._id}`,
+        `/api/customers/${userFromRedux._id}`,
         formData
       );
       setUser(res.data.customer || res.data);
@@ -79,7 +79,7 @@ const ProfilePage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-700">
+      <div className="min-h-screen flex items-center justify-center text-text-primary">
         Loading...
       </div>
     );
@@ -88,25 +88,25 @@ const ProfilePage = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">My Profile</h1>
-          <p className="text-gray-600">Manage your personal details</p>
+          <h1 className="text-4xl font-bold text-text-heading mb-2">My Profile</h1>
+          <p className="text-text-secondary">Manage your personal details</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Sidebar */}
           <div className="lg:col-span-4">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden sticky top-8">
-              <div className="bg-gradient-to-br from-indigo-600 to-purple-700 p-8 text-white">
+            <div className="bg-bg-card rounded-2xl shadow-lg overflow-hidden sticky top-8">
+              <div className="bg-gradient-to-br from-brand-primary to-purple-700 p-8 text-white">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-24 h-24 bg-white bg-opacity-20 backdrop-blur-lg rounded-full flex items-center justify-center mb-4 border-4 border-white border-opacity-30">
+                  <div className="w-24 h-24 bg-bg-card bg-opacity-20 backdrop-blur-lg rounded-full flex items-center justify-center mb-4 border-4 border-white border-opacity-30">
                     <User className="w-12 h-12" />
                   </div>
                   <h2 className="text-2xl font-bold mb-1">{user.name}</h2>
-                  <p className="text-indigo-100 text-sm">{user.email}</p>
+                  <p className="text-white/70 text-sm">{user.email}</p>
                 </div>
               </div>
             </div>
@@ -118,17 +118,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              className="bg-bg-card rounded-2xl shadow-lg overflow-hidden"
             >
               <div className="p-8">
                 <div className="flex justify-between items-center mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900">
+                  <h2 className="text-2xl font-bold text-text-heading">
                     Profile Information
                   </h2>
                   {!isEditing && (
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
+                      className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-hover transition-colors shadow-md"
                     >
                       <Edit3 className="w-4 h-4" />
                       Edit Profile
@@ -139,68 +139,68 @@ const ProfilePage = () => {
                 {isEditing ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label className="block text-sm font-semibold text-text-primary mb-2">
                         Full Name
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 border-gray-200"
+                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-border-focus border-border-primary"
                           placeholder="Enter your full name"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label className="block text-sm font-semibold text-text-primary mb-2">
                         Email
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 border-gray-200"
+                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-border-focus border-border-primary"
                           placeholder="your@email.com"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label className="block text-sm font-semibold text-text-primary mb-2">
                         Phone
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary" />
                         <input
                           type="tel"
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 border-gray-200"
+                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-border-focus border-border-primary"
                           placeholder="+91 98765 43210"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label className="block text-sm font-semibold text-text-primary mb-2">
                         Address
                       </label>
                       <div className="relative">
-                        <MapPin className="absolute left-3 top-4 w-5 h-5 text-gray-400" />
+                        <MapPin className="absolute left-3 top-4 w-5 h-5 text-text-tertiary" />
                         <textarea
                           name="address"
                           rows={4}
                           value={formData.address}
                           onChange={handleInputChange}
-                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-indigo-500 resize-none border-gray-200"
+                          className="w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-border-focus resize-none border-border-primary"
                           placeholder="Enter your address"
                         />
                       </div>
@@ -209,14 +209,14 @@ const ProfilePage = () => {
                     <div className="flex gap-3 pt-4">
                       <button
                         type="submit"
-                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors shadow-md font-medium"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-xl hover:bg-brand-hover transition-colors shadow-md font-medium"
                       >
                         <Save className="w-5 h-5" /> Save
                       </button>
                       <button
                         type="button"
                         onClick={() => setIsEditing(false)}
-                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors font-medium"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-bg-hover text-text-primary rounded-xl hover:bg-bg-hover transition-colors font-medium"
                       >
                         <X className="w-5 h-5" /> Cancel
                       </button>
@@ -224,20 +224,20 @@ const ProfilePage = () => {
                   </form>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-indigo-50 p-6 rounded-xl">
-                      <h3 className="font-semibold text-gray-500">Full Name</h3>
+                    <div className="bg-info-bg p-6 rounded-xl">
+                      <h3 className="font-semibold text-text-muted">Full Name</h3>
                       <p className="text-lg font-medium">{user.name}</p>
                     </div>
-                    <div className="bg-blue-50 p-6 rounded-xl">
-                      <h3 className="font-semibold text-gray-500">Email</h3>
+                    <div className="bg-info-bg p-6 rounded-xl">
+                      <h3 className="font-semibold text-text-muted">Email</h3>
                       <p className="text-lg font-medium">{user.email}</p>
                     </div>
-                    <div className="bg-emerald-50 p-6 rounded-xl">
-                      <h3 className="font-semibold text-gray-500">Phone</h3>
+                    <div className="bg-success-bg p-6 rounded-xl">
+                      <h3 className="font-semibold text-text-muted">Phone</h3>
                       <p className="text-lg font-medium">{user.phone}</p>
                     </div>
-                    <div className="bg-amber-50 p-6 rounded-xl">
-                      <h3 className="font-semibold text-gray-500">Address</h3>
+                    <div className="bg-warning-bg p-6 rounded-xl">
+                      <h3 className="font-semibold text-text-muted">Address</h3>
                       <p className="text-lg font-medium">{user.address}</p>
                     </div>
                   </div>

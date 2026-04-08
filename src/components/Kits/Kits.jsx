@@ -29,7 +29,7 @@ export default function KitsSection() {
       setLoading(true);
       try {
         const res = await axios.get(
-          "https://api-studentalliance.nexcorealliance.com/api/products/category/STEM%20%26%20Robotics"
+          "/api/products/category/STEM%20%26%20Robotics"
         );
         setKits(res.data || []);
       } catch (error) {
@@ -59,23 +59,23 @@ export default function KitsSection() {
   }, [kits]);
 
   return (
-    <section className="bg-gradient-to-br from-slate-50 via-white to-slate-100 py-16 px-6">
+    <section className="bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-tertiary py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.h2
-          className="text-slate-900  text-4xl font-bold mb-12 text-center "
+          className="text-text-heading  text-4xl font-bold mb-12 text-center "
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           STEM & Robotics 
 
-           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-purple-600">
             Kits
           </span>
         </motion.h2>
 
         {loading ? (
-          <div className="text-center py-12 text-slate-600 text-lg">
+          <div className="text-center py-12 text-text-secondary text-lg">
             Loading kits...
           </div>
         ) : (
@@ -87,14 +87,14 @@ export default function KitsSection() {
               return (
                 <motion.div
                   key={kit._id || idx}
-                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-transform duration-150 ease-out flex flex-col items-center "
+                  className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-transform duration-150 ease-out flex flex-col items-center "
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   whileHover={{ scale: 1.05 }} // Fast zoom only, no lift
                 >
-                  <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden">
+                  <div className="relative aspect-[4/3] w-full bg-bg-section overflow-hidden">
                     <Image
                       src={kit.image}
                       alt={kit.name}
@@ -102,19 +102,19 @@ export default function KitsSection() {
                       className="object-contain p-4 transition-transform duration-150 ease-out group-hover:scale-110"
                     />
                     {kit.discount > 0 && (
-                      <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                      <div className="absolute top-3 left-3 bg-brand-accent text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
                         {kit.discount}% OFF
                       </div>
                     )}
                     {kit.isNew && (
-                      <div className="absolute top-3 right-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                      <div className="absolute top-3 right-3 bg-brand-secondary text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
                         NEW
                       </div>
                     )}
                   </div>
 
                   <div className="p-5 w-full text-center flex flex-col flex-grow">
-                    <h3 className="font-semibold text-lg text-slate-900 mb-2 line-clamp-2 min-h-[3rem]">
+                    <h3 className="font-semibold text-lg text-text-heading mb-2 line-clamp-2 min-h-[3rem]">
                       {kit.name}
                     </h3>
 
@@ -131,14 +131,14 @@ export default function KitsSection() {
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
-                      <span className="text-xs text-slate-500 ml-1">
+                      <span className="text-xs text-text-muted ml-1">
                         ({reviews} reviews)
                       </span>
                     </div>
 
                     <motion.button
                       onClick={() => router.push(`/product/${kit._id}`)}
-                      className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium py-3 rounded-xl transition-all duration-150 ease-out cursor-pointer"
+                      className="w-full bg-gradient-to-r from-brand-primary to-purple-600 hover:from-brand-hover hover:to-purple-700 text-white font-medium py-3 rounded-xl transition-all duration-150 ease-out cursor-pointer"
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                     >
