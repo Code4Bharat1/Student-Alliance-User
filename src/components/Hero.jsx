@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image'
 
 const images = [
   "/gallery/hero1.jpg",
@@ -14,11 +15,11 @@ const images = [
 ];
 
 const Respimages = [
-  "/gallery/h1.png",
-  "/gallery/h2.png",
-  "/gallery/h3.png",
-  "/gallery/h4.png",
-  "/gallery/h5.png",
+  "/gallery/h1.jpg",
+  "/gallery/h2.jpg",
+  "/gallery/h3.jpg",
+  "/gallery/h4.jpg",
+  "/gallery/h5.jpg",
 ];
 
 const slides = [
@@ -65,9 +66,16 @@ const slides = [
 ];
 
 const Hero = () => {
-  const [[currentIndex, direction], setIndex] = useState([0, 1]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPlaying(true);
+    }, 3000); // start after 3 sec
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -111,19 +119,27 @@ const Hero = () => {
   return (
     <section className="relative w-full h-[85vh] md:h-[92vh] overflow-hidden bg-bg-primary mt-9 ">
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-auto">
+      <div className="absolute inset-0 w-full h-full">
         <AnimatePresence initial={false}>
-          <motion.img
+          <motion.div
             key={currentImages[currentIndex]}
-            src={currentImages[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
-            className="absolute inset-0 w-full h-full object-contain"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
+
+            className="absolute inset-0 w-full h-full"
+            // initial={{ opacity: 0, scale: 1.1 }}
+            // animate={{ opacity: 1, scale: 1 }}
+            // exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 1, ease: "easeInOut" }}
-            loading={currentIndex === 0 ? "eager" : "lazy"}
-          />
+          >
+            <Image
+              src={currentImages[currentIndex]}
+              alt={`Slide ${currentIndex + 1}`}
+              fill
+              className="object-contain"
+              priority={currentIndex === 0}
+              fetchPriority="high"
+              sizes="100vw"
+            />
+          </motion.div>
         </AnimatePresence>
 
         {/* Dark Overlay */}
@@ -134,7 +150,7 @@ const Hero = () => {
       </div>
 
       {/* Text Content */}
-      
+
 
       {/* Navigation Arrows */}
       <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 z-10 pointer-events-none">
@@ -168,11 +184,10 @@ const Hero = () => {
               setIsPlaying(false);
               setIndex(([prev]) => [index, index > prev ? 1 : -1]);
             }}
-            className={`rounded-full transition-all duration-500 ${
-              index === currentIndex
-                ? "w-10 h-2.5 bg-white"
-                : "w-2.5 h-2.5 bg-white/40 hover:bg-white/60"
-            }`}
+            className={`rounded-full transition-all duration-500 ${index === currentIndex
+              ? "w-10 h-2.5 bg-white"
+              : "w-2.5 h-2.5 bg-white/40 hover:bg-white/60"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

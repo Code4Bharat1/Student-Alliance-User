@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Sparkles, Cpu, Monitor, Rocket } from "lucide-react";
 
 const services = [
@@ -126,10 +127,12 @@ const Service = () => {
                     className="relative aspect-[4/3] bg-bg-card rounded-2xl overflow-hidden border border-border-primary"
                     style={{ boxShadow: "var(--shadow-sm)" }}
                   >
-                    <img
+                    <Image
                       src={service.imgSrc}
                       alt={service.title}
-                      className="w-full h-full object-contain p-4"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-contain p-4"
                     />
                   </motion.div>
                 </div>

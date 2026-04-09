@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Star, MessageCircle, ArrowRight } from "lucide-react";
 
 // ✅ JSON import
@@ -81,11 +82,13 @@ export default function Products() {
                       whileHover={{ y: -5 }}
                     >
                       {/* Image */}
-                      <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center">
-                        <img
+                      <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center relative">
+                        <Image
                           src={product.image}
                           alt={product.name}
-                          className="h-full object-contain p-4"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          className="object-contain p-4"
                         />
                       </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaQuoteLeft,
@@ -221,10 +222,12 @@ export default function Testimonial() {
                       <div className="flex items-center gap-4 mb-6">
                         <div className="relative">
                           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary p-0.5">
-                            <img
+                            <Image
                               src={testimonial.image}
                               alt={testimonial.name}
-                              className="w-full h-full rounded-full object-cover border-4 border-white"
+                              fill
+                              sizes="64px"
+                              className="rounded-full object-cover border-4 border-white"
                             />
                           </div>
                           <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-brand-secondary rounded-full border-2 border-white"></div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Brand = () => {
   const cards = [
@@ -27,13 +28,15 @@ const Brand = () => {
               viewport={{ once: true }}
             >
               <Link href={card.link}>
-                <div className="card-glow relative group rounded-2xl overflow-hidden bg-bg-card border border-border-primary transition-all duration-500">
-                  <img
+                <div className="card-glow relative group rounded-2xl overflow-hidden bg-bg-card border border-border-primary transition-all duration-500 h-64">
+                  <Image
                     src={card.img}
                     alt={`Brand ${card.id}`}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition duration-500 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition duration-500 flex items-center justify-center z-10">
                     <span className="text-lg font-semibold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       View Products →
                     </span>
