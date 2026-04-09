@@ -1,7 +1,7 @@
 export const products =[
   {
     "id": 1,
-    "name": "65\" IFPD Normal",
+    "name": "65 Inch IFPD - Interactive Flat Panel Display",
     "size": 65,
     "category": "IFPD",
     "subCategory": "Normal",
@@ -21,7 +21,7 @@ export const products =[
   },
   {
     "id": 2,
-    "name": "75\" IFPD Normal",
+    "name": "75 Inch IFPD - Interactive Flat Panel Display",
     "size": 75,
     "category": "IFPD",
     "subCategory": "Normal",
@@ -41,7 +41,7 @@ export const products =[
   },
   {
     "id": 3,
-    "name": "86\" IFPD Normal",
+    "name": "86 Inch IFPD - Interactive Flat Panel Display",
     "size": 86,
     "category": "IFPD",
     "subCategory": "Normal",
@@ -61,7 +61,7 @@ export const products =[
   },
   {
     "id": 4,
-    "name": "98\" IFPD Normal",
+    "name": "98 Inch IFPD - Interactive Flat Panel Display",
     "size": 98,
     "category": "IFPD",
     "subCategory": "Normal",
@@ -81,7 +81,7 @@ export const products =[
   },
   {
     "id": 5,
-    "name": "110\" IFPD Normal",
+    "name": "110 Inch IFPD - Interactive Flat Panel Display",
     "size": 110,
     "category": "IFPD",
     "subCategory": "Normal",
