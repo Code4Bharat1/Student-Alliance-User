@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Star } from "lucide-react";
 import WhatsAppWidget from "../WhatsApp/WhatApp";
@@ -16,10 +14,9 @@ export default function Printer() {
   useEffect(() => {
     const fetchPrinters = async () => {
       try {
-        const res = await axios.get(
-          "/api/products/category/3D%20Printers"
-        );
-        setPrinters(res.data || []);
+        const res = await fetch("/api/products/category/3D%20Printers");
+        const data = await res.json();
+        setPrinters(data || []);
       } catch (err) {
         console.error("Error fetching printers:", err);
       } finally {
@@ -35,39 +32,20 @@ export default function Printer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-tertiary">
-      {/* Header */}
-      <motion.div
-        className="relative py-16 px-4 overflow-hidden text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        {/* Decorative Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-bg-badge rounded-full blur-3xl opacity-30"></div>
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl opacity-30"></div>
-        </div>
 
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold text-text-heading relative z-10"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-        >
+      {/* Header (NO motion = faster first paint) */}
+      <div className="relative py-16 px-4 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold text-text-heading">
           <span>3D Printers</span>
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-purple-600">
             Innovation at Your Desk
           </span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          className="text-text-secondary mt-3 text-lg relative z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
+        <p className="text-text-secondary mt-3 text-lg">
           Explore our high-performance 3D printers designed for professionals and creators.
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       {/* Products */}
       {loading ? (
@@ -76,22 +54,20 @@ export default function Printer() {
         <div className="text-center py-20 text-text-muted">No printers available.</div>
       ) : (
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6 pb-20">
-          {printers.map((printer, index) => (
-            <motion.div
+
+          {/* LIMIT RENDERING */}
+          {printers.slice(0, 12).map((printer) => (
+            <div
               key={printer._id}
-              className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-transform duration-150 ease-out flex flex-col items-center "
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }} // Fast zoom
+              className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-200 hover:scale-[1.02] flex flex-col items-center"
             >
-              <div className="relative aspect-[4/3] w-full bg-bg-section overflow-hidden">
+              <div className="relative aspect-[4/3] w-full bg-bg-section">
                 <Image
                   src={printer.image}
                   alt={printer.name}
                   fill
-                  className="object-contain p-4 transition-transform duration-150 ease-out group-hover:scale-110"
+                  loading="lazy"
+                  className="object-contain p-4"
                 />
               </div>
 
@@ -104,27 +80,28 @@ export default function Printer() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${
-                        i < 4 ? "fill-yellow-400 text-yellow-400" : "fill-border-primary text-border-primary"
-                      }`}
+                      className={`w-4 h-4 ${i < 4
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "fill-border-primary text-border-primary"
+                        }`}
                     />
                   ))}
                 </div>
 
                 <p className="text-text-muted text-sm mb-4 flex-grow">
-                  {printer.reviews ? `${printer.reviews} reviews` : "No reviews yet"}
+                  {printer.reviews
+                    ? `${printer.reviews} reviews`
+                    : "No reviews yet"}
                 </p>
 
-                <motion.button
+                <button
                   onClick={() => handleProductClick(printer._id)}
-                  className="w-full bg-gradient-to-r from-brand-primary to-purple-600 hover:from-brand-hover hover:to-purple-700 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-150 ease-out cursor-pointer"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  className="w-full bg-gradient-to-r from-brand-primary to-purple-600 hover:from-brand-hover hover:to-purple-700 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition duration-200"
                 >
                   View Details <ArrowRight className="w-4 h-4" />
-                </motion.button>
+                </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       )}

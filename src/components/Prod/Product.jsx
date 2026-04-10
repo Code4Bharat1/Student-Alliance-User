@@ -118,13 +118,6 @@ const Products = () => {
                         {/* Buttons */}
                         <div className="flex gap-2">
 
-                          {/* View Product */}
-                          <button
-                            onClick={() => router.push(`/product/${product.id}`)}
-                            className="flex-1 bg-gray-900 text-white py-2 rounded-xl text-sm hover:opacity-90 transition"
-                          >
-                            View
-                          </button>
 
                           {/* WhatsApp */}
                           <button
