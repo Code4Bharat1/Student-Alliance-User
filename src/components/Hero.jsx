@@ -89,14 +89,13 @@ const Hero = () => {
   const currentImages = isMobile ? Respimages : images;
 
   const nextImage = useCallback(() => {
-    setIndex(([prevIndex]) => [(prevIndex + 1) % currentImages.length, 1]);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % currentImages.length);
   }, [currentImages.length]);
 
   const prevImage = useCallback(() => {
-    setIndex(([prevIndex]) => [
-      prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1,
-      -1,
-    ]);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? currentImages.length - 1 : prevIndex - 1
+    );
   }, [currentImages.length]);
 
   useEffect(() => {
@@ -182,7 +181,7 @@ const Hero = () => {
             key={index}
             onClick={() => {
               setIsPlaying(false);
-              setIndex(([prev]) => [index, index > prev ? 1 : -1]);
+              setCurrentIndex(index);
             }}
             className={`rounded-full transition-all duration-500 ${index === currentIndex
               ? "w-10 h-2.5 bg-white"
