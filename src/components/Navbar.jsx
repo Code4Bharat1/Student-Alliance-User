@@ -98,7 +98,7 @@ const Navbar = () => {
           <Link href="/home" className="flex-shrink-0">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Image
-                src="/images/logo.jpg"
+                src="/logo.png"
                 alt="Student Alliance"
                 width={176}
                 height={80}
@@ -193,7 +193,7 @@ const Navbar = () => {
           {/* Right Actions */}
           <div className="flex items-center gap-2">
             {/* Theme Toggle */}
-            <motion.button
+            {/* <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -215,7 +215,7 @@ const Navbar = () => {
                   )}
                 </motion.div>
               </AnimatePresence>
-            </motion.button>
+            </motion.button> */}
 
             {/* Cart */}
             <Link href="/mycart">

@@ -8,7 +8,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 99000,
     "originalPrice": 275000,
-    "image": "/images/65_inch.png",
+    "image": "/IFPD/65.jpg",
     "features": [
       "Android 14 OS (Upgradeable to Android 16)",
       "4GB RAM + 32GB Storage",
@@ -28,7 +28,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 124950,
     "originalPrice": 350000,
-    "image": "/images/75_inch.png",
+    "image": "/IFPD/75.jpg",
     "features": [
       "Android 14 OS (Upgradeable to Android 16)",
       "4K UHD Display",
@@ -48,7 +48,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 157651,
     "originalPrice": 476000,
-    "image": "/images/86_inch.png",
+    "image": "/IFPD/86.jpg",
     "features": [
       "Android 14 OS (Upgradeable to Android 16)",
       "4K Ultra HD Panel",
@@ -68,7 +68,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 489975,
     "originalPrice": 750000,
-    "image": "/images/98_inch.png",
+    "image": "/IFPD/98.jpg",
     "features": [
       "Android 14 OS (Upgradeable to Android 16)",
       "4K Ultra HD Display",
@@ -88,7 +88,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 850000,
     "originalPrice": 1200000,
-    "image": "/images/110_inch.png",
+    "image": "/IFPD/110.jpg",
     "features": [
       "Android 14 OS (Upgradeable to Android 16)",
       "Ultra Large 4K Display",
@@ -109,7 +109,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 120000,
     "originalPrice": 300000,
-    "image": "/images/65_inch.png",
+    "image": "/IFPD/65.jpg",
     "features": [
       "Google EDLA Certified",
       "Android 14 (Upgradeable to Android 16)",
@@ -129,7 +129,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 145000,
     "originalPrice": 350000,
-    "image": "/images/75_inch.png",
+    "image": "/IFPD/75.jpg",
     "features": [
       "Google EDLA Certified",
       "Android 14 (Upgradeable to Android 16)",
@@ -149,7 +149,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 185000,
     "originalPrice": 476000,
-    "image": "/images/86_inch.png",
+    "image": "/IFPD/86.jpg",
     "features": [
       "Google EDLA Certified",
       "Android 14 (Upgradeable to Android 16)",
@@ -169,7 +169,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 550000,
     "originalPrice": 750000,
-    "image": "/images/98_inch.png",
+    "image": "/IFPD/98.jpg",
     "features": [
       "Google EDLA Certified",
       "Android 14 (Upgradeable to Android 16)",
@@ -189,7 +189,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 950000,
     "originalPrice": 1200000,
-    "image": "/images/110_inch.png",
+    "image": "/IFPD/110.jpg",
     "features": [
       "Google EDLA Certified",
       "Android 14 (Upgradeable to Android 16)",
@@ -201,7 +201,7 @@ export const products =[
     ]
   },
 
-   {
+  {
     "id": 11,
     "name": "65\" Google EDLA IFPD with Camera",
     "size": 65,
@@ -210,7 +210,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 135000,
     "originalPrice": 320000,
-    "image": "/images/65_inch_withcamer.png",
+    "image": "/IFPD/61.jpg",
     "features": [
       "Built-in AI Camera",
       "Google EDLA Certified",
@@ -230,7 +230,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 165000,
     "originalPrice": 370000,
-    "image": "/images/75_inch_withcamer.png",
+    "image": "/IFPD/75.1.jpeg",
     "features": [
       "AI Camera + Mic",
       "Google EDLA Certified",
@@ -250,7 +250,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 210000,
     "originalPrice": 476000,
-    "image": "/images/85_inch_withcamer.png",
+    "image": "/IFPD/86.1.jpeg",
     "features": [
       "AI Camera System",
       "Google EDLA Certified",
@@ -270,7 +270,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 600000,
     "originalPrice": 750000,
-    "image": "/images/98_inch_withcamer.png",
+    "image": "/IFPD/96.1.jpeg",
     "features": [
       "AI Camera + Speaker System",
       "Google EDLA Certified",
@@ -290,7 +290,7 @@ export const products =[
     "version": "Android 14 (Upgradeable to Android 16)",
     "price": 1100000,
     "originalPrice": 1300000,
-    "image": "/images/110-inch_withcamer.png",
+    "image": "/IFPD/110.jpeg",
     "features": [
       "AI Camera + Mic Array",
       "Google EDLA Certified",

@@ -29,12 +29,12 @@ export default function Products() {
 
   // ✅ Section grouping
   const groupedProducts = {
-    Normal: products.filter((p) => p.subCategory === "Normal"),
-    "Google EDLA without Camera": products.filter(
-      (p) => p.subCategory === "Google EDLA without Camera"
-    ),
-    "Google EDLA with Camera": products.filter(
+    " Interactive Flat Panel Display (IFPD)": products.filter((p) => p.subCategory === "Normal"),
+    "Google EDLA With Camera": products.filter(
       (p) => p.subCategory === "Google EDLA with Camera"
+    ),
+    "Google EDLA Without Camera": products.filter(
+      (p) => p.subCategory === "Google EDLA without Camera"
     ),
   };
 
