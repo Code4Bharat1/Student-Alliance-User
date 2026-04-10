@@ -32,7 +32,7 @@ export default function Printer() {
 
   return (
     <div className="min-h-screen bg-bg-primary py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1600px] mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
@@ -51,10 +51,10 @@ export default function Printer() {
             No 3D printers available.
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
 
             {/* LIMIT ITEMS */}
-            {printers.slice(0, 12).map((printer) => (
+            {printers.map((printer) => (
               <div
                 key={printer._id}
                 className="card-glow bg-bg-card rounded-2xl overflow-hidden border border-border-primary hover:shadow-lg transition duration-200 flex flex-col h-full hover:scale-[1.02]"

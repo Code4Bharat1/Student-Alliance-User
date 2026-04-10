@@ -60,7 +60,7 @@ export default function KitsSection() {
 
   return (
     <section className="bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-tertiary py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1600px] mx-auto">
         <motion.h2
           className="text-text-heading  text-4xl font-bold mb-12 text-center "
           initial={{ opacity: 0, y: -20 }}
@@ -79,7 +79,7 @@ export default function KitsSection() {
             Loading kits...
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
             {kits.map((kit, idx) => {
               const rating = kitRatings[kit._id] || 4;
               const reviews = reviewCounts[kit._id] || 0;

@@ -56,7 +56,7 @@ const Products = () => {
       </div>
 
       {/* Sections */}
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="max-w-[1600px] mx-auto px-4 pb-20">
         {Object.entries(groupedProducts).map(([section, items]) =>
           items.length > 0 && (
             <div key={section} className="mb-12">
@@ -70,10 +70,10 @@ const Products = () => {
               </h2>
 
               {/* Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
 
                 {/* 🔥 LIMIT RENDERING (adjust if needed) */}
-                {items.slice(0, 12).map((product, index) => {
+                {items.map((product, index) => {
                   const rating = productRatings[product.id] || 4;
                   const reviewCount = reviewCounts[product.id] || 0;
 

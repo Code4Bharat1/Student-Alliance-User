@@ -53,10 +53,10 @@ export default function Printer() {
       ) : printers.length === 0 ? (
         <div className="text-center py-20 text-text-muted">No printers available.</div>
       ) : (
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-6 pb-20">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 px-6 pb-20">
 
           {/* LIMIT RENDERING */}
-          {printers.slice(0, 12).map((printer) => (
+          {printers.map((printer) => (
             <div
               key={printer._id}
               className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-200 hover:scale-[1.02] flex flex-col items-center"
