@@ -1,35 +1,39 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { Star, MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // ✅ JSON import
 import { products as staticProducts } from "@/data/products";
 
-export default function Products() {
+const Products = () => {
+  const router = useRouter();
+
   const [products] = useState(staticProducts);
   const [productRatings, setProductRatings] = useState({});
   const [reviewCounts, setReviewCounts] = useState({});
 
-  // ⭐ Random rating system
+  // ⭐ Random rating system (lightweight)
   useEffect(() => {
-    const generateRatings = {};
-    const generateReviews = {};
+    const ratings = {};
+    const reviews = {};
 
-    products.forEach((product) => {
-      generateRatings[product.id] = Math.floor(Math.random() * 2) + 4;
-      generateReviews[product.id] = Math.floor(Math.random() * 50) + 10;
-    });
+    for (let product of products) {
+      ratings[product.id] = Math.floor(Math.random() * 2) + 4;
+      reviews[product.id] = Math.floor(Math.random() * 50) + 10;
+    }
 
-    setProductRatings(generateRatings);
-    setReviewCounts(generateReviews);
+    setProductRatings(ratings);
+    setReviewCounts(reviews);
   }, [products]);
 
-  // ✅ Section grouping
+  // ✅ Grouping
   const groupedProducts = {
-    " Interactive Flat Panel Display (IFPD)": products.filter((p) => p.subCategory === "Normal"),
+    "Interactive Flat Panel Display (IFPD)": products.filter(
+      (p) => p.subCategory === "Normal"
+    ),
     "Google EDLA With Camera": products.filter(
       (p) => p.subCategory === "Google EDLA with Camera"
     ),
@@ -38,16 +42,14 @@ export default function Products() {
     ),
   };
 
-  const handleProductClick = (productId) => {
-    window.location.href = `/product/${productId}`;
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary">
 
       {/* Header */}
       <div className="py-16 text-center">
-        <h1 className="text-4xl font-bold mb-2">Interactive Flat Panel Displays</h1>
+        <h1 className="text-4xl font-bold mb-2">
+          Interactive Flat Panel Displays
+        </h1>
         <p className="text-gray-500">
           Explore our complete range of IFPD solutions
         </p>
@@ -55,7 +57,6 @@ export default function Products() {
 
       {/* Sections */}
       <div className="max-w-7xl mx-auto px-4 pb-20">
-
         {Object.entries(groupedProducts).map(([section, items]) =>
           items.length > 0 && (
             <div key={section} className="mb-12">
@@ -71,15 +72,15 @@ export default function Products() {
               {/* Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
-                {items.map((product, index) => {
+                {/* 🔥 LIMIT RENDERING (adjust if needed) */}
+                {items.slice(0, 12).map((product, index) => {
                   const rating = productRatings[product.id] || 4;
                   const reviewCount = reviewCounts[product.id] || 0;
 
                   return (
-                    <motion.div
+                    <div
                       key={product.id || index}
-                      className="group bg-white rounded-2xl overflow-hidden  hover:shadow-xl transition"
-                      whileHover={{ y: -5 }}
+                      className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1"
                     >
                       {/* Image */}
                       <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center relative">
@@ -87,6 +88,7 @@ export default function Products() {
                           src={product.image}
                           alt={product.name}
                           fill
+                          loading="lazy"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                           className="object-contain p-4"
                         />
@@ -103,35 +105,52 @@ export default function Products() {
                         {/* Features */}
                         <ul className="space-y-2 mb-4">
                           {product.features?.slice(0, 4).map((f, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                            <li
+                              key={i}
+                              className="flex items-start gap-2 text-sm text-gray-600"
+                            >
                               <span className="text-green-500 mt-1">✔</span>
                               {f}
                             </li>
                           ))}
                         </ul>
 
-                        {/* Button */}
-                        <button
-                          onClick={() => {
-                            const message = `Hello, I'm interested in this product:
+                        {/* Buttons */}
+                        <div className="flex gap-2">
+
+                          {/* View Product */}
+                          <button
+                            onClick={() => router.push(`/product/${product.id}`)}
+                            className="flex-1 bg-gray-900 text-white py-2 rounded-xl text-sm hover:opacity-90 transition"
+                          >
+                            View
+                          </button>
+
+                          {/* WhatsApp */}
+                          <button
+                            onClick={() => {
+                              const message = `Hello, I'm interested in this product:
 
 📺 Product: ${product.name}
-📏 Size: ${product.size}"
+📏 Size: ${product.size}
 📂 Category: ${product.subCategory}
 💰 Price: ₹${product.price}
 
 Please share more details.`;
 
-                            const url = `https://wa.me/9594402775?text=${encodeURIComponent(message)}`;
-                            window.open(url, "_blank");
-                          }}
-                          className="w-full bg-gradient-to-r from-indigo-600 to-green-500 text-white py-2.5 rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition"
-                        >
-                          🛒 Get a Quote
-                        </button>
+                              const url = `https://wa.me/9594402775?text=${encodeURIComponent(
+                                message
+                              )}`;
+                              window.open(url, "_blank");
+                            }}
+                            className="flex-1 bg-gradient-to-r from-indigo-600 to-green-500 text-white py-2 rounded-xl text-sm hover:opacity-90 transition"
+                          >
+                            Quote
+                          </button>
 
+                        </div>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
@@ -147,7 +166,7 @@ Please share more details.`;
         )}
       </div>
 
-      {/* WhatsApp Button */}
+      {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/9594402775"
         className="fixed bottom-6 right-6 bg-green-500 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
@@ -156,4 +175,6 @@ Please share more details.`;
       </a>
     </div>
   );
-}
+};
+
+export default React.memo(Products);
