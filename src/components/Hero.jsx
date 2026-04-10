@@ -52,7 +52,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-[85vh] md:h-[92vh] overflow-hidden mt-9">
+    <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[92vh] overflow-hidden mt-[0px] sm:mt-[72px] md:mt-[10px]">
 
       {/* Image */}
       <div className="absolute inset-0">
@@ -89,8 +89,8 @@ const Hero = () => {
             key={i}
             onClick={() => setCurrentIndex(i)}
             className={`rounded-full ${i === currentIndex
-                ? "w-8 h-2 bg-white"
-                : "w-2 h-2 bg-white/40"
+              ? "w-8 h-2 bg-white"
+              : "w-2 h-2 bg-white/40"
               }`}
           />
         ))}
