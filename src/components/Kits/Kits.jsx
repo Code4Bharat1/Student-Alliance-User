@@ -12,6 +12,8 @@ export default function KitsSection() {
   const [loading, setLoading] = useState(true);
   const [kitRatings, setKitRatings] = useState({});
   const [reviewCounts, setReviewCounts] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
   const router = useRouter();
 
   // Load saved ratings/reviews
@@ -58,6 +60,20 @@ export default function KitsSection() {
     }
   }, [kits]);
 
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Smooth scroll to top of section
+    const element = document.getElementById("kits-section");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentKits = kits.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(kits.length / itemsPerPage);
+
   return (
     <section className="bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-tertiary py-16 px-6">
       <div className="max-w-[1600px] mx-auto">
@@ -79,8 +95,9 @@ export default function KitsSection() {
             Loading kits...
           </div>
         ) : (
+        <div id="kits-section" className="flex flex-col gap-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-            {kits.map((kit, idx) => {
+            {currentKits.map((kit, idx) => {
               const rating = kitRatings[kit._id] || 4;
               const reviews = reviewCounts[kit._id] || 0;
 
@@ -92,7 +109,7 @@ export default function KitsSection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  whileHover={{ scale: 1.05 }} // Fast zoom only, no lift
+                  whileHover={{ scale: 1.05 }}
                 >
                   <div className="relative aspect-[4/3] w-full bg-bg-section overflow-hidden">
                     <Image
@@ -118,7 +135,6 @@ export default function KitsSection() {
                       {kit.name}
                     </h3>
 
-                    {/* ⭐ Ratings */}
                     <div className="flex justify-center items-center gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
                         <svg
@@ -149,6 +165,45 @@ export default function KitsSection() {
               );
             })}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-4">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg border transition duration-200 ${currentPage === 1
+                    ? "border-border-primary text-text-muted cursor-not-allowed"
+                    : "border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white"
+                  }`}
+              >
+                Prev
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => paginate(i + 1)}
+                  className={`w-10 h-10 rounded-lg border transition duration-200 ${currentPage === i + 1
+                      ? "bg-gradient-to-r from-brand-primary to-purple-600 text-white border-transparent shadow-md"
+                      : "border-border-primary text-text-secondary hover:border-brand-primary hover:text-brand-primary"
+                    }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-lg border transition duration-200 ${currentPage === totalPages
+                    ? "border-border-primary text-text-muted cursor-not-allowed"
+                    : "border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white"
+                  }`}
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </div>
         )}
       </div>
 

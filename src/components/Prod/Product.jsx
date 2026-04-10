@@ -14,6 +14,8 @@ const Products = () => {
   const [products] = useState(staticProducts);
   const [productRatings, setProductRatings] = useState({});
   const [reviewCounts, setReviewCounts] = useState({});
+  const [currentPage, setCurrentPage] = useState({}); // { categoryName: pageNum }
+  const itemsPerPage = 12;
 
   // ⭐ Random rating system (lightweight)
   useEffect(() => {
@@ -40,6 +42,10 @@ const Products = () => {
     "Google EDLA Without Camera": products.filter(
       (p) => p.subCategory === "Google EDLA without Camera"
     ),
+  };
+
+  const paginate = (section, pageNumber) => {
+    setCurrentPage((prev) => ({ ...prev, [section]: pageNumber }));
   };
 
   return (
@@ -70,83 +76,114 @@ const Products = () => {
               </h2>
 
               {/* Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 mb-10">
+                {items
+                  .slice(
+                    ((currentPage[section] || 1) - 1) * itemsPerPage,
+                    (currentPage[section] || 1) * itemsPerPage
+                  )
+                  .map((product, index) => {
+                    const rating = productRatings[product.id] || 4;
+                    const reviewCount = reviewCounts[product.id] || 0;
 
-                {/* 🔥 LIMIT RENDERING (adjust if needed) */}
-                {items.map((product, index) => {
-                  const rating = productRatings[product.id] || 4;
-                  const reviewCount = reviewCounts[product.id] || 0;
+                    return (
+                      <div
+                        key={product.id || index}
+                        className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1"
+                      >
+                        {/* Image */}
+                        <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center relative">
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            className="object-contain p-4"
+                          />
+                        </div>
 
-                  return (
-                    <div
-                      key={product.id || index}
-                      className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition duration-300 hover:-translate-y-1"
-                    >
-                      {/* Image */}
-                      <div className="aspect-[4/3] bg-gray-50 flex items-center justify-center relative">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          loading="lazy"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                          className="object-contain p-4"
-                        />
-                      </div>
+                        {/* Content */}
+                        <div className="p-4">
+                          <h3 className="font-bold text-lg mb-3 text-gray-800">
+                            {product.name}
+                          </h3>
 
-                      {/* Content */}
-                      <div className="p-4">
+                          <ul className="space-y-2 mb-4">
+                            {product.features?.slice(0, 4).map((f, i) => (
+                              <li
+                                key={i}
+                                className="flex items-start gap-2 text-sm text-gray-600"
+                              >
+                                <span className="text-green-500 mt-1">✔</span>
+                                {f}
+                              </li>
+                            ))}
+                          </ul>
 
-                        {/* Title */}
-                        <h3 className="font-bold text-lg mb-3 text-gray-800">
-                          {product.name}
-                        </h3>
-
-                        {/* Features */}
-                        <ul className="space-y-2 mb-4">
-                          {product.features?.slice(0, 4).map((f, i) => (
-                            <li
-                              key={i}
-                              className="flex items-start gap-2 text-sm text-gray-600"
-                            >
-                              <span className="text-green-500 mt-1">✔</span>
-                              {f}
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Buttons */}
-                        <div className="flex gap-2">
-
-
-                          {/* WhatsApp */}
-                          <button
-                            onClick={() => {
-                              const message = `Hello, I'm interested in this product:
-
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => {
+                                const message = `Hello, I'm interested in this product:
 📺 Product: ${product.name}
 📏 Size: ${product.size}
 📂 Category: ${product.subCategory}
 💰 Price: ₹${product.price}
 
 Please share more details.`;
-
-                              const url = `https://wa.me/9594402775?text=${encodeURIComponent(
-                                message
-                              )}`;
-                              window.open(url, "_blank");
-                            }}
-                            className="flex-1 bg-gradient-to-r from-indigo-600 to-green-500 text-white py-2 rounded-xl text-sm hover:opacity-90 transition"
-                          >
-                            Quote
-                          </button>
-
+                                const url = `https://wa.me/9594402775?text=${encodeURIComponent(
+                                  message
+                                )}`;
+                                window.open(url, "_blank");
+                              }}
+                              className="flex-1 bg-gradient-to-r from-indigo-600 to-green-500 text-white py-2 rounded-xl text-sm hover:opacity-90 transition"
+                            >
+                              Quote
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
+
+              {/* Pagination Section */}
+              {items.length > itemsPerPage && (
+                <div className="flex justify-center items-center gap-2 mt-6">
+                  <button
+                    onClick={() => paginate(section, (currentPage[section] || 1) - 1)}
+                    disabled={(currentPage[section] || 1) === 1}
+                    className={`px-3 py-1 rounded-lg border transition ${(currentPage[section] || 1) === 1
+                        ? "text-gray-300 border-gray-200 cursor-not-allowed"
+                        : "text-indigo-600 border-indigo-200 hover:bg-indigo-50"
+                      }`}
+                  >
+                    Prev
+                  </button>
+                  {[...Array(Math.ceil(items.length / itemsPerPage))].map((_, i) => (
+                    <button
+                      key={i + 1}
+                      onClick={() => paginate(section, i + 1)}
+                      className={`w-8 h-8 rounded-lg border transition ${ (currentPage[section] || 1) === i + 1
+                          ? "bg-indigo-600 text-white border-indigo-600"
+                          : "text-gray-500 border-gray-200 hover:border-indigo-400"
+                        }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => paginate(section, (currentPage[section] || 1) + 1)}
+                    disabled={(currentPage[section] || 1) === Math.ceil(items.length / itemsPerPage)}
+                    className={`px-3 py-1 rounded-lg border transition ${(currentPage[section] || 1) === Math.ceil(items.length / itemsPerPage)
+                        ? "text-gray-300 border-gray-200 cursor-not-allowed"
+                        : "text-indigo-600 border-indigo-200 hover:bg-indigo-50"
+                      }`}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           )
         )}

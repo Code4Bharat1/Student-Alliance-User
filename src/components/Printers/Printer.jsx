@@ -9,6 +9,8 @@ import WhatsAppWidget from "../WhatsApp/WhatApp";
 export default function Printer() {
   const [printers, setPrinters] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
   const router = useRouter();
 
   useEffect(() => {
@@ -28,6 +30,16 @@ export default function Printer() {
 
   const handleProductClick = (id) => {
     router.push(`/product/${id}`);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = printers.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(printers.length / itemsPerPage);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -53,56 +65,94 @@ export default function Printer() {
       ) : printers.length === 0 ? (
         <div className="text-center py-20 text-text-muted">No printers available.</div>
       ) : (
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 px-6 pb-20">
-
-          {/* LIMIT RENDERING */}
-          {printers.map((printer) => (
-            <div
-              key={printer._id}
-              className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-200 hover:scale-[1.02] flex flex-col items-center"
-            >
-              <div className="relative aspect-[4/3] w-full bg-bg-section">
-                <Image
-                  src={printer.image}
-                  alt={printer.name}
-                  fill
-                  loading="lazy"
-                  className="object-contain p-4"
-                />
-              </div>
-
-              <div className="p-5 w-full text-center flex flex-col flex-grow">
-                <h3 className="font-semibold text-lg text-text-heading mb-2 line-clamp-2 min-h-[3rem]">
-                  {printer.name}
-                </h3>
-
-                <div className="flex justify-center items-center gap-1 text-yellow-400 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i < 4
-                          ? "fill-yellow-400 text-yellow-400"
-                          : "fill-border-primary text-border-primary"
-                        }`}
-                    />
-                  ))}
+        <div className="max-w-[1600px] mx-auto px-6 pb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 mb-10">
+            {currentItems.map((printer) => (
+              <div
+                key={printer._id}
+                className="bg-bg-card border border-border-primary rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition duration-200 hover:scale-[1.02] flex flex-col items-center"
+              >
+                <div className="relative aspect-[4/3] w-full bg-bg-section">
+                  <Image
+                    src={printer.image}
+                    alt={printer.name}
+                    fill
+                    loading="lazy"
+                    className="object-contain p-4"
+                  />
                 </div>
 
-                <p className="text-text-muted text-sm mb-4 flex-grow">
-                  {printer.reviews
-                    ? `${printer.reviews} reviews`
-                    : "No reviews yet"}
-                </p>
+                <div className="p-5 w-full text-center flex flex-col flex-grow">
+                  <h3 className="font-semibold text-lg text-text-heading mb-2 line-clamp-2 min-h-[3rem]">
+                    {printer.name}
+                  </h3>
 
-                <button
-                  onClick={() => handleProductClick(printer._id)}
-                  className="w-full bg-gradient-to-r from-brand-primary to-purple-600 hover:from-brand-hover hover:to-purple-700 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition duration-200"
-                >
-                  View Details <ArrowRight className="w-4 h-4" />
-                </button>
+                  <div className="flex justify-center items-center gap-1 text-yellow-400 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${i < 4
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "fill-border-primary text-border-primary"
+                          }`}
+                      />
+                    ))}
+                  </div>
+
+                  <p className="text-text-muted text-sm mb-4 flex-grow">
+                    {printer.reviews
+                      ? `${printer.reviews} reviews`
+                      : "No reviews yet"}
+                  </p>
+
+                  <button
+                    onClick={() => handleProductClick(printer._id)}
+                    className="w-full bg-gradient-to-r from-brand-primary to-purple-600 hover:from-brand-hover hover:to-purple-700 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 transition duration-200"
+                  >
+                    View Details <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg border transition duration-200 ${currentPage === 1
+                    ? "border-border-primary text-text-muted cursor-not-allowed"
+                    : "border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white"
+                  }`}
+              >
+                Prev
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => paginate(i + 1)}
+                  className={`w-10 h-10 rounded-lg border transition duration-200 ${currentPage === i + 1
+                      ? "bg-gradient-to-r from-brand-primary to-purple-600 text-white border-transparent"
+                      : "border-border-primary text-text-secondary hover:border-brand-primary hover:text-brand-primary"
+                    }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 rounded-lg border transition duration-200 ${currentPage === totalPages
+                    ? "border-border-primary text-text-muted cursor-not-allowed"
+                    : "border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white"
+                  }`}
+              >
+                Next
+              </button>
             </div>
-          ))}
+          )}
         </div>
       )}
 
