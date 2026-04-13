@@ -1,17 +1,4 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import dynamic from "next/dynamic";
-const Testimonial = dynamic(
-  () => import("@/components/Testimonial/Testimonial"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="min-h-[300px] flex items-center justify-center">
-        Loading testimonials...
-      </div>
-    ),
-  },
-);
+import TestimonialClient from "@/components/Testimonial/TestimonialClient";
 import { testimonials, aggregate } from "@/components/Testimonial/data";
 import React from "react";
 
@@ -83,7 +70,7 @@ const Page = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
       />
-      <Testimonial />
+      <TestimonialClient />
     </div>
   );
 };
