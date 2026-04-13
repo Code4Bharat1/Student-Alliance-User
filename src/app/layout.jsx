@@ -74,6 +74,9 @@ export const metadata = {
       "We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning.",
     images: ["https://studentalliancellp.com/images/logo.jpg"],
   },
+  verification: {
+    google: "CDZu0TCaNf_G9tizuEdfcEh6ozr6cb0kLPg48T6z3zg",
+  },
 };
 
 export default function RootLayout({ children }) {
