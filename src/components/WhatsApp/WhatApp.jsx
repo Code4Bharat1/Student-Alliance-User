@@ -91,7 +91,9 @@ const WhatsAppWidget = () => {
                     className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold text-text-heading">Neha Fakih</p>
+                    <p className="font-semibold text-text-heading">
+                      Neha Fakih
+                    </p>
                     <p className="text-xs text-text-muted">Owner</p>
                   </div>
                   <motion.span
@@ -119,17 +121,22 @@ const WhatsAppWidget = () => {
                     className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold text-text-heading">Ayaan Raje</p>
+                    <p className="font-semibold text-text-heading">
+                      Ayaan Raje
+                    </p>
                     <p className="text-xs text-text-muted">Marketing Head</p>
                   </div>
-                  <span className="text-text-tertiary text-xs">Typically replies in 5m</span>
+                  <span className="text-text-tertiary text-xs">
+                    Typically replies in 5m
+                  </span>
                 </a>
               </div>
             </div>
 
             {/* Footer */}
             <div className="bg-bg-card border-t border-border-primary text-center py-3 text-xs text-text-muted">
-              💬 Powered by <span className="text-brand-secondary font-medium">WhatsApp</span>
+              💬 Powered by{" "}
+              <span className="text-brand-secondary font-medium">WhatsApp</span>
             </div>
           </motion.div>
         )}

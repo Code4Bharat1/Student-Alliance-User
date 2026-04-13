@@ -226,21 +226,21 @@ export default function Testimonial() {
           {Array.from({
             length: Math.ceil(testimonials.length / cardsPerPage),
           }).map((_, index) => (
-                      <motion.button
-                        key={index}
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                          setIsAutoPlay(false);
-                          setCurrentIndex(index * cardsPerPage);
-                        }}
-                        aria-label={`Go to testimonial set ${index + 1}`}
-                        className={`transition-all duration-300 rounded-full ${
-                          index === Math.floor(currentIndex / cardsPerPage)
-                            ? "w-12 h-3 bg-gradient-to-r from-brand-primary to-brand-secondary"
-                            : "w-3 h-3 bg-border-primary hover:bg-border-secondary"
-                        }`}
-                      />
+            <motion.button
+              key={index}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => {
+                setIsAutoPlay(false);
+                setCurrentIndex(index * cardsPerPage);
+              }}
+              aria-label={`Go to testimonial set ${index + 1}`}
+              className={`transition-all duration-300 rounded-full ${
+                index === Math.floor(currentIndex / cardsPerPage)
+                  ? "w-12 h-3 bg-gradient-to-r from-brand-primary to-brand-secondary"
+                  : "w-3 h-3 bg-border-primary hover:bg-border-secondary"
+              }`}
+            />
           ))}
         </div>
 
