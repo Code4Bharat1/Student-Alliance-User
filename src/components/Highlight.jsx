@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const highlights = [
   {
@@ -67,10 +68,12 @@ const Highlight = () => {
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.4 }}
               >
-                <img
+                <Image
                   src={item.imgSrc}
                   alt={item.alt}
-                  className="w-full h-full object-cover transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
               </motion.div>

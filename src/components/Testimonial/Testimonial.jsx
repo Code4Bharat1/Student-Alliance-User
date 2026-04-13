@@ -83,7 +83,7 @@ export default function Testimonial() {
             className="inline-block mb-4"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-brand-primary font-semibold text-sm uppercase tracking-wider bg-bg-badge px-4 py-2 rounded-full">
+            <span className="text-text-heading font-semibold text-sm uppercase tracking-wider bg-bg-badge px-4 py-2 rounded-full">
               Client Reviews
             </span>
           </motion.div>
@@ -196,6 +196,7 @@ export default function Testimonial() {
               whileHover={{ scale: 1.1, x: 5 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleNext}
+              aria-label="Next testimonials"
               className="hidden md:flex w-14 h-14 items-center justify-center bg-bg-card rounded-full shadow-xl hover:shadow-2xl text-brand-primary transition-all z-10"
             >
               <FaChevronRight size={20} />

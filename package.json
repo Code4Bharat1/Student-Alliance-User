@@ -40,5 +40,11 @@
   "bugs": {
     "url": "https://github.com/Code4Bharat1/Student-Alliance/issues"
   },
-  "homepage": "https://github.com/Code4Bharat1/Student-Alliance#readme"
+  "homepage": "https://github.com/Code4Bharat1/Student-Alliance#readme",
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
 }

@@ -194,22 +194,6 @@ a {
   background: var(--text-tertiary);
 }
 
-/* ===== Smooth transitions for theme switching ===== */
-/* Only transition compositable properties + color for theme switching.
-   Avoids 351+ non-composited animation warnings in Lighthouse. */
-*,
-*::before,
-*::after {
-  transition-property: color, background-color;
-  transition-duration: 0.2s;
-  transition-timing-function: ease;
-}
-
-[class*="framer-motion"],
-[style*="transform"] {
-  transition-property: none;
-}
-
 /* ===== GLASSMORPHISM ===== */
 .glass {
   background: rgba(255, 255, 255, 0.7);
