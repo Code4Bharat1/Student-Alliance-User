@@ -25,7 +25,7 @@ export const metadata = {
     siteName: "Student Alliance LLP",
     images: [
       {
-        url: "https://studentalliancellp.com/images/og-banner.jpg",
+        url: "https://studentalliancellp.com/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Student Alliance STEM Kits",

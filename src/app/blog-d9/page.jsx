@@ -8,7 +8,7 @@ export const metadata = {
     description: "Discover how to start teaching online and earn from home using Student Alliance tools and platforms. A step-by-step guide for educators in India.",
     url: "https://studentalliancellp.com/blog-d9",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Start Teaching on an Online Teaching Platform & Earn from Home" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Start Teaching on an Online Teaching Platform & Earn from Home" }],
     locale: "en_IN",
     type: "article",
   },

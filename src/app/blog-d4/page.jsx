@@ -8,7 +8,7 @@ export const metadata = {
     description: "A complete guide to the best live streaming equipment for beginners. Explore webcams, microphones, lighting, and software recommended by Student Alliance.",
     url: "https://studentalliancellp.com/blog-d4",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Top Live Streaming Equipment for Beginners" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Top Live Streaming Equipment for Beginners" }],
     locale: "en_IN",
     type: "article",
   },

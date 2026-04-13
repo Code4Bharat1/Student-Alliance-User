@@ -8,7 +8,7 @@ export const metadata = {
     description: "Learn how IFPD technology is transforming schools and classrooms in India. Student Alliance provides top-quality interactive flat panels for education.",
     url: "https://studentalliancellp.com/blog-d3",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "IFPD for Schools and Classes" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "IFPD for Schools and Classes" }],
     locale: "en_IN",
     type: "article",
   },

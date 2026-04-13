@@ -218,7 +218,7 @@ const Navbar = () => {
             </motion.button>
 
             {/* Cart */}
-            <Link href="/mycart">
+            <Link href="/mycart" aria-label="Shopping cart">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -301,6 +301,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="lg:hidden p-2.5 rounded-xl bg-bg-hover/80 text-text-secondary hover:text-brand-primary transition-all duration-300"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
             </motion.button>

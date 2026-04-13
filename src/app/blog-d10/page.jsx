@@ -8,7 +8,7 @@ export const metadata = {
     description: "Complete digital board price guide for India. Compare prices, features, and specifications of interactive flat panels from Student Alliance and other brands.",
     url: "https://studentalliancellp.com/blog-d10",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Digital Board Price Guide" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Digital Board Price Guide" }],
     locale: "en_IN",
     type: "article",
   },

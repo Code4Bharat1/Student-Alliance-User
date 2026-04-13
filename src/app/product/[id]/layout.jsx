@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
         "Explore this product from Student Alliance LLP - quality educational tools for schools.";
       const image =
         product?.images?.[0] ||
-        "https://studentalliancellp.com/images/og-banner.jpg";
+        "https://studentalliancellp.com/images/logo.jpg";
 
       return {
         title: `${name} | Student Alliance LLP`,

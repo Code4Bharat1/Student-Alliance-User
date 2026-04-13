@@ -60,7 +60,7 @@ export const metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "https://studentalliancellp.com/images/og-banner.jpg",
+        url: "https://studentalliancellp.com/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Student Alliance LLP - STEM & Robotics Lab Solutions",
@@ -72,7 +72,7 @@ export const metadata = {
     title: "Student Alliance | STEM & Robotics Lab Solutions in India",
     description:
       "We design and deliver cutting-edge STEM and robotics labs that spark curiosity, creativity, and future-ready learning.",
-    images: ["https://studentalliancellp.com/images/og-banner.jpg"],
+    images: ["https://studentalliancellp.com/images/logo.jpg"],
   },
 };
 
@@ -81,17 +81,6 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#2a1b8f" />
-        <link
-          rel="preconnect"
-          href="https://www.googletagmanager.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://www.google-analytics.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="preload" as="image" href="/images/og-banner.jpg" />
 
         {/* Structured Data (JSON-LD) - Organization Schema */}
         <Script

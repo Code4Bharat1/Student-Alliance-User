@@ -12,6 +12,7 @@ const WhatsAppWidget = () => {
       {/* Floating WhatsApp Button */}
       <motion.button
         onClick={togglePopup}
+        aria-label="Chat on WhatsApp"
         className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-brand-secondary to-brand-secondary text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl"
         whileHover={{ scale: 1.1 }}
         animate={{

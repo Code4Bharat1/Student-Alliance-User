@@ -1,8 +1,5 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import Service from "@/components/Service";
-import ShopByCat from "@/components/Shopby/ShopByCat";
-import Brand from "@/components/Brand/Brand";
 
 export const metadata = {
   title: "Student Alliance | STEM & Robotics Labs for Schools in India",
@@ -31,7 +28,7 @@ export const metadata = {
     siteName: "Student Alliance LLP",
     images: [
       {
-        url: "https://studentalliancellp.com/images/og-banner.jpg",
+        url: "https://studentalliancellp.com/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Student Alliance LLP - STEM & Robotics Lab Solutions",
@@ -43,6 +40,9 @@ export const metadata = {
 };
 
 // Lazy load below-the-fold components
+const Service = dynamic(() => import("@/components/Service"));
+const ShopByCat = dynamic(() => import("@/components/Shopby/ShopByCat"));
+const Brand = dynamic(() => import("@/components/Brand/Brand"));
 const WhyChoose = dynamic(() => import("@/components/Franchise/Choose"));
 const Categories = dynamic(() => import("@/components/Franchise/Category"));
 const Features = dynamic(() => import("@/components/Franchise/Features"));

@@ -8,7 +8,7 @@ export const metadata = {
     description: "Review of the Student Alliance 4K Ultra HD Alpha Webcam - the ultimate webcam for educators, streamers, and professionals in India.",
     url: "https://studentalliancellp.com/blog-d5",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Student Alliance 4K Ultra HD Alpha Webcam" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Student Alliance 4K Ultra HD Alpha Webcam" }],
     locale: "en_IN",
     type: "article",
   },

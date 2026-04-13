@@ -8,7 +8,7 @@ export const metadata = {
     description: "Discover the best Interactive Flat Panel Displays for work and office use. Student Alliance offers premium IFPD solutions to enhance collaboration and productivity.",
     url: "https://studentalliancellp.com/blog-d2",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Interactive Flat Panel Displays for Work & Office" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Interactive Flat Panel Displays for Work & Office" }],
     locale: "en_IN",
     type: "article",
   },

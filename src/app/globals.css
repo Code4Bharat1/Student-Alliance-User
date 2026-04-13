@@ -33,7 +33,7 @@
   /* Section */
   --bg-section: #f7f9fb;
   --text-dark: #1e1e1e;
-  --text-muted: #757575;
+  --text-muted: #6b6b6b;
 
   /* Borders */
   --border-primary: #e2e8f0;
@@ -85,8 +85,8 @@
   --text-heading: #f8fafc;
   --text-inverse: #0f172a;
 
-  --brand-primary: #5b4fc7;
-  --brand-primary-hover: #7b6fe7;
+  --brand-primary: #9189e3;
+  --brand-primary-hover: #a8a1f0;
   --brand-secondary: #2ecc71;
   --brand-accent: #ff6b6b;
   --brand-gradient: linear-gradient(135deg, #5b4fc7 0%, #2ecc71 100%);
@@ -195,10 +195,12 @@ a {
 }
 
 /* ===== Smooth transitions for theme switching ===== */
+/* Only transition compositable properties + color for theme switching.
+   Avoids 351+ non-composited animation warnings in Lighthouse. */
 *,
 *::before,
 *::after {
-  transition-property: background-color, border-color, color, box-shadow;
+  transition-property: color, background-color;
   transition-duration: 0.2s;
   transition-timing-function: ease;
 }

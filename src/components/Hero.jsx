@@ -46,21 +46,22 @@ const Hero = () => {
   };
 
   const prevImage = () => {
-    setCurrentIndex((prev) =>
-      (prev - 1 + currentImages.length) % currentImages.length
+    setCurrentIndex(
+      (prev) => (prev - 1 + currentImages.length) % currentImages.length,
     );
   };
 
   return (
     <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[92vh] overflow-hidden mt-[0px] sm:mt-[72px] md:mt-[10px]">
-
       {/* Image */}
       <div className="absolute inset-0">
         <Image
           src={currentImages[currentIndex]}
-          alt="hero"
+          alt={`Hero banner slide ${currentIndex + 1}`}
           fill
+          sizes="100vw"
           priority={currentIndex === 0}
+          fetchPriority={currentIndex === 0 ? "high" : undefined}
           className="object-contain transition-opacity duration-700"
         />
       </div>
@@ -69,6 +70,7 @@ const Hero = () => {
       <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 z-20">
         <button
           onClick={prevImage}
+          aria-label="Previous slide"
           className="bg-black/70 hover:bg-white/20 rounded-full p-3 transition"
         >
           <ChevronLeft className="h-5 w-5 text-white" />
@@ -76,6 +78,7 @@ const Hero = () => {
 
         <button
           onClick={nextImage}
+          aria-label="Next slide"
           className="bg-black/70 hover:bg-white/20 rounded-full p-3 transition"
         >
           <ChevronRight className="h-5 w-5 text-white" />
@@ -88,11 +91,15 @@ const Hero = () => {
           <button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            className={`rounded-full ${i === currentIndex
-              ? "w-8 h-2 bg-white"
-              : "w-2 h-2 bg-white/40"
-              }`}
-          />
+            aria-label={`Go to slide ${i + 1}`}
+            className={`rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center ${
+              i === currentIndex ? "bg-white/90" : "bg-white/40"
+            }`}
+          >
+            <span
+              className={`block rounded-full ${i === currentIndex ? "w-8 h-2 bg-white" : "w-2 h-2 bg-white/60"}`}
+            />
+          </button>
         ))}
       </div>
     </section>

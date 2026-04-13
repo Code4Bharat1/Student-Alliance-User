@@ -8,7 +8,7 @@ export const metadata = {
     description: "Step-by-step guide to starting an offline coaching center in India. Learn about setup, equipment, franchise options, and growth strategies with Student Alliance.",
     url: "https://studentalliancellp.com/blog-d11",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "How to Start an Offline Coaching Center" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "How to Start an Offline Coaching Center" }],
     locale: "en_IN",
     type: "article",
   },

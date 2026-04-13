@@ -8,7 +8,7 @@ export const metadata = {
     description: "Explore the features, benefits, and buying guide for Interactive Flat Panel Displays (IFPD). Learn how Student Alliance IFPD transforms classrooms and offices.",
     url: "https://studentalliancellp.com/blog-d1",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Interactive Flat Panel Displays" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Interactive Flat Panel Displays" }],
     locale: "en_IN",
     type: "article",
   },

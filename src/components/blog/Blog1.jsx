@@ -71,7 +71,6 @@ const blogData = [
 export default function Blog() {
   return (
     <section className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white via-gray-50 to-[#e8f3ff] overflow-hidden">
-
       {/* Title */}
       <div className="text-center mb-12">
         <h2 className="text-5xl md:text-6xl font-bold mb-4">
@@ -93,9 +92,10 @@ export default function Blog() {
             <div className="relative overflow-hidden">
               <Image
                 src={blog.image}
-                alt={blog.title}
+                alt={`Read more: ${blog.title}`}
                 width={500}
                 height={300}
+                sizes="(max-width: 768px) 100vw, 33vw"
                 loading="lazy"
                 className="w-full h-56 object-cover transition duration-500 hover:scale-105"
               />

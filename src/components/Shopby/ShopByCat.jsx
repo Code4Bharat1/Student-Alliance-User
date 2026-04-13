@@ -81,6 +81,7 @@ const ShopByCat = () => {
                       src={category.image}
                       alt={category.name}
                       fill
+                      sizes="(max-width: 768px) 112px, 144px"
                       className="object-contain p-3 transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>

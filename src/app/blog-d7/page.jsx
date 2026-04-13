@@ -8,7 +8,7 @@ export const metadata = {
     description: "Actionable strategies to scale your coaching business in 2024. From digital tools to franchise models, learn how Student Alliance helps coaching centers grow.",
     url: "https://studentalliancellp.com/blog-d7",
     siteName: "Student Alliance LLP",
-    images: [{ url: "https://studentalliancellp.com/images/og-banner.jpg", width: 1200, height: 630, alt: "Scale Your Coaching Business in 2024" }],
+    images: [{ url: "https://studentalliancellp.com/images/logo.jpg", width: 1200, height: 630, alt: "Scale Your Coaching Business in 2024" }],
     locale: "en_IN",
     type: "article",
   },
