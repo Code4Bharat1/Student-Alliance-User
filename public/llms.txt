@@ -1,0 +1,22 @@
+LLMS Endpoint Usage
+
+Endpoint: /api/llms
+Method: POST
+Content-Type: application/json
+Body: { "prompt": "Your prompt here" }
+
+Response: streaming text or JSON (e.g., { "text": "..." })
+
+Example (curl):
+
+curl -N -X POST https://your-site.com/api/llms \
+  -H "Content-Type: application/json" \
+  -d '{"prompt":"Summarize the benefits of STEM education."}'
+
+Server notes:
+- Implement the server route as an App Router API route (e.g., src/app/api/llms/route.js or .ts).
+- For streaming responses return a ReadableStream and set appropriate headers (Content-Type: text/event-stream or text/plain).
+- Keep provider keys in environment variables (e.g., OPENAI_API_KEY) and never commit secrets.
+- Add authentication, rate-limiting and input validation before calling external LLM providers.
+
+This file is a developer reference only.
