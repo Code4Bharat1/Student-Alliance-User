@@ -7,14 +7,14 @@ export default function GoogleAnalytics() {
     <>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-L48FSWY2HB"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="ga4-init" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-L48FSWY2HB');
+          gtag('config', 'G-L48FSWY2HB', { send_page_view: true });
         `}
       </Script>
     </>

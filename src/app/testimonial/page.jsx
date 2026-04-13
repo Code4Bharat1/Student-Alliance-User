@@ -1,6 +1,11 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import Testimonial from "@/components/Testimonial/Testimonial";
+import dynamic from "next/dynamic";
+const Testimonial = dynamic(() => import("@/components/Testimonial/Testimonial"), {
+  ssr: false,
+  loading: () => <div className="min-h-[300px] flex items-center justify-center">Loading testimonials...</div>,
+});
+import { testimonials, aggregate } from "@/components/Testimonial/data";
 import React from "react";
 
 export const metadata = {
@@ -35,8 +40,39 @@ export const metadata = {
 };
 
 const Page = () => {
+  // Build JSON-LD for reviews (server-rendered)
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Testimonials",
+      itemListElement: testimonials.map((t, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Review",
+          author: t.name,
+          reviewBody: t.message,
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: t.rating,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        },
+      })),
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: aggregate.ratingValue,
+      reviewCount: aggregate.reviewCount,
+    },
+  };
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }} />
       <Testimonial />
     </div>
   );

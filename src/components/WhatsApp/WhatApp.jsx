@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const WhatsAppWidget = () => {
@@ -25,11 +26,22 @@ const WhatsAppWidget = () => {
           ease: "easeInOut",
         }}
       >
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-          alt="WhatsApp"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           className="w-8 h-8"
-        />
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 3.08 4.18 2 2 0 0 1 5 2h3a2 2 0 0 1 2 1.72c.12.8.3 1.6.56 2.36a2 2 0 0 1-.45 2.11L9 9l3 3 1.79-1.79a2 2 0 0 1 2.11-.45c.76.26 1.56.44 2.36.56A2 2 0 0 1 22 16.92z"
+          />
+        </svg>
       </motion.button>
 
       {/* Popup */}
@@ -71,9 +83,11 @@ const WhatsAppWidget = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-card p-3 rounded-2xl hover:bg-success-bg transition shadow-sm"
                 >
-                  <img
+                  <Image
                     src="/images/p6.png"
                     alt="Neha Fakih"
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">
@@ -97,9 +111,11 @@ const WhatsAppWidget = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-bg-card p-3 rounded-2xl hover:bg-success-bg transition shadow-sm"
                 >
-                  <img
+                  <Image
                     src="/images/p4.png"
                     alt="Ayaan Raje"
+                    width={48}
+                    height={48}
                     className="w-12 h-12 rounded-full border-2 border-brand-secondary"
                   />
                   <div className="flex-1">

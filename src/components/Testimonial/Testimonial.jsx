@@ -10,89 +10,7 @@ import {
   FaChevronRight,
 } from "react-icons/fa";
 
-const testimonials = [
-  {
-    id: 1,
-    image: "/images/s2.png",
-    name: "Shubham Prajapti",
-    role: "Customer",
-    message:
-      "Thank you IFPD for providing such a smooth and reliable experience. Truly helped me a lot.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    image: "/images/s1.png",
-    name: "Rohan Pawar",
-    role: "Business Owner",
-    message:
-      "We are at a time where we need service more than the product, thanks for giving us the trust factor",
-    rating: 5,
-  },
-  {
-    id: 3,
-    image: "/images/s3.png",
-    name: "Shubham Thakare",
-    role: "Tech Enthusiast",
-    message:
-      "We are happy with the open source technologies where we can use more features on the Panels",
-    rating: 5,
-  },
-  {
-    id: 4,
-    image: "/images/p4.png",
-    name: "Nitesh Pawar",
-    role: "Educator",
-    message:
-      "Great digital teaching device by Student Alliance. Screen interactive make virtual classes engaging and effective.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    image: "/images/p5.png",
-    name: "Siddharth Bhagat",
-    role: "Content Creator",
-    message:
-      "Student Alliance is excellent for great camera quality and interactive tools keep the audience engaged.",
-    rating: 5,
-  },
-  {
-    id: 6,
-    image: "/images/feedbackpic1.png",
-    name: "Maksud Kureshi",
-    role: "Event Manager",
-    message:
-      "Student Alliance device is ideal for virtual events large screen and great camera quality enhance the experience.",
-    rating: 5,
-  },
-  {
-    id: 7,
-    image: "/images/feedbackpic2.png",
-    name: "Umar Afrad",
-    role: "Language Teacher",
-    message:
-      "The Student Alliance device is excellent for language learning interactive features boost speaking listening practice.",
-    rating: 5,
-  },
-  {
-    id: 8,
-    image: "/images/feedbackpic3.png",
-    name: "Gaurang Mahankar",
-    role: "Online Instructor",
-    message:
-      "The Student Alliance device is perfect for online teaching excellent video and audio quality.",
-    rating: 5,
-  },
-  {
-    id: 9,
-    image: "/images/feedbackpic4.png",
-    name: "Pritilesh Surve",
-    role: "Corporate Trainer",
-    message:
-      "This digital lectern from Student Alliance is ideal for training sessions intuitive, modern, and very satisfying to use",
-    rating: 5,
-  },
-];
+import { testimonials } from "./data";
 
 export default function Testimonial() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -188,6 +106,7 @@ export default function Testimonial() {
               whileHover={{ scale: 1.1, x: -5 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePrev}
+              aria-label="Previous testimonials"
               className="hidden md:flex w-14 h-14 items-center justify-center bg-bg-card rounded-full shadow-xl hover:shadow-2xl text-brand-primary transition-all z-10"
             >
               <FaChevronLeft size={20} />
@@ -203,6 +122,7 @@ export default function Testimonial() {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.5 }}
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  role="list"
                 >
                   {visibleTestimonials.map((testimonial, index) => (
                     <motion.div
@@ -212,6 +132,8 @@ export default function Testimonial() {
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ y: -10, scale: 1.02 }}
                       className="relative bg-bg-card rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 p-8 group"
+                      role="listitem"
+                      aria-label={`Testimonial by ${testimonial.name}`}
                     >
                       {/* Quote Icon */}
                       <div className="absolute top-6 right-6 text-brand-primary/30 opacity-50 group-hover:opacity-100 transition-opacity">
@@ -304,20 +226,21 @@ export default function Testimonial() {
           {Array.from({
             length: Math.ceil(testimonials.length / cardsPerPage),
           }).map((_, index) => (
-            <motion.button
-              key={index}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => {
-                setIsAutoPlay(false);
-                setCurrentIndex(index * cardsPerPage);
-              }}
-              className={`transition-all duration-300 rounded-full ${
-                index === Math.floor(currentIndex / cardsPerPage)
-                  ? "w-12 h-3 bg-gradient-to-r from-brand-primary to-brand-secondary"
-                  : "w-3 h-3 bg-border-primary hover:bg-border-secondary"
-              }`}
-            />
+                      <motion.button
+                        key={index}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => {
+                          setIsAutoPlay(false);
+                          setCurrentIndex(index * cardsPerPage);
+                        }}
+                        aria-label={`Go to testimonial set ${index + 1}`}
+                        className={`transition-all duration-300 rounded-full ${
+                          index === Math.floor(currentIndex / cardsPerPage)
+                            ? "w-12 h-3 bg-gradient-to-r from-brand-primary to-brand-secondary"
+                            : "w-3 h-3 bg-border-primary hover:bg-border-secondary"
+                        }`}
+                      />
           ))}
         </div>
 

@@ -79,33 +79,38 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Structured Data (JSON-LD) - Organization Schema */}
-        <Script
-          id="schema-org"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Student Alliance LLP",
-            url: "https://studentalliancellp.com",
-            logo: "https://studentalliancellp.com/images/logo.jpg",
-            description:
-              "Student Alliance LLP is India's leading provider of innovative STEM and robotics lab solutions for schools.",
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+91-9022477293",
-              contactType: "Customer Support",
-            },
-            sameAs: [
-              "https://www.facebook.com/studentalliancellp/",
-              "https://www.instagram.com/studentalliance/#",
-            ],
-          })}
-        </Script>
-      </head>
+        <head>
+          <meta name="theme-color" content="#2a1b8f" />
+          <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+          <link rel="preload" as="image" href="/images/og-banner.jpg" />
+
+          {/* Structured Data (JSON-LD) - Organization Schema */}
+          <Script
+            id="schema-org"
+            type="application/ld+json"
+            strategy="afterInteractive"
+          >
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Student Alliance LLP",
+              url: "https://studentalliancellp.com",
+              logo: "https://studentalliancellp.com/images/logo.jpg",
+              description:
+                "Student Alliance LLP is India's leading provider of innovative STEM and robotics lab solutions for schools.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+91-9022477293",
+                contactType: "Customer Support",
+              },
+              sameAs: [
+                "https://www.facebook.com/studentalliancellp/",
+                "https://www.instagram.com/studentalliance/#",
+              ],
+            })}
+          </Script>
+        </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
