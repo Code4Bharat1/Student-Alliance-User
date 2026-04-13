@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import React from 'react';
 import WhatsAppWidget from "@/components/WhatsApp/WhatApp";
 

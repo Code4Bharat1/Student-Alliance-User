@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import ForgotPass from '@/components/ForgetPass/ForgetPass'
 import React from 'react'
 

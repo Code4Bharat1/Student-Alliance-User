@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import React, { Suspense } from "react";
 import UpdatePass from "../../components/ForgetPass/UpdatePass";
 

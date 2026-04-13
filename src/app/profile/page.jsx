@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import UserProfile from '@/components/UserProfile/Profile'
 import React from 'react'
 

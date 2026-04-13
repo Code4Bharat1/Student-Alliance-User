@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import Login from '@/components/ForgetPass/Contact/Contact'
 import React from 'react'
 

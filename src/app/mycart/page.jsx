@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import Footer from '@/components/Footer'
 import MyCart from '@/components/MyCart/MyCart'
 import Navbar from '@/components/Navbar'

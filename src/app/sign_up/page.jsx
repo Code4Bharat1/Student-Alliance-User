@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 
 import SignUp from '@/components/ForgetPass/Contact/Sign-up'
 import React from 'react'

@@ -4,6 +4,44 @@ import Service from "@/components/Service";
 import ShopByCat from "@/components/Shopby/ShopByCat";
 import Brand from "@/components/Brand/Brand";
 
+export const metadata = {
+  title: "Student Alliance | STEM & Robotics Labs for Schools in India",
+  description:
+    "Explore Student Alliance LLP – India's trusted provider of STEM, robotics, and innovation labs for schools. Shop kits, explore franchise opportunities, and empower future-ready learning.",
+  keywords: [
+    "student alliance",
+    "student alliance llp",
+    "STEM lab for schools",
+    "robotics lab India",
+    "school innovation lab",
+    "student alliance kits",
+    "student alliance shop",
+    "STEM education India",
+    "student alliance franchise",
+    "best STEM lab provider",
+    "robotics kits for students",
+    "3D printing for schools",
+  ],
+  alternates: { canonical: "https://studentalliancellp.com/" },
+  openGraph: {
+    title: "Student Alliance | STEM & Robotics Labs for Schools in India",
+    description:
+      "Shop STEM kits, explore franchise opportunities, and set up world-class innovation labs with Student Alliance LLP.",
+    url: "https://studentalliancellp.com/",
+    siteName: "Student Alliance LLP",
+    images: [
+      {
+        url: "https://studentalliancellp.com/images/og-banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Student Alliance LLP - STEM & Robotics Lab Solutions",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Lazy load below-the-fold components
 const WhyChoose = dynamic(() => import("@/components/Franchise/Choose"));
 const Categories = dynamic(() => import("@/components/Franchise/Category"));

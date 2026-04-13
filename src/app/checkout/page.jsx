@@ -1,3 +1,7 @@
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 import Check from "@/components/check/check";
 
 export default function Checkout() {

@@ -1,4 +1,18 @@
+# robots.txt for https://studentalliancellp.com
+# Allow all bots full access except unnecessary feeds and admin pages
 User-agent: *
-Disallow:
+Disallow: /feed
+Disallow: /comments/feed
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+Disallow: /login
+Disallow: /sign_up
+Disallow: /OTP
+Disallow: /forgot-password
+Disallow: /UpdatePass
+Disallow: /mycart
+Disallow: /profile
+Disallow: /checkout
 
-Sitemap: https://student-alliance.com/sitemap.xml
+# Sitemap location
+Sitemap: https://studentalliancellp.com/sitemap.xml
