@@ -50,6 +50,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/home",
+        destination: "/",
+        permanent: true, // 308 — tells Google to permanently consolidate to /
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
